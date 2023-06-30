@@ -6,11 +6,11 @@
 ## Запуск проекта локально
 Чтобы запустить проект локально, необходимо склонировать проект себе на устройство командой:
 ```
-git clone ssh (где ssh ключ к проекту)
+git clone url
 ```
 После того как проект склонирован, в консоле проекта, активируем и скачиваем все зависимости командой:
 ```
-composer install && npm install && npm run dev
+composer install && npm install && npm run dev && php artisan key:generate
 ```
 
 ## Добавления .env файла
@@ -28,7 +28,7 @@ DB_PASSWORD=(пароль)
 ```
 Затем приминяем миграции командой:
 ```
-php artisan serve
+php artisan migrate --seed
 ```
 Запускаем проект командой: php artisan serve
 
