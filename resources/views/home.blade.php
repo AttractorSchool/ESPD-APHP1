@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['isMobile' => $isMobile])
 
 @section('content')
 <div class="container">
