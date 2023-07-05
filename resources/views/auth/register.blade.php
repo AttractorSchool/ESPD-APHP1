@@ -100,6 +100,24 @@
                         </div>
 
                         <div class="row mb-3">
+                            <label for="city"
+                                   class="col-md-4 col-form-label text-md-end">{{ __('City') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="city" type="text"
+                                       class="form-control @error('city') is-invalid @enderror" name="city"
+                                       value="{{ old('city') }}" required autocomplete="city"
+                                       placeholder="City *">
+
+                                @error('city')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
                             <label for="password"
                                    class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 

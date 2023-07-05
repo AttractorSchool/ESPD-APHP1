@@ -1,4 +1,4 @@
-@extends('layouts.app', ['isMobile' => $isMobile])
+@extends('layouts.app')
 
 @section('content')
     <div class="container">
@@ -69,7 +69,7 @@
 
                 <i id="right" class="fa-solid fa-angle-right icon-right"></i>
             </div>
-            <a href="#" class="residents-link">
+            <a href="{{ route('residents') }}" class="residents-link">
                 <span>Показать всех резидентов</span>
                 <i class="fas fa-arrow-right arrow-right res-link"></i>
             </a>
