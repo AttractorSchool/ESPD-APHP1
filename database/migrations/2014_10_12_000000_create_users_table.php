@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('avatar')->nullable();
             $table->string('phone')->unique();
             $table->string('country');
-            $table->string('city');
+            $table->string('city')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
