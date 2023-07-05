@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Front\FormController;
+use App\Http\Controllers\Front\PageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/residents', [PageController::class, 'residents']);
+Route::post('/form', [FormController::class, 'store'])->name('front.form');
 
 Auth::routes();
 
