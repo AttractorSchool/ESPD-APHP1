@@ -6,15 +6,21 @@
     overflow-x: hidden;
 }
 
-.promo {
-    height: 80vh;
-    background-image: url('../../storage/pictures/Rectangle.png');
-    background-repeat: no-repeat;
-    background-size: cover;
+.container{
+    padding: 0;
 }
 
-h1,
-p {
+.promo {
+    height: 80vh;
+    background-image: url('https://img1.akspic.ru/crops/3/5/0/4/7/174053/174053-vozdushnyj_shar-Vozdushnyy_sharik-kappadokiya-samolety-polet-3840x2160.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    width: auto;
+}
+
+h1, p {
     padding-top: 5%;
     color: #fff;
     text-align: center;
@@ -27,7 +33,6 @@ p {
 
 h1 {
     padding-right: 20%;
-    font-weight: 700;
     font-size: 66px;
     line-height: 1;
     font-weight: bold;
@@ -56,6 +61,7 @@ h1 {
     margin: 20px;
     font-size: 24px;
     border-radius: 20px;
+    overflow:hidden;
 }
 
 .mini-block p {
@@ -75,7 +81,6 @@ h1 {
     position: relative;
     background-color: #25292D;
     overflow-y: hidden;
-    position: relative;
 }
 
 .wrapper i {
@@ -100,6 +105,10 @@ h1 {
     margin-left: 15%;
     width: 40%;
     padding: 50px;
+}
+
+.reviews-text h2{
+    overflow: hidden;
 }
 
 .wrapper i:active {
@@ -228,7 +237,6 @@ h1 {
 
 .carousel {
     padding: 10px;
-    margin-left: 50px;
     width: 80%;
     margin: 0 auto;
     justify-content: space-between;
@@ -239,7 +247,6 @@ h1 {
     gap: 16px;
     border-radius: 8px;
     scroll-behavior: smooth;
-    scrollbar-width: none;
 }
 
 .residents .carousel {
@@ -330,6 +337,7 @@ h1 {
 
 .event-info {
     align-items: flex-start;
+    color: #fff;
 }
 
 .event-calendar h2,
@@ -403,7 +411,6 @@ p {
     padding: 20px;
 }
 
-
 .accordian .card:nth-child(1) .card-body {
     display: block;
 }
@@ -414,3 +421,12 @@ p {
     color: #444444;
     margin: 0px;
 }
+
+.price-text{
+    color: #000;
+    justify-content: center;
+    width: auto;
+    margin: auto;
+    text-align: center;
+}
+
