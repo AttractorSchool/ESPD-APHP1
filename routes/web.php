@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActionController;
 use App\Http\Controllers\Front\FormController;
 use App\Http\Controllers\Front\PageController;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/residents', [PageController::class, 'residents'])->name('residents');
 Route::post('/form', [FormController::class, 'store'])->name('front.form');
-
+Route::post('/connect', [ActionController::class, 'connect'])->name('connect');
 Auth::routes();
 
