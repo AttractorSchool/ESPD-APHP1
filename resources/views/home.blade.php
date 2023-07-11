@@ -2,9 +2,6 @@
 
 @section('content')
     <div class="container">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/media.css') }}" rel="stylesheet">
         <div class="row justify-content-center">
             <div class="promo">
                 <h1>Сообщество близких по духу предпринимателей.</h1>

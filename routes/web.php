@@ -21,5 +21,6 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::get('/residents', [PageController::class, 'residents'])->name('residents');
 Route::post('/form', [FormController::class, 'store'])->name('front.form');
 Route::post('/connect', [ActionController::class, 'connect'])->name('connect');
+Route::get('/network', [PageController::class, 'networking'])->name('networking');
 Auth::routes();
 

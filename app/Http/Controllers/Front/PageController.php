@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Models\Subscription;
 use App\Models\User;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -26,7 +27,15 @@ class PageController extends Controller
         $subscriptions = Subscription::all();
         return view('front.residents', compact('users', 'subscriptions'));
     }
+    /**
+     * @return View
+     */
+    public function networking(): View
+    {
+        $users = User::all();
 
+        return view('front.mainNetwork', compact('users'));
+    }
     /**
      * Store a newly created resource in storage.
      */
