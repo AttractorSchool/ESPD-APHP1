@@ -8,6 +8,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/media.css') }}" rel="stylesheet">
     <script src="/js/app.js"></script>
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -40,7 +43,7 @@
                         <a class="nav-link" href="#">События</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Нетворкинг</a>
+                        <a class="nav-link" href="{{ route('networking') }}">Нетворкинг</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Менторство</a>
@@ -83,6 +86,11 @@
                     @endguest
                 </ul>
             </div>
+                <a href="{{ route('notifications') }}">
+                    <div class="notification" style="text-decoration: none">
+                        <i class="fa-solid fa-bell" style="text-decoration: none; color: black"></i>
+                    </div>
+                </a>
         </div>
     </nav>
 
@@ -102,8 +110,8 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-search"></i>
+            <a class="nav-link" href="{{ route('networking') }}">
+                <i class="fa-solid fa-globe" style="color: #5085e2;"></i>
             </a>
         </li>
         <li class="nav-item">
