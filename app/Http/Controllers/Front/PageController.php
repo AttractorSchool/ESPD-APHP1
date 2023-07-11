@@ -36,6 +36,18 @@ class PageController extends Controller
 
         return view('front.mainNetwork', compact('users'));
     }
+
+
+    /**
+     * @return View
+     */
+    public function notifications(): View
+    {
+        $users = User::all();
+
+        return view('front.notification', compact('users'));
+    }
+
     /**
      * Store a newly created resource in storage.
      */

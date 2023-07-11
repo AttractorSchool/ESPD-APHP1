@@ -86,6 +86,11 @@
                     @endguest
                 </ul>
             </div>
+                <a href="{{ route('notifications') }}">
+                    <div class="notification" style="text-decoration: none">
+                        <i class="fa-solid fa-bell" style="text-decoration: none; color: black"></i>
+                    </div>
+                </a>
         </div>
     </nav>
 
