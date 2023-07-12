@@ -22,7 +22,7 @@ class ConnectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|integer|exists:users,id',
+            'user_id' => 'integer|exists:users,id',
         ];
     }
 }
