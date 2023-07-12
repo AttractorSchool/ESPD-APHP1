@@ -16,7 +16,6 @@
 
     <!-- Fonts -->
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -51,7 +50,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Академия</a>
                     </li>
-                    <!-- Authentication Links -->
                     @guest
                         @if (Route::has('login'))
                             <li class="nav-item">
@@ -86,15 +84,25 @@
                     @endguest
                 </ul>
             </div>
-                <a href="{{ route('notifications') }}">
-                    <div class="notification" style="text-decoration: none">
-                        <i class="fa-solid fa-bell" style="text-decoration: none; color: black"></i>
-                    </div>
-                </a>
+            @if(\Illuminate\Support\Facades\Auth::check())
+                <div class="notification">
+                    <a href="{{ route('notifications') }}" style="text-decoration: none"><i class="fa-solid fa-bell" style="text-decoration: none; color: black"></i></a>
+                    @if(\Illuminate\Support\Facades\Auth::user()->notifications)
+                        <div class="not no_overflow">
+                            <p class="no_overflow">{{ count(\Illuminate\Support\Facades\Auth::user()->notifications) }}</p>
+                        </div>
+                    @endif
+                </div>
+            @endif
         </div>
     </nav>
 
     <main class="py-4">
+        @if (session('status'))
+            <div class="alert alert-primary" role="alert">
+                {{session('status')}}
+            </div>
+        @endif
         @yield('content')
     </main>
 

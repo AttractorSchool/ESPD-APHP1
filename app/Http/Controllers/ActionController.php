@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ConnectRequest;
+use App\Models\Notification;
 use App\Models\Response;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -45,6 +46,10 @@ class ActionController extends Controller
 
                 return redirect()->back()->with('status', 'Вы уже подтвердили подключение.');
             }
+            $notification = new Notification();
+            $notification->first_id = Auth::id();
+            $notification->user_id  = $request->input('second_id');
+            $notification->save();
 
             $newResponse = new Response();
             $newResponse->first_id = $authenticatedUserId;
@@ -58,4 +63,19 @@ class ActionController extends Controller
         return redirect()->route('login')->with('status', 'You are not logged in.');
     }
 
+    public function connect_final(Request $request, Response $response, Notification $notification)
+    {
+        $response->confirm_second = $request->input('confirm_second');
+
+        $response->update();
+
+        $notification->delete();
+
+        return redirect()->back()->with('status', 'You have match! You can chat with him!');
+    }
+    public function delete_notification(Notification $notification){
+        $notification->delete();
+
+        return redirect()->back()->with('status', 'You are delete notification');
+    }
 }
