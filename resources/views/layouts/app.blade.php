@@ -105,38 +105,68 @@
 <footer class="footer footer-mobile">
     <ul class="footer-icons nav d-flex justify-content-between">
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('home') }}">
-                <i class="fas fa-home"></i>
-            </a>
+            <div class="icon-container">
+                <a class="nav-link" href="{{ route('home') }}">
+                    <i class="fas fa-home" style="color: #8C8C8C"></i>
+                </a>
+                <span class="icon-label">Home</span>
+            </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('networking') }}">
-                <i class="fa-solid fa-globe" style="color: #5085e2;"></i>
-            </a>
+            <div class="icon-container">
+                <a class="nav-link" href="{{ route('networking') }}">
+                    <i class="fa-solid fa-user-group" style="color: #000;"></i>
+                </a>
+                <span class="icon-label">Network</span>
+            </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-bell"></i>
-            </a>
+            <div class="icon-container">
+                <a class="nav-link" href="#">
+                    <i class="fa-solid fa-book-open" style="color: #000;"></i>
+                </a>
+                <span class="icon-label">Academy</span>
+            </div>
+        </li>
+        <li class="nav-item">
+            <div class="icon-container">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-message"></i>
+                </a>
+                <span class="icon-label">Chat</span>
+            </div>
         </li>
         @guest
             @if (Route::has('login'))
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    <div class="icon-container">
+                        <a class="nav-link" href="{{ route('login') }}">
+                            <i class="fas fa-sign-in-alt"></i>
+                        </a>
+                        <span class="icon-label">{{ __('Login') }}</span>
+                    </div>
                 </li>
             @endif
 
             @if (Route::has('register'))
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    <div class="icon-container">
+                        <a class="nav-link" href="{{ route('register') }}">
+                            <i class="fas fa-user-plus"></i>
+                        </a>
+                        <span class="icon-label">{{ __('Register') }}</span>
+                    </div>
                 </li>
             @endif
         @else
             <li class="nav-item dropdown">
-                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                    <i class="fas fa-user-circle"></i>
-                </a>
+                <div class="icon-container">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <i class="fas fa-user-circle"></i>
+                    </a>
+                    <span class="icon-label">Profile</span>
+                </div>
 
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ route('logout') }}"
