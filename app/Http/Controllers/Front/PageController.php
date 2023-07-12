@@ -43,9 +43,9 @@ class PageController extends Controller
      */
     public function notifications(): View
     {
-        $users = User::all();
+        $notifications = auth()->user()->notifications;
 
-        return view('front.notification', compact('users'));
+        return view('front.notification', compact('notifications'));
     }
 
     /**

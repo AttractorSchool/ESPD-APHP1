@@ -13,11 +13,13 @@
                             <h2>Имя профиля 1</h2>
                             <p>Профессия</p>
                             <p>Место работы</p>
-                            <form method="POST" action="{{ route('connect') }}">
-                                @csrf
-                                <input type="hidden" value="{{ $user->id }}" name="second_id">
-                                <button>Подключиться</button>
-                            </form>
+                            <div class="notification_btn no_overflow">
+                                <form method="POST" action="{{ route('connect') }}">
+                                    @csrf
+                                    <input type="hidden" value="{{ $user->id }}" name="second_id">
+                                    <button>Подключиться</button>
+                                </form>
+                            </div>
                         </div>
                 @endforeach
                 </div>
