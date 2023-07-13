@@ -21,13 +21,17 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::get('/residents', [PageController::class, 'residents'])->name('residents');
 Route::post('/form', [FormController::class, 'store'])->name('front.form');
 
-Route::post('/connect', [ActionController::class, 'connect'])->name('connect');
-Route::put('/connect_final/{response}/{notification}', [ActionController::class, 'connect_final'])->name('connect_final');
+Route::post('/connect', [ActionController::class, 'connect'])->name('connect')->middleware('auth');
+Route::put('/connect_final/{response}/{notification}', [ActionController::class, 'connect_final'])->name(
+    'connect_final'
+)->middleware('auth');
 
-Route::get('/network', [PageController::class, 'networking'])->name('networking');
+Route::get('/network', [PageController::class, 'networking'])->name('networking')->middleware('auth');
 
-Route::get('/notification', [PageController::class, 'notifications'])->name('notifications');
-Route::delete('/notification/{notification}', [PageController::class, 'delete_notification'])->name('delete_notification');
+Route::get('/notification', [PageController::class, 'notifications'])->name('notifications')->middleware('auth');
+Route::delete('/notification/{notification}', [PageController::class, 'delete_notification'])->name(
+    'delete_notification'
+);
 
 Auth::routes();
 

@@ -19,13 +19,16 @@ class Notification extends Model
     /**
      * @return BelongsTo
      */
-    public function user(): BelongsTo{
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function sender():BelongsTo{
+    public function sender(): BelongsTo
+    {
         return $this->belongsTo(User::class, 'first_id');
     }
+
     public function response()
     {
         $response_all = \App\Models\Response::all();
