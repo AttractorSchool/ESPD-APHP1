@@ -7,6 +7,13 @@
     }
 }
 
+@media screen and (max-width: 360px) {
+    .notification_container{
+        padding: 0 5px;
+    }
+
+}
+
 @media screen and (max-width: 480px) {
     .promo {
         height: auto;
@@ -35,6 +42,36 @@
         height: 100px;
         padding: 5px;
         overflow-y: hidden;
+    }
+    .notification_container{
+        padding: 0 10px;
+    }
+    .notification_btn{
+        max-width: 100px;
+        padding: 4px 10px;
+    }
+    .notification_btn button{
+        padding: 2px 3px;
+        font-size: 10px;
+    }
+    .notification_text h4{
+        font-size: 14px;
+        margin-left: 5px;
+        margin-bottom: 2px;
+    }
+    .notification_text h6{
+        font-size: 10px;
+        color: #4d5154;
+        margin-bottom: 0px;
+    }
+    .notification_text p{
+        margin-left: 10px;
+        font-size: 10px;
+        color: #0a53be;
+    }
+    .notification_img img{
+        width: 40px;
+        height: 40px;
     }
 }
 

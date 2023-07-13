@@ -8,12 +8,14 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/media.css') }}" rel="stylesheet">
     <script src="/js/app.js"></script>
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -40,7 +42,7 @@
                         <a class="nav-link" href="#">События</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Нетворкинг</a>
+                        <a class="nav-link" href="{{ route('networking') }}">Нетворкинг</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Менторство</a>
@@ -48,7 +50,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Академия</a>
                     </li>
-                    <!-- Authentication Links -->
                     @guest
                         @if (Route::has('login'))
                             <li class="nav-item">
@@ -83,10 +84,25 @@
                     @endguest
                 </ul>
             </div>
+            @if(\Illuminate\Support\Facades\Auth::check())
+                <div class="notification">
+                    <a href="{{ route('notifications') }}" style="text-decoration: none"><i class="fa-solid fa-bell" style="text-decoration: none; color: black"></i></a>
+                    @if(\Illuminate\Support\Facades\Auth::user()->notifications)
+                        <div class="not no_overflow">
+                            <p class="no_overflow">{{ count(\Illuminate\Support\Facades\Auth::user()->notifications) }}</p>
+                        </div>
+                    @endif
+                </div>
+            @endif
         </div>
     </nav>
 
     <main class="py-4">
+        @if (session('status'))
+            <div class="alert alert-primary" role="alert">
+                {{session('status')}}
+            </div>
+        @endif
         @yield('content')
     </main>
 
@@ -97,38 +113,68 @@
 <footer class="footer footer-mobile">
     <ul class="footer-icons nav d-flex justify-content-between">
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('home') }}">
-                <i class="fas fa-home"></i>
-            </a>
+            <div class="icon-container">
+                <a class="nav-link" href="{{ route('home') }}">
+                    <i class="fas fa-home" style="color: #8C8C8C"></i>
+                </a>
+                <span class="icon-label">Home</span>
+            </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-search"></i>
-            </a>
+            <div class="icon-container">
+                <a class="nav-link" href="{{ route('networking') }}">
+                    <i class="fa-solid fa-user-group" style="color: #000;"></i>
+                </a>
+                <span class="icon-label">Network</span>
+            </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-bell"></i>
-            </a>
+            <div class="icon-container">
+                <a class="nav-link" href="#">
+                    <i class="fa-solid fa-book-open" style="color: #000;"></i>
+                </a>
+                <span class="icon-label">Academy</span>
+            </div>
+        </li>
+        <li class="nav-item">
+            <div class="icon-container">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-message"></i>
+                </a>
+                <span class="icon-label">Chat</span>
+            </div>
         </li>
         @guest
             @if (Route::has('login'))
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    <div class="icon-container">
+                        <a class="nav-link" href="{{ route('login') }}">
+                            <i class="fas fa-sign-in-alt"></i>
+                        </a>
+                        <span class="icon-label">{{ __('Login') }}</span>
+                    </div>
                 </li>
             @endif
 
             @if (Route::has('register'))
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    <div class="icon-container">
+                        <a class="nav-link" href="{{ route('register') }}">
+                            <i class="fas fa-user-plus"></i>
+                        </a>
+                        <span class="icon-label">{{ __('Register') }}</span>
+                    </div>
                 </li>
             @endif
         @else
             <li class="nav-item dropdown">
-                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                    <i class="fas fa-user-circle"></i>
-                </a>
+                <div class="icon-container">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <i class="fas fa-user-circle"></i>
+                    </a>
+                    <span class="icon-label">Profile</span>
+                </div>
 
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ route('logout') }}"
