@@ -27,8 +27,6 @@ Route::post('/message', [ChatController::class, 'send'])->name('chat.send');
 Route::get('/message/{id}', [ChatController::class, 'show'])->name('chat.show');
 Route::get('/messages/{id}', [ChatController::class, 'showBlade'])->name('show');
 
-Route::get('/refresh/{model}', [ActionController::class, 'update'])->name('refresh');
-Route::post('/confirm', [ActionController::class, 'confirm'])->name('confirm');
 
 Auth::routes();
 
