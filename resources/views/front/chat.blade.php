@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-        <!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,17 +12,16 @@
 </head>
 <body>
 
-<div class="wrapper">
+<div class="wrapper-chat">
     <div class="title">Chat with
         <div class="icon">
-            <i class="fa fa-user"></i>
         </div>
     </div>
     <div class="body">
         <div class="box">
-                <div id="messages">
-                    <p></p>
-                </div>
+            <div id="messages">
+                <p></p>
+            </div>
         </div>
     </div>
     <div class="typing-area">

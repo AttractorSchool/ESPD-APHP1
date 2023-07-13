@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActionController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\Front\FormController;
 use App\Http\Controllers\Front\PageController;
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +26,11 @@ Route::post('/connect', [ActionController::class, 'connect'])->name('connect')->
 Route::put('/connect_final/{response}/{notification}', [ActionController::class, 'connect_final'])->name(
     'connect_final'
 )->middleware('auth');
+
+Route::post('/message', [ChatController::class, 'send'])->name('chat.send')->middleware('auth');
+Route::get('/message/{id}', [ChatController::class, 'show'])->name('chat.show')->middleware('auth');
+Route::get('/messages/{id}', [ChatController::class, 'showBlade'])->name('showChat')->middleware('auth');
+
 
 Route::get('/network', [PageController::class, 'networking'])->name('networking')->middleware('auth');
 

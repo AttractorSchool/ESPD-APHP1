@@ -71,7 +71,7 @@ class ActionController extends Controller
 
         $notification->delete();
 
-        return redirect()->back()->with('status', 'You have match! You can chat with him!');
+        return redirect()->route('showChat', ['id' => $response->id]);
     }
     public function delete_notification(Notification $notification){
         $notification->delete();
