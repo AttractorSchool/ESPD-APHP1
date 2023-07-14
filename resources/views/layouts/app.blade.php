@@ -98,7 +98,7 @@
         </div>
     </nav>
 
-    <main class="py-4" style="min-height: 120vh;">
+    <main class="py-4">
         @if (session('status'))
             <div class="alert alert-primary" role="alert">
                 {{session('status')}}
@@ -195,7 +195,7 @@
                 <a class="nav-link py-1" href="#">
                     <i class="fas fa-user-circle" style="color: #8C8C8C"></i>
                 </a>
-                <span class="icon-label">Home</span>
+                <span class="icon-label">Profile</span>
             </div>
         </li>
     </ul>
