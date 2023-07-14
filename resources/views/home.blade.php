@@ -5,7 +5,8 @@
         <div class="row justify-content-center">
             <div class="promo">
                 <h1>Сообщество близких по духу предпринимателей.</h1>
-                <p class="promo-text"> Нам по пути, если бизнес для тебя не просто деньги,а помощь другим и личная миссия</p>
+                <p class="promo-text"> Нам по пути, если бизнес для тебя не просто деньги,а помощь другим и личная
+                    миссия</p>
                 <div class="block-card">
                     <div class="mini-block">
                         <i class="fas fa-business-time"></i>
@@ -26,46 +27,110 @@
                 </div>
             </div>
         </div>
-        <div class="wrapper">
-            <div class="reviews-text">
-                <h2>Чем «Woman Create» отличается от других сообществ?</h2>
-            </div>
-            <i id="left" class="fa-solid fa-angle-left"></i>
-            <ul class="carousel">
-                @foreach ($reviews as $review)
-                    <li class="card">
-                        <div class="img">
-                            <img src="https://vokrug.tv/pic/news/f/b/9/2/fb927aca1ca4a42d9bd46ce4e3330bdd.jpg" alt="img" draggable="false">
-                        </div>
-                        <h2 style="overflow: hidden">{{ $review->user->name }}</h2>
-                        <span>{{ $review->body }}</span>
-                    </li>
-                @endforeach
-            </ul>
-            <i id="right" class="fa-solid fa-angle-right"></i>
+    </div>
+    <div class="wrapper">
+        <div class="reviews-text text-center">
+            <h2>Чем «Woman Create» отличается от других сообществ?</h2>
         </div>
+
+        <ul class="carousel">
+        </ul>
+
+
+        <div id="carouselExampleCaptions" class="carousel slide">
+            <div class="carousel-inner">
+
+                @foreach($reviews as $review)
+                    @if($review===$reviews[0])
+                        <div class="carousel-item active">
+                            <li class="card">
+                                <div class="img">
+                                    <img src="https://vokrug.tv/pic/news/f/b/9/2/fb927aca1ca4a42d9bd46ce4e3330bdd.jpg"
+                                         alt="img"
+                                         draggable="false">
+                                </div>
+                                <h2 style="overflow: hidden">{{ $review->user->name }}</h2>
+                                <span class="text-center">{{ $review->body }}</span>
+                            </li>
+                        </div>
+                    @else
+                        <div class="carousel-item">
+                            <li class="card">
+                                <div class="img">
+                                    <img src="https://vokrug.tv/pic/news/f/b/9/2/fb927aca1ca4a42d9bd46ce4e3330bdd.jpg"
+                                         alt="img"
+                                         draggable="false">
+                                </div>
+                                <h2 style="overflow: hidden">{{ $review->user->name }}</h2>
+                                <span class="text-center">{{ $review->body }}</span>
+                            </li>
+                        </div>
+                    @endif
+                @endforeach
+
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon bg-dark rounded-5 p-2" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon bg-dark rounded-5 p-2" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+    </div>
+    <div class="container">
         <div class="residents">
             <h2 style="overflow:hidden;">Наши резиденты</h2>
-            <div class="carousel-wrapper">
-                <i id="left" class="fa-solid fa-angle-left icon-left"></i>
 
-                <div class="carousel">
-                    @foreach ($users as $user)
-                        <div class="resident">
-                            <img src="https://vokrug.tv/pic/news/f/b/9/2/fb927aca1ca4a42d9bd46ce4e3330bdd.jpg" alt=" ">
-                            <div class="resident-info">
-                                @foreach ($user->reviews as $review)
-                                    <p>{{ $review->body }}</p>
-                                @endforeach
+            <div id="carouselExampleCaptions2" class="carousel slide text-center mx-auto" style="width: 100%">
+                <div class="carousel-inner">
+
+                    @foreach($users as $user)
+                        @if($user===$users[0])
+                            <div class="carousel-item active">
+                                <div class="resident mx-auto">
+                                    <img src="https://vokrug.tv/pic/news/f/b/9/2/fb927aca1ca4a42d9bd46ce4e3330bdd.jpg"
+                                         alt=" ">
+                                    <div class="resident-info">
+                                        @foreach ($user->reviews as $review)
+                                            <p>{{ $review->body }}</p>
+                                        @endforeach
+                                    </div>
+                                    <h3 style="overflow:hidden;">{{ $user->name }}</h3>
+                                </div>
                             </div>
-                            <h3 style="overflow:hidden;">{{ $user->name }}</h3>
-                        </div>
+                        @else
+                            <div class="carousel-item">
+                                <div class="resident mx-auto">
+                                    <img src="https://vokrug.tv/pic/news/f/b/9/2/fb927aca1ca4a42d9bd46ce4e3330bdd.jpg"
+                                         alt=" ">
+                                    <div class="resident-info">
+                                        @foreach ($user->reviews as $review)
+                                            <p>{{ $review->body }}</p>
+                                        @endforeach
+                                    </div>
+                                    <h3 style="overflow:hidden;">{{ $user->name }}</h3>
+                                </div>
+                            </div>
+                        @endif
                     @endforeach
 
                 </div>
-
-                <i id="right" class="fa-solid fa-angle-right icon-right"></i>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions2"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon bg-warning rounded-5 p-2" aria-hidden="true"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions2"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon bg-warning rounded-5 p-2" aria-hidden="true"></span>
+                </button>
             </div>
+
+
             <a href="{{ route('residents') }}" class="residents-link">
                 <span>Показать всех резидентов</span>
                 <i class="fas fa-arrow-right arrow-right res-link"></i>
@@ -74,7 +139,8 @@
         <div class="event-calendar">
             <div class="event-info">
                 <h2 style="overflow: hidden">Получи полный календарь мероприятий</h2>
-                <p>Получи подробную презентацию, календарь мероприятий клуба, информацию о резидентах и возможностях нашей
+                <p>Получи подробную презентацию, календарь мероприятий клуба, информацию о резидентах и возможностях
+                    нашей
                     платформы
                 </p>
                 <button class="calendar-button">Получить календарь</button>
@@ -88,7 +154,8 @@
                     <div class="card my-2 text-center">
                         <div class="card-body">
                             <h5 class="card-title">Получить консультацию</h5>
-                            <p class="card-text" style="color: black">Оставить заявку, чтобы мы ответили на все вопросы и рассказали о жизни
+                            <p class="card-text" style="color: black">Оставить заявку, чтобы мы ответили на все вопросы
+                                и рассказали о жизни
                                 клуба</p>
                             <h5>Бесплатно</h5>
 
@@ -104,7 +171,8 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: black">Получить
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: black">
+                                                Получить
                                                 консультацию</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
@@ -159,45 +227,48 @@
             @endforeach
         </div>
     </div>
-        <div class="accordian">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Heading One </h3>
-                    <span class="fa fa-minus"></span>
-                </div>
-                <div class="card-body active">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamLorem ipsum dolor sit amet,
-                        consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
-                </div>
+    <div class="accordian">
+        <div class="card">
+            <div class="card-header">
+                <h3>Heading One </h3>
+                <span class="fa fa-minus"></span>
             </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h3>Heading Two </h3>
-                    <span class="fa fa-plus"></span>
-                </div>
-                <div class="card-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamLorem ipsum dolor sit amet,
-                        consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <h3>Heading Three </h3>
-                    <span class="fa fa-plus"></span>
-                </div>
-                <div class="card-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamLorem ipsum dolor sit amet,
-                        consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
-                </div>
+            <div class="card-body active">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamLorem ipsum dolor sit
+                    amet,
+                    consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
             </div>
         </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Heading Two </h3>
+                <span class="fa fa-plus"></span>
+            </div>
+            <div class="card-body">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamLorem ipsum dolor sit
+                    amet,
+                    consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h3>Heading Three </h3>
+                <span class="fa fa-plus"></span>
+            </div>
+            <div class="card-body">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamLorem ipsum dolor sit
+                    amet,
+                    consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+            </div>
+        </div>
+    </div>
 
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -208,8 +279,7 @@
                 if ($(this).next(".card-body").hasClass("active")) {
                     $(this).next(".card-body").removeClass("active").slideUp()
                     $(this).children("span").removeClass("fa-minus").addClass("fa-plus")
-                }
-                else {
+                } else {
                     $(".card .card-body").removeClass("active").slideUp()
                     $(".card .card-header span").removeClass("fa-minus").addClass("fa-plus");
                     $(this).next(".card-body").addClass("active").slideDown()
