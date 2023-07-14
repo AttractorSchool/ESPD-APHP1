@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Response extends Model
 {
@@ -16,9 +18,18 @@ class Response extends Model
         'confirm_second',
     ];
 
-
     public function messages()
     {
         return $this->hasMany(Message::class);
+    }
+
+    public function first(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'first_id');
+    }
+
+    public function second(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'second_id');
     }
 }

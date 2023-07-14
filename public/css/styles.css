@@ -587,6 +587,7 @@ p {
     background-color: #EDEAE4;
     min-height: 100vh;
 }
+
 .notification_container_text{
     position: relative;
     min-height: 100px;
@@ -620,7 +621,6 @@ p {
     border: none;
     background-color: #D8A4B4;
 }
-
 
 .footer-icons .nav-item {
     display: inline-block;
