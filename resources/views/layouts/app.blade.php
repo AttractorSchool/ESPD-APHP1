@@ -86,7 +86,8 @@
             </div>
             @if(\Illuminate\Support\Facades\Auth::check())
                 <div class="notification">
-                    <a href="{{ route('notifications') }}" style="text-decoration: none"><i class="fa-solid fa-bell" style="text-decoration: none; color: black"></i></a>
+                    <a href="{{ route('notifications') }}" style="text-decoration: none"><i class="fa-solid fa-bell"
+                                                                                            style="text-decoration: none; color: black"></i></a>
                     @if(\Illuminate\Support\Facades\Auth::user()->notifications)
                         <div class="not no_overflow">
                             <p class="no_overflow">{{ count(\Illuminate\Support\Facades\Auth::user()->notifications) }}</p>
@@ -97,7 +98,7 @@
         </div>
     </nav>
 
-    <main class="py-4">
+    <main class="py-4" style="min-height: 120vh;">
         @if (session('status'))
             <div class="alert alert-primary" role="alert">
                 {{session('status')}}
@@ -110,85 +111,93 @@
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 
-<footer class="footer footer-mobile">
+<footer class="footer footer-mobile px-4 py-0">
     <ul class="footer-icons nav d-flex justify-content-between">
-        <li class="nav-item">
+        <li class="nav-item m-0">
             <div class="icon-container">
-                <a class="nav-link" href="{{ route('home') }}">
+                <a class="nav-link py-1" href="/">
                     <i class="fas fa-home" style="color: #8C8C8C"></i>
                 </a>
                 <span class="icon-label">Home</span>
             </div>
         </li>
-        <li class="nav-item">
+        <li class="nav-item m-0">
             <div class="icon-container">
-                <a class="nav-link" href="{{ route('networking') }}">
+                <a class="nav-link py-1" href="{{ route('networking') }}">
                     <i class="fa-solid fa-user-group" style="color: #000;"></i>
                 </a>
                 <span class="icon-label">Network</span>
             </div>
         </li>
-        <li class="nav-item">
+        <li class="nav-item m-0">
             <div class="icon-container">
-                <a class="nav-link" href="#">
+                <a class="nav-link py-1" href="#">
                     <i class="fa-solid fa-book-open" style="color: #000;"></i>
                 </a>
                 <span class="icon-label">Academy</span>
             </div>
         </li>
-        <li class="nav-item">
+        <li class="nav-item m-0">
             <div class="icon-container">
-                <a class="nav-link" href="#">
+                <a class="nav-link py-1" href="#">
                     <i class="fas fa-message"></i>
                 </a>
                 <span class="icon-label">Chat</span>
             </div>
         </li>
-        @guest
-            @if (Route::has('login'))
-                <li class="nav-item">
-                    <div class="icon-container">
-                        <a class="nav-link" href="{{ route('login') }}">
-                            <i class="fas fa-sign-in-alt"></i>
-                        </a>
-                        <span class="icon-label">{{ __('Login') }}</span>
-                    </div>
-                </li>
-            @endif
+        {{--        @guest--}}
+        {{--            @if (Route::has('login'))--}}
+        {{--                <li class="nav-item m-0">--}}
+        {{--                    <div class="icon-container">--}}
+        {{--                        <a class="nav-link" href="{{ route('login') }}">--}}
+        {{--                            <i class="fas fa-sign-in-alt"></i>--}}
+        {{--                        </a>--}}
+        {{--                        <span class="icon-label">{{ __('Login') }}</span>--}}
+        {{--                    </div>--}}
+        {{--                </li>--}}
+        {{--            @endif--}}
 
-            @if (Route::has('register'))
-                <li class="nav-item">
-                    <div class="icon-container">
-                        <a class="nav-link" href="{{ route('register') }}">
-                            <i class="fas fa-user-plus"></i>
-                        </a>
-                        <span class="icon-label">{{ __('Register') }}</span>
-                    </div>
-                </li>
-            @endif
-        @else
-            <li class="nav-item dropdown">
-                <div class="icon-container">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        <i class="fas fa-user-circle"></i>
-                    </a>
-                    <span class="icon-label">Profile</span>
-                </div>
+        {{--            @if (Route::has('register'))--}}
+        {{--                <li class="nav-item m-0">--}}
+        {{--                    <div class="icon-container">--}}
+        {{--                        <a class="nav-link" href="{{ route('register') }}">--}}
+        {{--                            <i class="fas fa-user-plus"></i>--}}
+        {{--                        </a>--}}
+        {{--                        <span class="icon-label">{{ __('Register') }}</span>--}}
+        {{--                    </div>--}}
+        {{--                </li>--}}
+        {{--            @endif--}}
+        {{--        @else--}}
+        {{--            <li class="nav-item dropdown">--}}
+        {{--                <div class="icon-container">--}}
+        {{--                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"--}}
+        {{--                       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}
+        {{--                        <i class="fas fa-user-circle"></i>--}}
+        {{--                    </a>--}}
+        {{--                    <span class="icon-label">Profile</span>--}}
+        {{--                </div>--}}
 
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ route('logout') }}"
-                       onclick="event.preventDefault();
-                                 document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
-                    </a>
+        {{--                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">--}}
+        {{--                    <a class="dropdown-item" href="{{ route('logout') }}"--}}
+        {{--                       onclick="event.preventDefault();--}}
+        {{--                                 document.getElementById('logout-form').submit();">--}}
+        {{--                        {{ __('Logout') }}--}}
+        {{--                    </a>--}}
 
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
-                </div>
-            </li>
-        @endguest
+        {{--                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">--}}
+        {{--                        @csrf--}}
+        {{--                    </form>--}}
+        {{--                </div>--}}
+        {{--            </li>--}}
+        {{--        @endguest--}}
+        <li class="nav-item m-0">
+            <div class="icon-container">
+                <a class="nav-link py-1" href="#">
+                    <i class="fas fa-user-circle" style="color: #8C8C8C"></i>
+                </a>
+                <span class="icon-label">Home</span>
+            </div>
+        </li>
     </ul>
 </footer>
 
