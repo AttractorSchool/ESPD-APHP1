@@ -20,6 +20,9 @@
         background-position: center;
         padding: 20px;
     }
+    .pagination-users {
+        margin-left: 70px;
+    }
 
     h1 {
         font-size: 32px;
@@ -69,10 +72,15 @@
         font-size: 10px;
         color: #0a53be;
     }
+    .requested
+    {
+        font-size: 10px;
+    }
     .notification_img img{
         width: 40px;
         height: 40px;
     }
+
 }
 
 @media screen and (max-width: 480px) {

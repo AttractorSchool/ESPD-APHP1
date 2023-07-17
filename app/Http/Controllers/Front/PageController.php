@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Notification;
+use App\Models\Response;
 use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
@@ -32,9 +34,10 @@ class PageController extends Controller
      */
     public function networking(): View
     {
-        $users = User::all();
+        $users = User::paginate(9);
 
-        return view('front.mainNetwork', compact('users'));
+        $notifications = Notification::all();
+        return view('front.mainNetwork', compact('users', 'notifications'));
     }
 
 
