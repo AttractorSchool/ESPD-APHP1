@@ -3,7 +3,9 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -25,9 +27,24 @@ class UserFactory extends Factory
             'phone' => $this->faker->unique()->phoneNumber,
             'country' => $this->faker->country,
             'city' => $this->faker->city,
+            'avatar' => $this->getImage(rand(1,5)),
             'remember_token' => Str::random(10),
-            'subscription_id' => rand(1, 3)
         ];
+    }
+
+    /**
+     * @param int $imageNumber
+     * @return string
+     */
+    private function getImage(int $imageNumber = 1): string
+    {
+        $path = storage_path() . "/avatars/" . $imageNumber . ".jpeg";
+        $imageName = md5($path) . '.jpeg';
+        $image = 'pictures/' . $imageName;
+        $resize = Image::make($path)->fit(300)->encode('jpeg');
+        Storage::disk('public')->put('pictures/'.$imageName, $resize->__toString());
+
+        return $image;
     }
 
     /**
