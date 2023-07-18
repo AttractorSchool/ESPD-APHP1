@@ -4,6 +4,7 @@ use App\Http\Controllers\ActionController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\Front\FormController;
 use App\Http\Controllers\Front\PageController;
+use App\Http\Controllers\MentorController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +39,15 @@ Route::get('/notification', [PageController::class, 'notifications'])->name('not
 Route::delete('/notification/{notification}', [PageController::class, 'delete_notification'])->name(
     'delete_notification'
 );
+
+
+Route::get('/mentorship', [MentorController::class, 'index'])->name('mentorship');
+Route::get('/mentorship/test', [MentorController::class, 'mentorshipTest'])->name('mentorship.test');
+Route::post('/mentorship/result', [MentorController::class, 'mentorshipResult'])->name('mentorship.result');
+Route::get('/mentors', [MentorController::class, 'showAllMentors'])->name('mentors');
+Route::get('/mentors/{id}', [MentorController::class, 'show'])
+    ->name('mentors.show')
+    ->middleware('register.guest');
 
 Auth::routes();
 

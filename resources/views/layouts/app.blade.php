@@ -45,7 +45,7 @@
                         <a class="nav-link" href="{{ route('networking') }}">Нетворкинг</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Менторство</a>
+                        <a class="nav-link" href="{{ route('mentorship') }}">Менторство</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Академия</a>
@@ -105,6 +105,7 @@
             </div>
         @endif
         @yield('content')
+        @yield('js')
     </main>
 
 </div>
