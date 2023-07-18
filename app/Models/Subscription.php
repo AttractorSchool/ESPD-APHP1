@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Subscription extends Model
 {
@@ -13,10 +14,10 @@ class Subscription extends Model
     protected $fillable = ['type', 'start_date', 'end_date', 'description', 'price'];
 
     /**
-     * @return BelongsTo
+     * @return HasMany
      */
-    public function user(): BelongsTo
+    public function userSubscriptions(): HasMany
     {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(UserSubscription::class);
     }
 }

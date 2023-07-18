@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -11,14 +12,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subscriptions', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['free', 'standard', 'premium']);
-            $table->decimal('price');
-            $table->text('description');
+            $table->string('name')->unique();
             $table->timestamps();
-            $table->string('picture')->nullable();
         });
+
+        DB::table('roles')->insert([
+            ['name' => 'mentor'],
+            ['name' => 'resident'],
+            ['name' => 'admin'],
+        ]);
     }
 
     /**
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subscriptions');
+        Schema::dropIfExists('roles');
     }
 };

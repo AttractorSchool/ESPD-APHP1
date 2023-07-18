@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subscriptions', function (Blueprint $table) {
+        Schema::create('interests', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['free', 'standard', 'premium']);
-            $table->decimal('price');
-            $table->text('description');
+            $table->string('name')->unique();
             $table->timestamps();
-            $table->string('picture')->nullable();
         });
     }
 
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subscriptions');
+        Schema::dropIfExists('interests');
     }
 };
