@@ -54,20 +54,6 @@
     overflow-y: scroll;
 }
 
-::-webkit-scrollbar {
-    width: 0.5rem;
-}
-
-::-webkit-scrollbar-track {
-    background: darkgray;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: lightslategray;
-    border-radius: 1rem;
-    background-clip: content-box;
-}
-
 .wrapper-chat .box .item {
     display: flex;
     float: left;

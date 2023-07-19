@@ -65,6 +65,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Subscription::class);
     }
+
     public function notifications(): HasMany
     {
         return $this->hasMany(Notification::class, 'user_id');

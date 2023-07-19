@@ -28,11 +28,25 @@ class ChatController extends Controller
         }
         return back()->with(['status' => 'error']);
     }
+
     public function showBlade($id)
     {
         $response = Response::find($id);
 
         return view('front.chat', compact('response'));
+    }
+
+    public function chat()
+    {
+        $user = auth()->user();
+        $responses = Response::where(function ($query) use ($user) {
+            $query->where('first_id', $user->id)
+                ->orWhere('second_id', $user->id);
+        })
+            ->where('confirm_first', true)
+            ->where('confirm_second', true)
+            ->get();
+        return view('front.friends', compact('responses'));
     }
 }
 
