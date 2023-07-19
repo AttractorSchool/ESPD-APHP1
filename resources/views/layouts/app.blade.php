@@ -140,7 +140,7 @@
         </li>
         <li class="nav-item m-0">
             <div class="icon-container">
-                <a class="nav-link py-1" href="#">
+                <a class="nav-link py-1" href="{{route('chat')}}">
                     <i class="fas fa-message"></i>
                 </a>
                 <span class="icon-label">Chat</span>

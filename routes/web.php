@@ -28,12 +28,14 @@ Route::put('/connect_final/{response}/{notification}', [ActionController::class,
     'connect_final'
 )->middleware('auth');
 
+Route::get('/chat', [ChatController::class, 'chat'])->name('chat')->middleware('auth');
+
 Route::post('/message', [ChatController::class, 'send'])->name('chat.send')->middleware('auth');
 Route::get('/message/{id}', [ChatController::class, 'show'])->name('chat.show')->middleware('auth');
 Route::get('/messages/{id}', [ChatController::class, 'showBlade'])->name('showChat')->middleware('auth');
 
 
-Route::get('/network', [PageController::class, 'networking'])->name('networking')->middleware('auth');
+Route::get('/network', [PageController::class, 'networking'])->name('networking');
 
 Route::get('/notification', [PageController::class, 'notifications'])->name('notifications')->middleware('auth');
 Route::delete('/notification/{notification}', [PageController::class, 'delete_notification'])->name(
