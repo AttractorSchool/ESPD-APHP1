@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\View\View;
+use Jenssegers\Agent\Agent;
 
 class RegisterController extends Controller
 {
@@ -29,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -44,37 +46,41 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param array $data
+     * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'firstName' => ['required', 'string', 'max:255'],
-            'secondName' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8'],
-            'phone' => ['numeric','unique:users'],
-            'country' => ['required', 'string', 'min:3', 'max:255'],
-            'city' => ['required', 'string', 'min:3', 'max:255'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param array $data
+     * @param  array  $data
      * @return \App\Models\User
      */
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['firstName'],
+            'name' => $data['name'],
             'email' => $data['email'],
-            'phone' => $data['phone'],
-            'country' => $data['country'],
-            'city' => $data['city'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    /**
+     * @return View
+     */
+    public function showRegistrationForm(): View
+    {
+        $agent = new Agent;
+        $isMobile = $agent->isMobile();
+
+        return view('auth.register', compact('isMobile'));
     }
 }
