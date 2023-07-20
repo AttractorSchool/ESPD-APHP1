@@ -45,4 +45,9 @@ class Response extends Model
     {
         return $this->belongsTo(User::class, 'second_id');
     }
+
+    public function last_Message()
+    {
+        return $this->messages()->latest()->first();
+    }
 }

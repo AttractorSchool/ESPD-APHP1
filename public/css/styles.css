@@ -3,7 +3,6 @@
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
-    overflow-x: hidden;
 }
 
 .container{
@@ -253,10 +252,6 @@ h1 {
     grid-auto-columns: calc((100% / 5) - 12px);
 }
 
-.carousel::-webkit-scrollbar {
-    display: none;
-}
-
 .resident {
     position: relative;
     width: 200px;
@@ -363,7 +358,6 @@ p {
 .event-calendar .calendar-button:hover {
     background-color: #f9c70a;
 }
-
 
 .accordian {
     max-width: 900px;
@@ -613,6 +607,7 @@ p {
 }
 .py-4{
     background-color: #ffffff;
+
     min-height: 100vh;
 }
 

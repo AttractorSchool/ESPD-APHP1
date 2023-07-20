@@ -45,7 +45,7 @@
                         <a class="nav-link" href="{{ route('networking') }}">Нетворкинг</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Менторство</a>
+                        <a class="nav-link" href="{{ route('mentorship') }}">Менторство</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Академия</a>
@@ -105,6 +105,7 @@
             </div>
         @endif
         @yield('content')
+        @yield('js')
     </main>
 
 </div>
@@ -139,7 +140,7 @@
         </li>
         <li class="nav-item m-0">
             <div class="icon-container">
-                <a class="nav-link py-1" href="#">
+                <a class="nav-link py-1" href="{{route('chat')}}">
                     <i class="fas fa-message"></i>
                 </a>
                 <span class="icon-label">Chat</span>

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('phone')->unique();
             $table->string('country');
             $table->foreignId('city')->constrained('cities')->cascadeOnDelete();
+            $table->text('description')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

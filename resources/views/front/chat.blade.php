@@ -4,6 +4,20 @@
         .icon {
             background-image: url("https://www.art-spb.ru/upload/good_image/16324.jpg");
         }
+
+        ::-webkit-scrollbar {
+            width: 0.5rem;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: darkgray;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: lightslategray;
+            border-radius: 1rem;
+            background-clip: content-box;
+        }
     </style>
     <div class="wrapper-chat" style="margin:-1.6rem 0; height: 100vh">
         <div class="title">Chat with "{{$response->first->name}}"

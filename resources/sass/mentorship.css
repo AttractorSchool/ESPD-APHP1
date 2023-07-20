@@ -1,0 +1,80 @@
+.mentor-card {
+    background-color: #9654D9;
+    border-radius: 21px;
+    padding: 10px;
+    margin: 0 auto;
+    border: none;
+    height: auto;
+}
+
+.mentor-card-title {
+    color: #fff;
+}
+
+.mentor-card-text {
+    color: #fff;
+}
+
+.avatar {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-text {
+    font-size: 14px;
+    color: #888;
+}
+
+.mentor-btn {
+    background-color: white;
+    border-radius: 15px;
+    border: none;
+    width: 10%;
+    color: #A42FC1;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+.interest-text {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 0;
+    color: pink;
+}
+
+.interest-text > span:nth-child(3n+1) {
+    grid-column: span 2;
+}
+
+.mentor-url {
+    text-decoration: none;
+    color: #A42FC1;
+}
+
+.star-rating {
+    color: gold;
+    font-size: 17px;
+}
+
+.card-mentors {
+    height: 170px;
+    width: 170px;
+    border-radius: 20px;
+}
+
+.mentor-link {
+    text-decoration: none;
+    color: black;
+}
