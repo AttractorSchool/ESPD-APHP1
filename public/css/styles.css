@@ -557,7 +557,7 @@ p {
     min-height: 100px;
     padding: 0 30px;
     margin-bottom: 15px;
-    background-color: white;
+    background-color: #e6f2ff;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -606,7 +606,8 @@ p {
     text-decoration: none;
 }
 .py-4{
-    background-color: #FBF6FD;
+    background-color: #ffffff;
+
     min-height: 100vh;
 }
 

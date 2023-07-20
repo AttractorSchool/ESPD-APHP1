@@ -48,6 +48,7 @@
     }
     .notification_container{
         padding: 0 10px;
+        margin: 1px;
     }
     .notification_btn{
         max-width: 100px;
@@ -56,6 +57,7 @@
     .notification_btn button{
         padding: 2px 3px;
         font-size: 10px;
+        margin-right: 44px;
     }
     .notification_text h4{
         font-size: 14px;
@@ -79,6 +81,8 @@
     .notification_img img{
         width: 40px;
         height: 40px;
+        margin-right: 36px;
+        margin-bottom: 26px;
     }
 
 }

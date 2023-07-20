@@ -10,6 +10,9 @@ class Message extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'body',
         'response_id',

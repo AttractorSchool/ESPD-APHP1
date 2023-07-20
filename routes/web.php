@@ -34,8 +34,9 @@ Route::post('/message', [ChatController::class, 'send'])->name('chat.send')->mid
 Route::get('/message/{id}', [ChatController::class, 'show'])->name('chat.show')->middleware('auth');
 Route::get('/messages/{id}', [ChatController::class, 'showBlade'])->name('showChat')->middleware('auth');
 
+Route::get('/network', [PageController::class, 'networking'])->name('networking')->middleware('auth');
+Route::get('/allresidents', [PageController::class, 'allResidents'])->name('allResidents')->middleware('auth');
 
-Route::get('/network', [PageController::class, 'networking'])->name('networking');
 
 Route::get('/notification', [PageController::class, 'notifications'])->name('notifications')->middleware('auth');
 Route::delete('/notification/{notification}', [PageController::class, 'delete_notification'])->name(

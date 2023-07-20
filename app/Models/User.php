@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -62,12 +63,36 @@ class User extends Authenticatable
     /**
      * @return HasMany
      */
+
+    public function subscription(): HasMany
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+  
     public function notifications(): HasMany
     {
         return $this->hasMany(Notification::class, 'user_id');
     }
 
     /**
+
+     * @return BelongsTo
+     */
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(City::class);
+    }
+
+    public function cityName(): string
+    {
+        return $this->city()->get('name');
+
+    }
+
      * @return BelongsToMany
      */
     public function roles(): BelongsToMany

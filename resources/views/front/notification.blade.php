@@ -10,8 +10,7 @@
                             <img src="{{ asset('images/3.jpg') }}" alt="Фото профиля">
                         </div>
                         <div class="notification_text">
-                            <h4 class="no_overflow">{{ $notification->sender->name }}</h4>
-                            <h6 class="no_overflow">Профессия</h6>
+                            <h6 class="no_overflow"><strong>{{ $notification->sender->name }}</strong> отправил(-а) вам приглашение на общение</h6>
                             <p>623 подключения</p>
                         </div>
                     </div>

@@ -24,11 +24,17 @@ class Notification extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    /**
+     * @return BelongsTo
+     */
     public function sender(): BelongsTo
     {
         return $this->belongsTo(User::class, 'first_id');
     }
 
+    /**
+     * @return mixed
+     */
     public function response()
     {
         $response_all = \App\Models\Response::all();
