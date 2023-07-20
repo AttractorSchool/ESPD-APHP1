@@ -10,6 +10,9 @@ class Review extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string[]
+     */
     protected $fillable = ['rating', 'body', 'user_id'];
 
     /**

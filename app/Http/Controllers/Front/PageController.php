@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\City;
 use App\Models\Notification;
 use App\Models\Response;
 use App\Models\Subscription;
@@ -32,12 +33,19 @@ class PageController extends Controller
     /**
      * @return View
      */
-    public function networking(): View
+    public function networking(Request $request): View
     {
-        $users = User::paginate(9);
-
+        $users = User::all();
+        $cities = City::all();
         $notifications = Notification::all();
-        return view('front.mainNetwork', compact('users', 'notifications'));
+        return view('front.mainNetwork', compact('users', 'cities', 'notifications'));
+    }
+    public function allResidents(Request $request): View
+    {
+        $users = User::all();
+        $cities = City::all();
+        $notifications = Notification::all();
+        return view('partials.residents', compact('users', 'cities', 'notifications'));
     }
 
 
