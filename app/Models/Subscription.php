@@ -10,6 +10,9 @@ class Subscription extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string[]
+     */
     protected $fillable = ['type', 'start_date', 'end_date', 'description', 'price'];
 
     /**

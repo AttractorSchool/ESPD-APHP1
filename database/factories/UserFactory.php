@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\City;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -24,7 +25,7 @@ class UserFactory extends Factory
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'phone' => $this->faker->unique()->phoneNumber,
             'country' => $this->faker->country,
-            'city' => $this->faker->city,
+            'city' => rand(1, count(City::all())),
             'remember_token' => Str::random(10),
             'subscription_id' => rand(1, 3)
         ];

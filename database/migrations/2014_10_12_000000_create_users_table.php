@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('avatar')->nullable();
             $table->string('phone')->unique();
             $table->string('country');
-            $table->string('city')->nullable();
+            $table->foreignId('city')->constrained('cities')->cascadeOnDelete();
             $table->rememberToken();
             $table->timestamps();
         });
