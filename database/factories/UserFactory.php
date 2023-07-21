@@ -29,6 +29,7 @@ class UserFactory extends Factory
             'country' => $this->faker->country,
             'city' => rand(1, count(City::all())),
             'remember_token' => Str::random(10),
+            'avatar' => $this->getImage(rand(1,5))
         ];
     }
 

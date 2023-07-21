@@ -38,7 +38,7 @@
                                         @endif
                                     @endforeach
                                     @unless($requested)
-                                        <div class="notification_btn no_overflow">
+                                        <div class="notification_btn">
                                             <input type="hidden" value="{{ $user->id }}" name="second_id">
                                             <button class="connect-button">Подключиться</button>
                                         </div>

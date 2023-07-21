@@ -72,7 +72,7 @@ class User extends Authenticatable
     /**
      * @return HasMany
      */
-  
+
     public function notifications(): HasMany
     {
         return $this->hasMany(Notification::class, 'user_id');
@@ -93,6 +93,7 @@ class User extends Authenticatable
 
     }
 
+    /**
      * @return BelongsToMany
      */
     public function roles(): BelongsToMany
