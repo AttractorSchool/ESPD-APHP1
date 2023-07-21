@@ -14,7 +14,7 @@
                             <p>623 подключения</p>
                         </div>
                     </div>
-                    <div class="notification_btn no_overflow">
+                    <div class="notification_btn">
                         <form method="POST" action="{{ route('connect_final', ['response' => $notification->response() , 'notification' => $notification])}}">
                             @method('PUT')
                             @csrf

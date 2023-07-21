@@ -27,6 +27,11 @@
                             <img src="{{asset('images/3.jpg')}}" alt="Фото профиля" class="image">
                             <h2>{{$user->name}}</h2>
                             <p>Профессия</p>
+                            <p>
+                            @foreach ($user->interests as $interest)
+                                <span>{{ $interest->name }}</span>
+                            @endforeach
+                            </p>
                             <p>{{$city->name}}</p>
                             <form class="connect-form" method="POST" action="{{ route('connect') }}">
                                 @csrf
@@ -39,7 +44,7 @@
                                     @endif
                                 @endforeach
                                 @unless($requested)
-                                    <div class="notification_btn no_overflow">
+                                    <div class="notification_btn">
                                         <input type="hidden" value="{{ $user->id }}" name="second_id">
                                         <button class="connect-button">Подключиться</button>
                                     </div>
