@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use App\Models\User;
 use App\Models\Interest;
 use Illuminate\Contracts\View\View;
@@ -16,6 +17,7 @@ class MentorController extends Controller
      */
     public function index(): View
     {
+        $cities = City::all();
         $topMentors = User::whereHas('roles', function ($query) {
             $query->where('name', 'mentor');
         })
@@ -45,7 +47,7 @@ class MentorController extends Controller
             }
         }
 
-        return view('front.mentorship.mentorship', compact('topMentors', 'recommendedMentors'));
+        return view('front.mentorship.mentorship', compact('topMentors', 'recommendedMentors', 'cities'));
     }
 
     /**
@@ -59,8 +61,9 @@ class MentorController extends Controller
             ->withAvg('ratings', 'rating')
             ->first();
 
+        $cities = City::all();
 
-        return view('front.mentorship.show-mentor', compact('mentor'));
+        return view('front.mentorship.show-mentor', compact('mentor', 'cities'));
     }
 
     /**
@@ -74,8 +77,9 @@ class MentorController extends Controller
             ->with('interests')
             ->orderByDesc('ratings_avg_rating')
             ->get();
+        $cities = City::all();
 
-        return view('front.mentorship.mentors', compact('mentors'));
+        return view('front.mentorship.mentors', compact('mentors', 'cities'));
     }
 
 
