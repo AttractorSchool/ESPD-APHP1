@@ -10,6 +10,7 @@ use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
 {
@@ -35,10 +36,27 @@ class PageController extends Controller
      */
     public function networking(Request $request): View
     {
-        $users = User::all();
+        $recommendedUsers = [];
+
+        $recommendedUsers = User::all();
+        if (Auth::check()) {
+            $userInterests = Auth::user()->interests->pluck('id')->toArray();
+
+            if (!empty($userInterests)) {
+                $recommendedUsers = User::whereHas('roles', function ($query) {
+                    $query->where('name', 'resident');
+                })
+                    ->whereHas('interests', function ($query) use ($userInterests) {
+                        $query->whereIn('interests.id', $userInterests);
+                    })
+                    ->with('interests')
+                    ->take(2)
+                    ->get();
+            }
+        }
         $cities = City::all();
         $notifications = Notification::all();
-        return view('front.mainNetwork', compact('users', 'cities', 'notifications'));
+        return view('front.mainNetwork', compact('recommendedUsers', 'cities', 'notifications'));
     }
     public function allResidents(Request $request): View
     {

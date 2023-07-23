@@ -4,11 +4,17 @@
     <div class="container">
         <a href="{{ route('mentorship') }}" class="arrow-back-mentors mb-2">
             <i class="fas fa-arrow-left"></i>
+            @foreach($cities as $city)
+            @endforeach
         </a>
         <div class="card-show-mentor">
             <table class="table table-responsive">
                 <tbody>
                 @foreach($mentors as $mentor)
+                    @php
+                        $requested = false;
+                        $city = $cities->firstWhere('id', $mentor->city);
+                    @endphp
                     <tr>
                         <td>
                             <a href="{{ route('mentors.show', ['id' => $mentor->id]) }}">
@@ -37,6 +43,7 @@
                                 @for ($i = 0; $i < $emptyStars; $i++)
                                     <i class="far fa-star"></i>
                                 @endfor
+                                <p style="color: gray">{{$city->name}}</p>
                                 <div class="interest-text">
                                     @foreach ($mentor->interests as $interest)
                                         <span>{{ $interest->name }}</span>
