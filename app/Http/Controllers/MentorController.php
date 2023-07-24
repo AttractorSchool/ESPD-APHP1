@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
+use App\Models\Notification;
 use App\Models\User;
 use App\Models\Interest;
 use Illuminate\Contracts\View\View;
@@ -76,7 +77,8 @@ class MentorController extends Controller
         })->withAvg('ratings', 'rating')
             ->with('interests')
             ->orderByDesc('ratings_avg_rating')
-            ->get();
+            ->paginate();
+
         $cities = City::all();
 
         return view('front.mentorship.mentors', compact('mentors', 'cities'));

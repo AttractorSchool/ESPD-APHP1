@@ -52,5 +52,10 @@
                 @endforeach
                 </tbody>
             </table>
+            <div class="row">
+                <div class="col-md-12">
+                    {{ $mentors->links('pagination::bootstrap-4') }}
+                </div>
+            </div>
         </div>
 @endsection

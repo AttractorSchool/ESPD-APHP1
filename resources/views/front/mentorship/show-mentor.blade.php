@@ -59,7 +59,7 @@
                                 @if ($isSubscribed)
                                     <button class="booking-button mt-4">Забронировать сессию</button>
                                 @else
-                                    <button class="booking-button mt-4" disabled style="background-color: gray;">Забронировать сессию</button>
+                                    <button class="booking-button mt-4" disabled style="background-color: gray;" >Забронировать сессию</button>
                                 @endif
                             @else
                                 <a href="{{ route('register') }}" class="booking-button mt-4">Забронировать сессию</a>

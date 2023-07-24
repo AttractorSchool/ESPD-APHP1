@@ -71,7 +71,6 @@
         </div>
 
         @if(count($recommendedMentors) > 0)
-            <h4 class="mt-4">Рекомендуем вам</h4>
             <div class="row">
                 @foreach ($recommendedMentors as $recommendedMentor)
                     @php
@@ -79,6 +78,7 @@
                         $city = $cities->firstWhere('id', $recommendedMentor->city);
                     @endphp
                     @if($city->id === auth()->user()->city)
+                        <h4 class="mt-4">Рекомендуем вам</h4>
                         <div class="col-lg-6 col-md-6 col-6">
                             <div class="card text-center">
                                 <div class="card-body">
