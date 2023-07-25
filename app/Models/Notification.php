@@ -32,7 +32,7 @@ class Notification extends Model
     public function response()
     {
         $response_all = \App\Models\Response::all();
-        $response = $response_all->where('first_id', $this->first_id)->where('second_id', $this->user_id);
+        $response = $response_all->where('first_id', $this->first_id)->where('second_id', $this->second_id);
 
         return $response->first()->id;
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ConnectRequest;
 use App\Models\Notification;
 use App\Models\Response;
+use App\Notifications\MyNotification;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -48,8 +49,12 @@ class ActionController extends Controller
             }
             $notification = new Notification();
             $notification->first_id = Auth::id();
-            $notification->user_id  = $request->input('second_id');
+            $notification->user_id = $request->input('second_id');
             $notification->save();
+
+
+            $user = Auth::user();
+            $user->notify(new MyNotification());
 
             $newResponse = new Response();
             $newResponse->first_id = $authenticatedUserId;
@@ -73,7 +78,9 @@ class ActionController extends Controller
 
         return redirect()->route('showChat', ['id' => $response->id]);
     }
-    public function delete_notification(Notification $notification){
+
+    public function delete_notification(Notification $notification)
+    {
         $notification->delete();
 
         return redirect()->back()->with('status', 'You are delete notification');

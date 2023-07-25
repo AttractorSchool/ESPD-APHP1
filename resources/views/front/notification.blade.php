@@ -16,7 +16,7 @@
                         </div>
                     </div>
                     <div class="notification_btn no_overflow">
-                        <form method="POST" action="{{ route('connect_final', ['response' => $notification->response() , 'notification' => $notification])}}">
+                        <form method="POST" action="">
                             @method('PUT')
                             @csrf
                             <input type="hidden" name="confirm_second" value="1">
