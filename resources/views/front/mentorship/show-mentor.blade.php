@@ -56,7 +56,7 @@
                                     $isSubscribed = $subscription && in_array($subscription->subscription_id, [2, 3]);
                                 @endphp
                                 @if ($isSubscribed)
-                                    <form class="connect-form" method="POST" action="{{ route('connect') }}">
+                                    <form class="connect-form" method="POST" action="{{ route('connectToMentor') }}">
                                         @csrf
                                         @php
                                             $requested = false;
