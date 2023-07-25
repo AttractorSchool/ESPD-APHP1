@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="container-fluid">
             <div class="position-relative">
-                <a href="{{ url()->previous() }}" class="arrow-back mb-2">
+                <a href="{{ '/mentorship' }}" class="arrow-back mb-2">
                     <i class="fas fa-arrow-left"></i>
                 </a>
                 <a href="#" class="heart-button">
@@ -55,9 +55,25 @@
                                     $subscription = auth()->user()->subscriptions()->first();
                                     $isSubscribed = $subscription && in_array($subscription->subscription_id, [2, 3]);
                                 @endphp
-
                                 @if ($isSubscribed)
-                                    <button class="booking-button mt-4">Забронировать сессию</button>
+                                    <form class="connect-form" method="POST" action="{{ route('connect') }}">
+                                        @csrf
+                                        @php
+                                            $requested = false;
+                                        @endphp
+                                        @foreach($notifications as $notification)
+                                            @if($notification->first_id == auth()->user()->id && $notification->user_id == $mentor->id)
+                                                @php
+                                                    $requested = true;
+                                                @endphp
+                                                <button class="booking-button mt-4" disabled style="background-color: gray;" >Сессия забронирована</button>
+                                            @endif
+                                        @endforeach
+                                        @unless($requested)
+                                                <input type="hidden" value="{{ $mentor->id }}" name="second_id">
+                                                <button class="booking-button mt-4">Забронировать сессию</button>
+                                        @endunless
+                                    </form>
                                 @else
                                     <button class="booking-button mt-4" disabled style="background-color: gray;" >Забронировать сессию</button>
                                 @endif
@@ -65,7 +81,6 @@
                                 <a href="{{ route('register') }}" class="booking-button mt-4">Забронировать сессию</a>
                             @endauth
                         </div>
-
                     </div>
                 </div>
 

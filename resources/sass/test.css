@@ -125,4 +125,12 @@
     }
 }
 
-
+.progress-bar {
+    position: absolute;
+    top: -5px;
+    left: 0;
+    height: 5px;
+    width: 0;
+    background-color: #00ff00;
+    transition: width 0.3s ease;
+}

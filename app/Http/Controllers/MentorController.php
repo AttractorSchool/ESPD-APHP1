@@ -63,8 +63,9 @@ class MentorController extends Controller
             ->first();
 
         $cities = City::all();
+        $notifications = Notification::all();
 
-        return view('front.mentorship.show-mentor', compact('mentor', 'cities'));
+        return view('front.mentorship.show-mentor', compact('mentor', 'cities', 'notifications'));
     }
 
     /**

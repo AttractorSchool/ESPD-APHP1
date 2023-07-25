@@ -11,6 +11,7 @@
         <form action="{{ route('mentorship.result') }}" method="POST">
             @csrf
             <div class="question-card">
+                <div class="progress-bar"></div>
                 <label for="interest">Что из нижеперечисленного вам по душе?</label><br>
             </div>
             @foreach ($interests->take(4) as $interest)

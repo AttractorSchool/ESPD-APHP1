@@ -43,6 +43,7 @@ Route::delete('/notification/{notification}', [PageController::class, 'delete_no
     'delete_notification'
 );
 
+Route::post('/connect', [ActionController::class, 'connect'])->name('connect');
 
 Route::get('/mentorship', [MentorController::class, 'index'])->name('mentorship');
 Route::get('/mentorship/test', [MentorController::class, 'mentorshipTest'])->name('mentorship.test');
