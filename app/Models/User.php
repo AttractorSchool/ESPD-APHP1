@@ -29,7 +29,8 @@ class User extends Authenticatable
         'avatar',
         'city',
         'phone',
-        'subscription_id'
+        'subscription_id',
+        'last_booking_date'
     ];
 
     /**
@@ -140,5 +141,13 @@ class User extends Authenticatable
     public function averageRating(): mixed
     {
         return $this->ratings()->avg('rating');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function sessionBookings(): HasMany
+    {
+        return $this->hasMany(SessionBooking::class, 'user_id');
     }
 }
