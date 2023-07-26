@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\City;
-use App\Models\Notification;
+use App\Models\CustomNotification;
 use App\Models\Response;
 use App\Models\Subscription;
 use App\Models\User;
@@ -55,14 +55,14 @@ class PageController extends Controller
             }
         }
         $cities = City::all();
-        $notifications = Notification::all();
+        $notifications = CustomNotification::all();
         return view('front.mainNetwork', compact('recommendedUsers', 'cities', 'notifications'));
     }
     public function allResidents(Request $request): View
     {
         $users = User::all();
         $cities = City::all();
-        $notifications = Notification::all();
+        $notifications = CustomNotification::all();
         return view('partials.residents', compact('users', 'cities', 'notifications'));
     }
 
@@ -72,7 +72,7 @@ class PageController extends Controller
      */
     public function notifications(): View
     {
-        $notifications = auth()->user()->notifications;
+        $notifications = auth()->user()->custom_notifications;
 
         return view('front.notification', compact('notifications'));
     }

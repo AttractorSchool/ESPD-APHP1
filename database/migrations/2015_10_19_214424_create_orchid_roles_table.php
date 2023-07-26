@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notifications', function (Blueprint $table) {
-            $table->id();
-            $table->string('first_id')->nullable();
-            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->string('title')->nullable();
-            $table->text('body')->nullable();
+        Schema::create('roles', function (Blueprint $table): void {
+            $table->increments('id');
+            $table->string('slug')->unique();
+            $table->string('name');
+            $table->jsonb('permissions')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notifications');
+        Schema::dropIfExists('roles');
     }
 };
