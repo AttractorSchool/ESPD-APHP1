@@ -1,10 +1,10 @@
 @extends('layouts.app')
+{{--<link href="{{ asset('css/media.css') }}" rel="stylesheet">--}}
 @section('content')
     <style>
         .icon {
             background-image: url("https://www.art-spb.ru/upload/good_image/16324.jpg");
         }
-
         ::-webkit-scrollbar {
             width: 0.5rem;
         }
@@ -18,14 +18,54 @@
             border-radius: 1rem;
             background-clip: content-box;
         }
+        .default_messages{
+            min-height: 40px;
+            background-color: #EAE5DF;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .default_messages .default_message{
+            width: 48%;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+        }
+        .default_messages .default_message .default_button{
+            border: none;
+            border-radius: 20px;
+            background-color: white;
+            color: black;
+            font-size: 10px;
+            padding: 0 5px;
+        }
     </style>
-    <div class="wrapper-chat" style="margin:-1.6rem 0; height: 100vh">
+    <div class="wrapper-chat" style=" height: 85vh">
         <div class="title">Chat with "{{$response->first->name}}"
             <div class="icon"></div>
         </div>
         <div class="body">
             <div class="box">
-                <div id="messages"></div>
+                <div id="messages">
+                    @if(!count($response->messages))
+                        <h1>Вы еще не общались</h1>
+                        <div class="default_messages">
+                                <form class="default_message" id="messageForm" action="{{route('chat.send')}}" enctype="multipart/form-data" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="response_id" value="{{$response->id}}">
+                                    <input type="hidden" id="body" name="body" value="Привет! Как у вас дела?">
+                                    <button type="submit" class="default_button">Привет! Как у вас дела?</button>
+                                </form>
+
+                                <form class="default_message" id="messageForm" action="{{route('chat.send')}}" enctype="multipart/form-data" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="response_id" value="{{$response->id}}">
+                                    <input type="hidden" id="body" name="body" value="Здравствуйте! Как ваши дела?">
+                                    <button type="submit" class="default_button">Здравствуйте! Как ваши дела?</button>
+                                </form>
+                        </div>
+                    @endif
+                </div>
             </div>
         </div>
         <div class="typing-area container">
