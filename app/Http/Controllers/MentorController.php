@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
-use App\Models\Notification;
+use App\Models\CustomNotification;
 use App\Models\User;
 use App\Models\Interest;
 use Illuminate\Contracts\View\View;
@@ -63,7 +63,7 @@ class MentorController extends Controller
             ->first();
 
         $cities = City::all();
-        $notifications = Notification::all();
+        $notifications = CustomNotification::all();
 
         return view('front.mentorship.show-mentor', compact('mentor', 'cities', 'notifications'));
     }

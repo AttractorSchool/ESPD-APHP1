@@ -88,7 +88,7 @@
                 <div class="notification">
                     <a href="{{ route('notifications') }}" style="text-decoration: none"><i class="fa-solid fa-bell"
                                                                                             style="text-decoration: none; color: black"></i></a>
-                    @if(\Illuminate\Support\Facades\Auth::user()->notifications)
+                    @if(count(\Illuminate\Support\Facades\Auth::user()->custom_notifications))
                         <div class="not no_overflow">
                             <p class="no_overflow">{{ count(\Illuminate\Support\Facades\Auth::user()->notifications) }}</p>
                         </div>

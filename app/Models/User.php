@@ -2,57 +2,74 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Orchid\Filters\Types\Like;
+use Orchid\Filters\Types\Where;
+use Orchid\Filters\Types\WhereDateStartEnd;
+use Orchid\Platform\Models\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
-
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var array
      */
     protected $fillable = [
         'name',
         'email',
         'password',
-        'country',
-        'avatar',
-        'city',
-        'phone',
-        'subscription_id',
-        'last_booking_date'
+        'permissions',
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * The attributes excluded from the model's JSON form.
      *
-     * @var array<int, string>
+     * @var array
      */
     protected $hidden = [
         'password',
         'remember_token',
+        'permissions',
     ];
 
     /**
-     * The attributes that should be cast.
+     * The attributes that should be cast to native types.
      *
-     * @var array<string, string>
+     * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
+        'permissions'          => 'array',
+        'email_verified_at'    => 'datetime',
     ];
 
+    /**
+     * The attributes for which you can use filters in url.
+     *
+     * @var array
+     */
+    protected $allowedFilters = [
+           'id'         => Where::class,
+           'name'       => Like::class,
+           'email'      => Like::class,
+           'updated_at' => WhereDateStartEnd::class,
+           'created_at' => WhereDateStartEnd::class,
+    ];
+
+    /**
+     * The attributes for which can use sort in url.
+     *
+     * @var array
+     */
+    protected $allowedSorts = [
+        'id',
+        'name',
+        'email',
+        'updated_at',
+        'created_at',
+    ];
     /**
      * @return HasMany
      */
@@ -60,7 +77,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(Review::class);
     }
-
     /**
      * @return HasMany
      */
@@ -73,14 +89,12 @@ class User extends Authenticatable
     /**
      * @return HasMany
      */
-
-    public function notifications(): HasMany
+    public function custom_notifications(): HasMany
     {
-        return $this->hasMany(Notification::class, 'user_id');
+        return $this->hasMany(CustomNotification::class, 'user_id');
     }
 
     /**
-
      * @return BelongsTo
      */
     public function city(): BelongsTo
@@ -99,7 +113,7 @@ class User extends Authenticatable
      */
     public function roles(): BelongsToMany
     {
-        return $this->belongsToMany(Role::class, 'user_roles');
+        return $this->belongsToMany(Role::class, 'role_users');
     }
 
     /**
@@ -141,13 +155,5 @@ class User extends Authenticatable
     public function averageRating(): mixed
     {
         return $this->ratings()->avg('rating');
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function sessionBookings(): HasMany
-    {
-        return $this->hasMany(SessionBooking::class, 'user_id');
     }
 }

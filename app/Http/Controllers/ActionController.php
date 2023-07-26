@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ConnectRequest;
-use App\Models\Notification;
+use App\Models\CustomNotification;
 use App\Models\Response;
 use App\Models\SessionBooking;
 use Carbon\Carbon;
@@ -48,7 +48,7 @@ class ActionController extends Controller
 
                 return redirect()->back()->with('status', 'Вы уже подтвердили подключение.');
             }
-            $notification = new Notification();
+            $notification = new CustomNotification();
             $notification->first_id = Auth::id();
             $notification->user_id  = $request->input('second_id');
             $notification->save();
@@ -105,7 +105,7 @@ class ActionController extends Controller
                 return redirect()->back()->with('status', 'Вы уже подтвердили подключение.');
             }
 
-            $notification = new Notification();
+            $notification = new CustomNotification();
             $notification->first_id = Auth::id();
             $notification->user_id = $secondUserId;
             $notification->save();
@@ -124,7 +124,7 @@ class ActionController extends Controller
         return redirect()->route('login')->with('status', 'You are not logged in.');
     }
 
-    public function connect_final(Request $request, Response $response, Notification $notification)
+    public function connect_final(Request $request, Response $response, CustomNotification $notification)
     {
         $response->confirm_second = $request->input('confirm_second');
 
@@ -134,7 +134,7 @@ class ActionController extends Controller
 
         return redirect()->route('showChat', ['id' => $response->id]);
     }
-    public function delete_notification(Notification $notification){
+    public function delete_notification(CustomNotification $notification){
         $notification->delete();
 
         return redirect()->back()->with('status', 'You are delete notification');

@@ -15,31 +15,31 @@ class MentorDataSeeder extends Seeder
      */
     public function run()
     {
-        $mentorRole = Role::where('name', 'mentor')->first();
-        $mentors = $mentorRole->users;
-
-        $users = User::all();
-
-        foreach ($mentors as $mentor) {
-            $numberOfRatings = rand(5, 15);
-
-            for ($i = 0; $i < $numberOfRatings; $i++) {
-                $ratedByUser = $users->random();
-
-                Rating::create([
-                    'user_id' => $mentor->id,
-                    'rated_by_user_id' => $ratedByUser->id,
-                    'rating' => $this->generateRating(),
-                ]);
-            }
-        }
+//        $mentorRole = Role::where('name', 'mentor')->first();
+//        $mentors = $mentorRole->users;
+//
+//        $users = User::all();
+//
+//        foreach ($mentors as $mentor) {
+//            $numberOfRatings = rand(5, 15);
+//
+//            for ($i = 0; $i < $numberOfRatings; $i++) {
+//                $ratedByUser = $users->random();
+//
+//                Rating::create([
+//                    'user_id' => $mentor->id,
+//                    'rated_by_user_id' => $ratedByUser->id,
+//                    'rating' => $this->generateRating(),
+//                ]);
+//            }
+//        }
     }
 
-    /**
-     * @return int
-     */
-    private function generateRating(): int
-    {
-        return rand(1, 5);
-    }
+//    /**
+//     * @return int
+//     */
+//    private function generateRating(): int
+//    {
+//        return rand(1, 5);
+//    }
 }
