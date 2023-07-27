@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         @foreach($notifications as $notification)
-            @if(isset($notification->first_id))
+            @if($notification->type==1)
                 <div class="notification_container">
                     <div class="notification_bar">
                         <div class="notification_img">
@@ -24,7 +24,7 @@
                     </div>
                 </div>
             @endif
-            @if(isset($notification->title))
+            @if($notification->type==2)
                 <div class="notification_container_text">
                     <div class="title">
                         <h4 class="no_overflow">{{ $notification->title }}</h4>
