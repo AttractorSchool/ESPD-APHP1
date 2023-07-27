@@ -53,5 +53,10 @@ Route::get('/mentors/{id}', [MentorController::class, 'show'])
     ->name('mentors.show')
     ->middleware('register.guest');
 
+Route::get('/notification/toEmail/{notification}', [\App\Http\Controllers\NotificationController::class, 'send'])->name(
+    'notification.send'
+);
+
+//http://127.0.0.1:8000/notification/toEmail/
 Auth::routes();
 

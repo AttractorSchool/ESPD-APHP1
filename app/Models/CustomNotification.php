@@ -14,7 +14,7 @@ class CustomNotification extends Model
     /**
      * @var string[]
      */
-    protected $fillable = ['first_id', 'second_id', 'title', 'body'];
+    protected $fillable = ['sender_id', 'user_id', 'title', 'body', 'is_read', 'type'];
 
     /**
      * @return BelongsTo
@@ -29,7 +29,7 @@ class CustomNotification extends Model
      */
     public function sender(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'first_id');
+        return $this->belongsTo(User::class, 'sender_id');
     }
 
     /**
@@ -37,9 +37,14 @@ class CustomNotification extends Model
      */
     public function response()
     {
-        $response_all = \App\Models\Response::all();
-        $response = $response_all->where('first_id', $this->first_id)->where('second_id', $this->user_id);
+        $response = Response::where('first_id', $this->sender_id)
+            ->where('second_id', $this->user_id)
+            ->first();
 
-        return $response->first()->id;
+        if ($response) {
+            return $response->id;
+        } else {
+            return null;
+        }
     }
 }
