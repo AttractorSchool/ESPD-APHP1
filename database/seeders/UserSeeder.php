@@ -23,8 +23,7 @@ class UserSeeder extends Seeder
             'city' => '10',
             'permissions' => '{"platform.index": true, "platform.systems.roles": true, "platform.systems.users": true, "platform.systems.attachment": true}'
         ]);
-
-        User::factory(25)->create();
+         User::factory(25)->create();
 
     }
 }
