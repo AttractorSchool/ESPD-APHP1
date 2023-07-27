@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Orchid\Layouts\User;
 
+use Illuminate\Support\Facades\Auth;
 use Orchid\Platform\Models\User;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
@@ -28,6 +29,11 @@ class UserListLayout extends Table
     public function columns(): array
     {
         return [
+            TD::make('picture')
+                ->render(function (User $user) {
+                    return "<img src='" . asset('storage/' . $user->avatar) . "' width='100' height='100'>";
+                }),
+
             TD::make('name', __('Name'))
                 ->sort()
                 ->cantHide()
@@ -45,6 +51,20 @@ class UserListLayout extends Table
                     ->asyncParameters([
                         'user' => $user->id,
                     ])),
+            TD::make('country', ('Country'))
+                ->sort()
+                ->cantHide()
+                ->filter(Input::make('country'))
+                ->render(fn(User $user) => Link::make($user->country)->route('platform.systems.users.edit', $user)),
+
+            TD::make('city', 'City')
+                ->render(fn(User $user) => $user->city),
+
+            TD::make('phone', ('Phone'))
+                ->sort()
+                ->cantHide()
+                ->filter(Input::make('phone'))
+                ->render(fn(User $user) => Link::make($user->phone)->route('platform.systems.users.edit', $user)),
 
             TD::make('created_at', __('Created'))
                 ->usingComponent(DateTimeSplit::class)
