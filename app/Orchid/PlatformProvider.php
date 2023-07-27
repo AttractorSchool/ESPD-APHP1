@@ -38,14 +38,21 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('bs.person-circle')
                 ->route('platform.systems.users')
                 ->permission('platform.systems.users')
-                ->title(__('Все пользователи')),
+
+                ->title(__('Все пользователи'))
+                ->divider(),
 
             Menu::make(__('Roles'))
                 ->icon('bs.award')
                 ->route('platform.systems.roles')
                 ->permission('platform.systems.roles')
+                ->title('Роли')
                 ->divider(),
 
+            Menu::make('Аналитика')
+                ->icon('bs.person')
+                ->route('platform.analytic')
+                ->title(__('Аналитика')),
         ];
     }
 

@@ -90,7 +90,7 @@
                                                                                             style="text-decoration: none; color: black"></i></a>
                     @if(count(\Illuminate\Support\Facades\Auth::user()->custom_notifications))
                         <div class="not no_overflow">
-                            <p class="no_overflow">{{ count(\Illuminate\Support\Facades\Auth::user()->notifications) }}</p>
+                            <p class="no_overflow">{{ count(\Illuminate\Support\Facades\Auth::user()->custom_notifications) }}</p>
                         </div>
                     @endif
                 </div>

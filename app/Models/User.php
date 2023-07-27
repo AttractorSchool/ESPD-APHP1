@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -155,5 +156,36 @@ class User extends Authenticatable
     public function averageRating(): mixed
     {
         return $this->ratings()->avg('rating');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function sevenDayAnalytic()
+    {
+        return User::whereNotNull('last_login_at')
+            ->whereBetween('last_login_at', [Carbon::now()->copy()->subDays(7), Carbon::now()])
+            ->count();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function monthAnalytic()
+    {
+        return User::whereNotNull('last_login_at')
+            ->wheremonth('last_login_at', '=', Carbon::now()->month)
+            ->whereYear('last_login_at', '=', Carbon::now()->year)
+            ->count();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function yearAnalytic()
+    {
+        return User::whereNotNull('last_login_at')
+            ->whereYear('last_login_at', '=', Carbon::now()->year)
+            ->count();
     }
 }
