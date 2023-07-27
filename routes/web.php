@@ -5,6 +5,7 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\Front\FormController;
 use App\Http\Controllers\Front\PageController;
 use App\Http\Controllers\MentorController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -22,7 +23,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/residents', [PageController::class, 'residents'])->name('residents');
 Route::post('/form', [FormController::class, 'store'])->name('front.form');
-
+Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 Route::post('/connect', [ActionController::class, 'connect'])->name('connect')->middleware('auth');
 Route::put('/connect_final/{response}/{notification}', [ActionController::class, 'connect_final'])->name(
     'connect_final'

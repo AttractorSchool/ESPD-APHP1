@@ -193,7 +193,7 @@
         {{--        @endguest--}}
         <li class="nav-item m-0">
             <div class="icon-container">
-                <a class="nav-link py-1" href="#">
+                <a class="nav-link py-1" href="{{route('profile.show')}}">
                     <i class="fas fa-user-circle" style="color: #8C8C8C"></i>
                 </a>
                 <span class="icon-label">Profile</span>
