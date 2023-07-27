@@ -114,8 +114,9 @@ class ActionController extends Controller
             }
 
             $notification = new CustomNotification();
-            $notification->first_id = Auth::id();
-            $notification->user_id = $secondUserId;
+            $notification->sender_id = Auth::user()->id;
+            $notification->user_id = $request->input('second_id');
+            $notification->type = 1;
             $notification->save();
 
             $newResponse = new Response();
