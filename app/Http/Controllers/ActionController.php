@@ -49,8 +49,9 @@ class ActionController extends Controller
                 return redirect()->back()->with('status', 'Вы уже подтвердили подключение.');
             }
             $notification = new CustomNotification();
-            $notification->first_id = Auth::id();
-            $notification->user_id  = $request->input('second_id');
+            $notification->sender_id = Auth::user()->id;
+            $notification->user_id = $request->input('second_id');
+            $notification->type = 1;
             $notification->save();
 
             $newResponse = new Response();
@@ -59,7 +60,11 @@ class ActionController extends Controller
             $newResponse->confirm_first = true;
             $newResponse->save();
 
-            return redirect()->back()->with('status', 'Вы успешно отправили запрос на подключение пользователю.');
+//            return redirect()->back()->with('status', 'Вы успешно отправили запрос на подключение пользователю.');
+            return redirect()->route('notification.send', compact('notification'))->with(
+                'status',
+                'Вы успешно отправили запрос на подключение пользователю.'
+            );
         }
 
         return redirect()->route('login')->with('status', 'You are not logged in.');
@@ -80,7 +85,10 @@ class ActionController extends Controller
             }
 
             if (!$this->canBookSession($secondUserId)) {
-                return redirect()->back()->with('status', 'Вы не можете забронировать сессию, т.к. уже забронирована сессия с ментором.');
+                return redirect()->back()->with(
+                    'status',
+                    'Вы не можете забронировать сессию, т.к. уже забронирована сессия с ментором.'
+                );
             }
 
             $response = Response::where('first_id', $authenticatedUserId)
@@ -106,8 +114,9 @@ class ActionController extends Controller
             }
 
             $notification = new CustomNotification();
-            $notification->first_id = Auth::id();
-            $notification->user_id = $secondUserId;
+            $notification->sender_id = Auth::user()->id;
+            $notification->user_id = $request->input('second_id');
+            $notification->type = 1;
             $notification->save();
 
             $newResponse = new Response();
@@ -134,7 +143,9 @@ class ActionController extends Controller
 
         return redirect()->route('showChat', ['id' => $response->id]);
     }
-    public function delete_notification(CustomNotification $notification){
+
+    public function delete_notification(CustomNotification $notification)
+    {
         $notification->delete();
 
         return redirect()->back()->with('status', 'You are delete notification');
