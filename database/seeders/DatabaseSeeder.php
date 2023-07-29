@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\City;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,30 +14,35 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-//        \App\Models\User::factory()->create(
-//            [
-//                'email' => 'admin@admin.com',
-//                'name' => 'admin',
-////                'city' => rand(1, count(City::all())),
-//                'permissions' => [
-//                    "platform.index" => true,
-//                    "platform.systems.roles" => true,
-//                    "platform.systems.users" => true,
-//                    "platform.systems.attachment" => true
-//                ]
+//        $role_date = [
+//            [   'id' => 1,
+//                'slug' => 'mentor',
 //            ]
-//        );
-
-        $this->call(CitySeeder::class);
-        $this->call(SubscriptionSeeder::class);
-        $this->call(InterestSeeder::class);
-        $this->call(UserSeeder::class);
-        $this->call(UserInterestSeeder::class);
-        $this->call(EventSeeder::class);
-        $this->call(ReviewSeeder::class);
-        $this->call(ResponseSeeder::class);
-        $this->call(MessageSeeder::class);
-        $this->call(UserRoleSeeder::class);
-        $this->call(MentorDataSeeder::class);
+//        ];
+//        $role_user_date = [
+//          [
+//              'user_id' => '2',
+//              'role_id' =>  '1'
+//          ]
+//        ];
+//        DB::table('role_users')->insert($role_date);
+        $this->call([
+            CitySeeder::class,
+            SubscriptionSeeder::class,
+            InterestSeeder::class,
+            UserSeeder::class,
+            UserInterestSeeder::class,
+            EventSeeder::class,
+            ReviewSeeder::class,
+            ResponseSeeder::class,
+            MessageSeeder::class,
+            UserRoleSeeder::class,
+            MentorDataSeeder::class,
+            CourseSeeder::class,
+            VideoSeeder::class,
+            QuestionSeeder::class,
+            AnswerSeeder::class,
+            UserCourseSeeder::class,
+        ]);
     }
 }

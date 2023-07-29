@@ -189,4 +189,13 @@ class User extends Authenticatable
             ->whereYear('last_login_at', '=', Carbon::now()->year)
             ->count();
     }
+
+
+    /**
+     * @return HasMany
+     */
+    public function courses():HasMany //только автор(ментор) может пользоваться
+    {
+        return $this->hasMany(Course::class, 'author_id');
+    }
 }
