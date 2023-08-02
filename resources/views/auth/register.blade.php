@@ -190,12 +190,10 @@
                 }
             });
 
-            $('.avatar-preview').on('click', '.avatar-edit', function() {
-                $('#avatar').click();
-            });
-
             $('.avatar-preview, .avatar-placeholder').on('click', function() {
-                $('#avatar').click();
+                $('#avatar').val('');
+                $('.avatar-placeholder').show();
+                $('.avatar-preview').html('');
             });
         });
     </script>

@@ -8,13 +8,21 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
     use RegistersUsers;
 
-    protected $redirectTo = '/mentorship';
+    protected function redirectTo()
+    {
+        $previousUrl = Session::get('previous_url');
+
+        Session::forget('previous_url');
+
+        return $previousUrl ? $previousUrl : '/';
+    }
 
     public function __construct()
     {
@@ -57,5 +65,4 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
-
 }
