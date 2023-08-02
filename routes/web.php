@@ -6,6 +6,7 @@ use App\Http\Controllers\Front\FormController;
 use App\Http\Controllers\Front\PageController;
 use App\Http\Controllers\MentorController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubscriptionsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -58,6 +59,10 @@ Route::get('/mentors/{id}', [MentorController::class, 'show'])
 Route::get('/notification/toEmail/{notification}', [\App\Http\Controllers\NotificationController::class, 'send'])->name(
     'notification.send'
 );
+
+Route::get('/subscriptions', [SubscriptionsController::class, 'index'])->name('subscriptions');
+Route::post('/subscribe/{subscription}', [SubscriptionsController::class, 'subscribe'])->name('subscribe');
+
 
 //http://127.0.0.1:8000/notification/toEmail/
 Auth::routes();

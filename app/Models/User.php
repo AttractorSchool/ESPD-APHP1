@@ -84,14 +84,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(Review::class);
     }
-    /**
-     * @return HasMany
-     */
-
-    public function subscription(): HasMany
-    {
-        return $this->hasMany(Subscription::class);
-    }
 
     /**
      * @return HasMany
@@ -129,14 +121,6 @@ class User extends Authenticatable
     public function interests(): BelongsToMany
     {
         return $this->belongsToMany(Interest::class, 'user_interests');
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function subscriptions(): HasMany
-    {
-        return $this->hasMany(UserSubscription::class);
     }
 
     /**
@@ -202,5 +186,33 @@ class User extends Authenticatable
     public function courses():HasMany //только автор(ментор) может пользоваться
     {
         return $this->hasMany(Course::class, 'author_id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function subscriptions(): BelongsToMany
+    {
+        return $this->belongsToMany(Subscription::class, 'user_subscriptions', 'user_id', 'subscription_id')
+            ->withPivot('start_date', 'end_date')
+            ->withTimestamps();
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function subscription(): HasMany
+    {
+        return $this->hasMany(UserSubscription::class, 'user_id');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasActiveSubscription(): bool
+    {
+        return $this->subscriptions()
+            ->where('end_date', '>=', now())
+            ->exists();
     }
 }
