@@ -37,7 +37,7 @@
                             <span class="num-ratings">{{ $numRatings }} проголосовавших</span>
                         </div>
                         <h5 class="card-title mt-4">О менторе</h5>
-                        <p style="display: flex; color: gray">г. {{$city->name}}</p>
+                        <p style="display: flex; color: gray">г. {{$mentor->city}}</p>
                         <p class="card-text text-start">{{ $mentor->description }}</p>
                         <div class="interest-text-show text-start mt-4">
                             @foreach ($mentor->interests as $interest)

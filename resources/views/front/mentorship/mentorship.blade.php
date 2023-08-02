@@ -20,18 +20,11 @@
 
         <div class="mt-4 mb-2 d-flex justify-content-between align-items-center">
             <h4 class="">ТОП-менторы</h4>
-            <a href="{{ route('mentors') }}" class="mentor-url">Все менторы
-                @foreach($cities as $city)
-                @endforeach
-            </a>
+            <a href="{{ route('mentors') }}" class="mentor-url">Все менторы</a>
         </div>
 
         <div class="row">
             @foreach ($topMentors as $topMentor)
-                @php
-                    $requested = false;
-                    $city = $cities->firstWhere('id', $topMentor->city);
-                @endphp
                 <div class="col-lg-6 col-md-6 col-6">
                     <div class="card text-center">
                         <div class="card-body">
@@ -58,7 +51,7 @@
                                     <i class="far fa-star"></i>
                                 @endfor
                             </div>
-                            <p style="color: gray">{{$city->name}}</p>
+                            <p style="color: gray">{{$topMentor->city}}</p>
                             <div class="interest-text">
                                 @foreach ($topMentor->interests as $interest)
                                     <span>{{ $interest->name }}</span>
@@ -73,11 +66,6 @@
         @if(count($recommendedMentors) > 0)
             <div class="row">
                 @foreach ($recommendedMentors as $recommendedMentor)
-                    @php
-                        $requested = false;
-                        $city = $cities->firstWhere('id', $recommendedMentor->city);
-                    @endphp
-                    @if($city->id === auth()->user()->city)
                         <h4 class="mt-4">Рекомендуем вам</h4>
                         <div class="col-lg-6 col-md-6 col-6">
                             <div class="card text-center">
@@ -105,7 +93,7 @@
                                             <i class="far fa-star"></i>
                                         @endfor
                                     </div>
-                                    <p style="color: gray">{{$city->name}}</p>
+                                    <p style="color: gray">{{$recommendedMentor->city}}</p>
                                     <div class="interest-text">
                                         @foreach ($recommendedMentor->interests as $interest)
                                             <span>{{ $interest->name }}</span>
@@ -114,7 +102,6 @@
                                 </div>
                             </div>
                         </div>
-                    @endif
                 @endforeach
             </div>
         @endif

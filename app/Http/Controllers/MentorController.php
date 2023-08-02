@@ -18,7 +18,6 @@ class MentorController extends Controller
      */
     public function index(): View
     {
-        $cities = City::all();
         $topMentors = User::whereHas('roles', function ($query) {
             $query->where('name', 'mentor');
         })
@@ -48,7 +47,7 @@ class MentorController extends Controller
             }
         }
 
-        return view('front.mentorship.mentorship', compact('topMentors', 'recommendedMentors', 'cities'));
+        return view('front.mentorship.mentorship', compact('topMentors', 'recommendedMentors'));
     }
 
     /**
