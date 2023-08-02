@@ -22,6 +22,9 @@ class User extends Authenticatable
         'name',
         'lastname',
         'email',
+        'phone',
+        'country',
+        'city',
         'password',
         'permissions',
         'last_booking_date'
