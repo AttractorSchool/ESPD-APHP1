@@ -11,6 +11,8 @@ class Interest extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name'];
+
     /**
      * @return BelongsToMany
      */
@@ -19,7 +21,7 @@ class Interest extends Model
         return $this->belongsToMany(User::class, 'user_interests');
     }
 
-    public function courses():HasMany
+    public function courses(): HasMany
     {
         return $this->hasMany(Course::class);
     }
