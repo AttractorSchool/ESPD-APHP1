@@ -36,4 +36,11 @@ class Course extends Model
     {
         return $this->hasMany(Video::class);
     }
+    /**
+     * @return HasMany
+     */
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class);
+    }
 }
