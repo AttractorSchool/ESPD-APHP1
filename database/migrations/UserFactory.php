@@ -1,8 +1,7 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\migrations;
 
-use App\Models\City;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
