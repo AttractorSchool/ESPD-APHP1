@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\Course;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class CourseSeeder extends Seeder
 {
@@ -17,6 +19,7 @@ class CourseSeeder extends Seeder
         Course::factory()->create([
 //            [
                 'name'             => 'Курсы по балету',
+                'photo'            => $this->getImage(2),
                 'author_id'        => '5',
                 'interest_id'      => rand(1, 10),
                 'mini_description' => 'Курсы балета представляют собой обучающие программы, которые предназначены для развития
@@ -40,5 +43,19 @@ class CourseSeeder extends Seeder
 //                 разработки программного обеспечения.',
 //                ],
             ]);
+    }
+    /**
+     * @param int $imageNumber
+     * @return string
+     */
+    private function getImage(int $imageNumber = 1): string
+    {
+        $path      = storage_path() . "/seed_pictures/" . $imageNumber . ".jpg";
+        $imageName = md5($path) . '.jpg';
+        $image     = 'pictures/' . $imageName;
+        $resize    = Image::make($path)->fit(300)->encode('jpg');
+        Storage::disk('public')->put($image, $resize->__toString());
+
+        return $image;
     }
 }
