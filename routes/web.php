@@ -59,6 +59,15 @@ Route::get('/notification/toEmail/{notification}', [\App\Http\Controllers\Notifi
     'notification.send'
 );
 
+Route::post('/academy', [\App\Http\Controllers\CourseController::class, 'countPoints'])->name('academy.countPoints');
+Route::get('/academy/{video}', [\App\Http\Controllers\CourseController::class, 'test'])->name('academy.test');
+Route::get('/academy/result/{score}', [\App\Http\Controllers\CourseController::class, 'result'])->name(
+    'academy.test.result'
+);
+Route::delete('/academy/{video}', [\App\Http\Controllers\CourseController::class, 'skipTest'])->name(
+    'academy.skipTest'
+);
+
 //http://127.0.0.1:8000/notification/toEmail/
 Auth::routes();
 
