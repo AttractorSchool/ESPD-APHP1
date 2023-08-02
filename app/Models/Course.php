@@ -23,6 +23,9 @@ class Course extends Model
     {
        return $this->belongsTo(User::class, 'author_id', 'id');
     }
+    public function users():HasMany{
+        return $this->hasMany(UserCourse::class);
+    }
 
     public function interest():BelongsTo
     {

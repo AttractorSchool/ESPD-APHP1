@@ -7,9 +7,12 @@ use App\Models\City;
 use App\Models\Course;
 use App\Models\CustomNotification;
 use App\Models\Response;
+use App\Models\Review;
 use App\Models\Subscription;
 use App\Models\User;
+use App\Models\Video;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -80,6 +83,17 @@ class PageController extends Controller
 
     public function course(Course $course):View
     {
+        $videos = Video::all();
+        $videos = $videos->where('course_id', $course->id);
 
+        return view('front.academy.course', compact('course',  'videos'));
+    }
+    public function video(Video $video)
+    {
+        return view('front.academy.video', compact('video'));
+    }
+    public function without_point():RedirectResponse
+    {
+        return redirect()->back()->with('status', 'Вы не прошли прошлый тест! Пройдите его что бы начать!');
     }
 }
