@@ -13,7 +13,6 @@
     <link href="{{ asset('css/media.css') }}" rel="stylesheet">
     <script src="/js/app.js"></script>
     <title>{{ config('app.name', 'Laravel') }}</title>
-
     <!-- Fonts -->
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
@@ -98,7 +97,7 @@
         </div>
     </nav>
 
-    <main class="py-4">
+    <main class="py-4" style="padding-top: 0">
         @if (session('status'))
             <div class="alert alert-primary" role="alert">
                 {{session('status')}}

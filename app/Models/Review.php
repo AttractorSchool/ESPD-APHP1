@@ -13,13 +13,27 @@ class Review extends Model
     /**
      * @var string[]
      */
-    protected $fillable = ['rating', 'body', 'user_id'];
+    protected $fillable = ['rating', 'body','author_id', 'user_id', 'course_id'];
 
+    /**
+     * @return BelongsTo
+     */
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'author_id');
+    }
     /**
      * @return BelongsTo
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
+    }
+    /**
+     * @return BelongsTo
+     */
+    public function course(): BelongsTo
+    {
+        return $this->belongsTo(Course::class);
     }
 }

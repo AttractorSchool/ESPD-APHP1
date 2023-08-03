@@ -4,11 +4,15 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\City;
+use App\Models\Course;
 use App\Models\CustomNotification;
 use App\Models\Response;
+use App\Models\Review;
 use App\Models\Subscription;
 use App\Models\User;
+use App\Models\Video;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -77,43 +81,19 @@ class PageController extends Controller
         return view('front.notification', compact('notifications'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function course(Course $course):View
     {
-        //
-    }
+        $videos = Video::all();
+        $videos = $videos->where('course_id', $course->id);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return view('front.academy.course', compact('course',  'videos'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function video(Video $video)
     {
-        //
+        return view('front.academy.video', compact('video'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function without_point():RedirectResponse
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->back()->with('status', 'Вы не прошли прошлый тест! Пройдите его что бы начать!');
     }
 }

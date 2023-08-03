@@ -67,6 +67,11 @@ Route::get('/academy/result/{score}', [\App\Http\Controllers\CourseController::c
 Route::delete('/academy/{video}', [\App\Http\Controllers\CourseController::class, 'skipTest'])->name(
     'academy.skipTest'
 );
+Route::get('/courses/{course}/main', [PageController::class, 'course'])->name('course');
+Route::get('/videos/{video}', [PageController::class, 'video'])->name('video');
+Route::get('course_without_pint', [PageController::class, 'without_point'])->name('without_point');
+
+Route::post('reviews', [ActionController::class, 'review'])->name('review_add');
 
 //http://127.0.0.1:8000/notification/toEmail/
 Auth::routes();

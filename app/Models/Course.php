@@ -45,6 +45,9 @@ class Course extends Model
     {
         return $this->belongsTo(User::class, 'author_id', 'id');
     }
+    public function users():HasMany{
+        return $this->hasMany(UserCourse::class);
+    }
 
     public function interest(): BelongsTo
     {
@@ -57,5 +60,12 @@ class Course extends Model
     public function videos(): HasMany
     {
         return $this->hasMany(Video::class);
+    }
+    /**
+     * @return HasMany
+     */
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class);
     }
 }

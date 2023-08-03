@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ConnectRequest;
 use App\Models\CustomNotification;
 use App\Models\Response;
+use App\Models\Review;
 use App\Models\SessionBooking;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
@@ -172,5 +173,21 @@ class ActionController extends Controller
         }
 
         return true;
+    }
+
+    public function review(Request $request):RedirectResponse
+    {
+        $request->validate([
+           'rating' => 'required|int|min:1|max:5',
+            'body'  => 'required|min:5|max:128',
+        ]);
+        $review = new Review();
+        $review->rating    = $request->input('rating');
+        $review->body      = $request->input('body');
+        $review->author_id = Auth::id();
+        $review->course_id = $request->input('course_id');
+        $review->save();
+
+        return redirect()->back()->with('status', 'Вы оставили отзыв');
     }
 }
