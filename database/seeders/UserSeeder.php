@@ -14,15 +14,23 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->create([
-           'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'password' => Hash::make('password'),
-            'phone' => '87019241146',
-            'country' => 'Kazahstan',
-            'city' => '10',
-            'permissions' => '{"platform.index": true, "platform.systems.roles": true, "platform.systems.users": true, "platform.systems.attachment": true}'
-        ]);
+        \App\Models\User::factory()->create(
+            [
+                'email' => 'admin@admin.com',
+                'name' => 'admin',
+                'lastname' => 'admin',
+                'country' => 'KAZ',
+                'city' => 1,
+                'permissions' => [
+                    "platform.index" => true,
+                    "platform.systems.roles" => true,
+                    "platform.systems.users" => true,
+                    "platform.systems.attachment" => true
+                ]
+            ]
+
+        );
+
          User::factory(25)->create();
 
     }
