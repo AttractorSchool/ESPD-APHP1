@@ -11,6 +11,7 @@ use App\Models\Review;
 use App\Models\Subscription;
 use App\Models\User;
 use App\Models\Video;
+use App\Models\VideoTestScore;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -85,8 +86,9 @@ class PageController extends Controller
     {
         $videos = Video::all();
         $videos = $videos->where('course_id', $course->id);
+        $score = VideoTestScore::all();
 
-        return view('front.academy.course', compact('course',  'videos'));
+        return view('front.academy.course', compact('course',  'videos', 'score'));
     }
     public function video(Video $video)
     {
