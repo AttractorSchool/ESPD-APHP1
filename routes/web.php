@@ -6,6 +6,7 @@ use App\Http\Controllers\Front\FormController;
 use App\Http\Controllers\Front\PageController;
 use App\Http\Controllers\MentorController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubscriptionsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -59,6 +60,9 @@ Route::get('/notification/toEmail/{notification}', [\App\Http\Controllers\Notifi
     'notification.send'
 );
 
+Route::get('/subscriptions', [SubscriptionsController::class, 'index'])->name('subscriptions');
+Route::post('/subscribe/{subscription}', [SubscriptionsController::class, 'subscribe'])->name('subscribe');
+
 Route::post('/academy', [\App\Http\Controllers\CourseController::class, 'countPoints'])->name('academy.countPoints');
 Route::get('/academy/{video}', [\App\Http\Controllers\CourseController::class, 'test'])->name('academy.test');
 Route::get('/academy/result/{score}', [\App\Http\Controllers\CourseController::class, 'result'])->name(
@@ -72,6 +76,7 @@ Route::get('/videos/{video}', [PageController::class, 'video'])->name('video');
 Route::get('course_without_pint', [PageController::class, 'without_point'])->name('without_point');
 
 Route::post('reviews', [ActionController::class, 'review'])->name('review_add');
+
 
 //http://127.0.0.1:8000/notification/toEmail/
 Auth::routes();

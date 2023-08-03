@@ -86,6 +86,7 @@ class PageController extends Controller
     {
         $videos = Video::all();
         $videos = $videos->where('course_id', $course->id);
+
         $score =  VideoTestScore::all();
 
         return view('front.academy.course', compact('course',  'videos', 'score'));

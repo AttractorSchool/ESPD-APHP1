@@ -17,6 +17,6 @@
     </video>
 
     <div class="tests">
-        <a href="#" class="test">Пройти тест></a>
+        <a href="{{route('academy.test', ['video' => $video])}}" class="test">Пройти тест></a>
     </div>
 @endsection

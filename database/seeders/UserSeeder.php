@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
                 'name' => 'admin',
                 'lastname' => 'admin',
                 'country' => 'KAZ',
-                'city' => 1,
+                'city' => 'Алмата',
                 'permissions' => [
                     "platform.index" => true,
                     "platform.systems.roles" => true,

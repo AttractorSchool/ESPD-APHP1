@@ -1,12 +1,12 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\migrations;
 
-use App\Models\City;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
@@ -20,6 +20,7 @@ class UserFactory extends Factory
     public function definition(): array
     {
         $cities = ['Алматы', 'Караганда', 'Астана'];
+
         return [
             'name' => $this->faker->firstName,
             'lastname' => $this->faker->lastName,
@@ -33,6 +34,7 @@ class UserFactory extends Factory
             'avatar' => $this->getImage(rand(1,5))
         ];
     }
+
     /**
      * @param int $imageNumber
      * @return string
@@ -44,8 +46,10 @@ class UserFactory extends Factory
         $image = 'pictures/' . $imageName;
         $resize = Image::make($path)->fit(300)->encode('jpeg');
         Storage::disk('public')->put('pictures/'.$imageName, $resize->__toString());
+
         return $image;
     }
+
     /**
      * Indicate that the model's email address should be unverified.
      */

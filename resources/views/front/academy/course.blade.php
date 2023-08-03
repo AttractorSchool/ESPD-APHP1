@@ -18,7 +18,7 @@
         <h2 style="margin-left: 10px">Материалы по курсу</h2>
         <div class="videos">
             @for($i = 1; $i <= count($videos); $i++)
-                    <a class="video" href="@if(($course->videos->first() == $videos->find($i)) || !is_null($videos->find($i-1)->point))
+                    <a class="video" href="@if(($course->videos->first() == $videos->find($i)) || !is_null($score->where('video_id', $videos->find($i-1)->id)->first()))
                      {{ route('video', ['video' => $videos->find($i)]) }}
                      @else
                      {{ route('without_point') }}
