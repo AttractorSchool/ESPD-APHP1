@@ -33,7 +33,6 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             UserInterestSeeder::class,
             EventSeeder::class,
-            ReviewSeeder::class,
             ResponseSeeder::class,
             MessageSeeder::class,
             UserRoleSeeder::class,
@@ -43,6 +42,7 @@ class DatabaseSeeder extends Seeder
             QuestionSeeder::class,
             AnswerSeeder::class,
             UserCourseSeeder::class,
+            ReviewSeeder::class,
         ]);
     }
 }

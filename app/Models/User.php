@@ -82,7 +82,7 @@ class User extends Authenticatable
      */
     public function reviews(): HasMany
     {
-        return $this->hasMany(Review::class);
+        return $this->hasMany(Review::class, 'user_id');
     }
 
     /**
@@ -183,7 +183,7 @@ class User extends Authenticatable
     /**
      * @return HasMany
      */
-    public function courses():HasMany //только автор(ментор) может пользоваться
+    public function courses_author():HasMany //только автор(ментор) может пользоваться
     {
         return $this->hasMany(Course::class, 'author_id');
     }
@@ -214,5 +214,13 @@ class User extends Authenticatable
         return $this->subscriptions()
             ->where('end_date', '>=', now())
             ->exists();
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function courses():HasMany
+    {
+        return $this->hasMany(UserCourse::class, );
     }
 }

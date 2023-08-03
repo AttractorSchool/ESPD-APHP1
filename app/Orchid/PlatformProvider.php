@@ -22,7 +22,6 @@ class PlatformProvider extends OrchidServiceProvider
     public function boot(Dashboard $dashboard): void
     {
         parent::boot($dashboard);
-
         // ...
     }
 
@@ -34,11 +33,25 @@ class PlatformProvider extends OrchidServiceProvider
     public function menu(): array
     {
         return [
+            Menu::make(__('Курсы'))
+                ->icon('database')
+                ->route('platform.course.list')
+                ->title(__('Course')),
+
+            Menu::make(__('Видио курсов'))
+                ->icon('database')
+                ->route('platform.video.list')
+                ->title(__('Video')),
+
+            Menu::make(__('Тесты для видео'))
+                ->icon('database')
+                ->route('platform.question.list')
+                ->title(__('Question')),
+
             Menu::make(__('Users'))
                 ->icon('bs.person-circle')
                 ->route('platform.systems.users')
                 ->permission('platform.systems.users')
-
                 ->title(__('Все пользователи'))
                 ->divider(),
 

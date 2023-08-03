@@ -49,7 +49,7 @@
                                          alt="img"
                                          draggable="false">
                                 </div>
-                                <h2 style="overflow: hidden">{{ $review->user->name }}</h2>
+                                <h2 style="overflow: hidden">{{ $review->author->name }}</h2>
                                 <span class="text-center">{{ $review->body }}</span>
                             </li>
                         </div>
@@ -61,7 +61,7 @@
                                          alt="img"
                                          draggable="false">
                                 </div>
-                                <h2 style="overflow: hidden">{{ $review->user->name }}</h2>
+                                <h2 style="overflow: hidden">{{ $review->author->name }}</h2>
                                 <span class="text-center">{{ $review->body }}</span>
                             </li>
                         </div>

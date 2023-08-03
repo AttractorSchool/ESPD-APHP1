@@ -22,7 +22,7 @@ class InterestFactory extends Factory
     {
         return [
             'name'    => $this->faker->unique()->word,
-            'picture' => rand(1, 5)
+            'picture' => $this->getImage(rand(1,4))
 
         ];
     }
