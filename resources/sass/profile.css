@@ -1,0 +1,23 @@
+.card-body {
+    background-color: #f3f3f3;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.avatar-profile
+{
+    margin: 35px 0 0 50px;
+    text-align: left;
+}
+
+.avatar-profile img{
+    border: 2px solid black;
+}
+
+.photo-add
+{
+    width: 70px;
+    margin-right: 20px;
+}
