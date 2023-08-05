@@ -49,7 +49,7 @@ class Course extends Model
         return $this->hasMany(UserCourse::class);
     }
 
-    public function interest(): BelongsTo
+    public function interests(): BelongsTo
     {
         return $this->belongsTo(Interest::class, 'interest_id');
     }

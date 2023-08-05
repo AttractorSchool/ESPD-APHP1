@@ -47,7 +47,7 @@
                         <a class="nav-link" href="{{ route('mentorship') }}">Менторство</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Академия</a>
+                        <a class="nav-link" href="{{route('academy')}}">Академия</a>
                     </li>
                     @guest
                         @if (Route::has('login'))
