@@ -18,7 +18,7 @@ class CourseFactory extends Factory
     {
         return [
             'name'             => $this->faker->name,
-            'author_id'        => '5',
+            'author_id'        => 5,
             'interest_id'      => rand(1, 10),
             'mini_description' => $this->faker->text,
             'description'      => $this->faker->text,

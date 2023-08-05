@@ -68,6 +68,11 @@ Route::get('/academy/{video}', [\App\Http\Controllers\CourseController::class, '
 Route::get('/academy/result/{score}', [\App\Http\Controllers\CourseController::class, 'result'])->name(
     'academy.test.result'
 );
+Route::get('/interests', [\App\Http\Controllers\InterestController::class, 'index'])->name('academy');
+Route::get('/filtered-courses', [\App\Http\Controllers\CourseController::class, 'showFilteredCourses'])->name('filtered.courses');
+Route::get('/courses/{id}', [\App\Http\Controllers\CourseController::class, 'show'])->name('show.course');
+Route::get('/reviews/{id}', [\App\Http\Controllers\CourseController::class, 'showAllReviews'])->name('show.reviews');
+
 Route::delete('/academy/{video}', [\App\Http\Controllers\CourseController::class, 'skipTest'])->name(
     'academy.skipTest'
 );
