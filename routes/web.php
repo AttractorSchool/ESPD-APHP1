@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ActionController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\Front\FormController;
 use App\Http\Controllers\Front\PageController;
 use App\Http\Controllers\MentorController;
@@ -24,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/residents', [PageController::class, 'residents'])->name('residents');
 Route::post('/form', [FormController::class, 'store'])->name('front.form');
-Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show')->middleware('auth');
 Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 Route::post('/connect', [ActionController::class, 'connect'])->name('connect')->middleware('auth');
 Route::put('/connect_final/{response}/{notification}', [ActionController::class, 'connect_final'])->name(
@@ -40,6 +41,7 @@ Route::get('/messages/{id}', [ChatController::class, 'showBlade'])->name('showCh
 Route::get('/network', [PageController::class, 'networking'])->name('networking')->middleware('auth');
 Route::get('/allresidents', [PageController::class, 'allResidents'])->name('allResidents')->middleware('auth');
 
+Route::get('/events', [EventController::class, 'show'])->name('events')->middleware('auth');
 
 Route::get('/notification', [PageController::class, 'notifications'])->name('notifications')->middleware('auth');
 Route::delete('/notification/{notification}', [PageController::class, 'delete_notification'])->name(

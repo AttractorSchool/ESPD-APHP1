@@ -38,7 +38,7 @@
                         <a class="nav-link" href="#">Woman Create club</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">События</a>
+                        <a class="nav-link" href="{{route('events')}}">События</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('networking') }}">Нетворкинг</a>
