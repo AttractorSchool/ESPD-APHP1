@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CustomNotification;
 use App\Models\Event;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -27,8 +28,10 @@ class EventController extends Controller
     public function show($id): View
     {
         $event = Event::findOrFail($id);
+        $notifications = CustomNotification::all();
 
-        return view('front.events.event-show', compact('event'));
+
+        return view('front.events.event-show', compact('event', 'notifications'));
     }
 
     /**

@@ -47,6 +47,31 @@
                                     <p class="text-dark mb-0">{{ $event->user->name }} {{ $event->user->lastname }}</p>
                                     <small class="text-muted mb-4">Организатор</small>
                                 </div>
+
+                                <form class="connect-form" method="POST" action="{{ route('connect') }}">
+                                    @csrf
+
+                                    @php
+                                        $requested = false;
+                                    @endphp
+
+                                    @foreach($notifications as $notification)
+                                        @if($notification->first_id == auth()->user()->id && $notification->user_id == $user->id)
+                                            @php
+                                                $requested = true;
+                                            @endphp
+                                            <button class="requested" disabled>Запрошено</button>
+                                        @endif
+                                    @endforeach
+
+                                    @unless($requested)
+                                        <div class="notification_btn">
+                                            <input type="hidden" value="{{ $event->user->id }}" name="second_id">
+                                            <button class="connect-button text-end">Подключиться</button>
+                                        </div>
+                                    @endunless
+                                </form>
+
                             </div>
                         </div>
                     </div>
