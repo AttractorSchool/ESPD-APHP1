@@ -23,10 +23,11 @@ class EventFactory extends Factory
             'title' => $this->faker->sentence,
             'description' => $this->faker->sentence,
             'date' => $this->faker->date,
+            'time' => $this->faker->time,
             'location' => $this->faker->address,
             'format' => $this->faker->randomElement(['online', 'offline']),
             'price' => $this->faker->randomFloat(2, 0, 1000),
-            'picture' => $this->getImage(rand(1,5)),
+            'picture' => $this->getImage(rand(1,4)),
             'author_id' => rand(1,10),
             'quantity' => rand(5,10)
         ];
@@ -34,10 +35,10 @@ class EventFactory extends Factory
 
     private function getImage(int $imageNumber = 1): string
     {
-        $path = storage_path() . "/avatars/" . $imageNumber . ".jpeg";
-        $imageName = md5($path) . '.jpeg';
+        $path = storage_path() . "/seed_pictures/" . $imageNumber . ".jpg";
+        $imageName = md5($path) . '.jpg';
         $image = 'pictures/' . $imageName;
-        $resize = Image::make($path)->fit(300)->encode('jpeg');
+        $resize = Image::make($path)->fit(300)->encode('jpg');
         Storage::disk('public')->put('pictures/'.$imageName, $resize->__toString());
         return $image;
     }

@@ -23,14 +23,13 @@ class Event extends Model
         'format',
         'quantity',
         'author_id',
-        'time'
     ];
 
     /**
      * @return BelongsTo
      */
-    public function users(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'author_id');
     }
 }

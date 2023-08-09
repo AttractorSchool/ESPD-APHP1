@@ -32,7 +32,7 @@
                                 </div>
                                 <div class="col-8">
                                     <div class="d-flex align-items-start">
-                                        <div class="text-decoration-none">
+                                        <div>
                                             <a href="{{ route('events.show', ['id' => $event->id]) }}">
                                             <h5 class="date-text">{{ $event->date }}</h5>
                                             </a>
