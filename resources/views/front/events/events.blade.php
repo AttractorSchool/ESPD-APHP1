@@ -20,16 +20,22 @@
                                 <div class="col-4">
                                     <div class="card-img-container">
                                         @if (isset($event, $event->picture))
+                                            <a href="{{ route('events.show', ['id' => $event->id]) }}">
                                             <img src="{{ asset('/storage/' . $event->picture) }}" class="card-img-pic" alt="Event Image" style="height: 100px;">
+                                            </a>
                                         @else
-                                            <img src="placeholder.jpg" class="card-img" alt="Placeholder Image" style="width: 100px; height: 100px;">
+                                            <a href="{{ route('events.show', ['id' => $event->id]) }}">
+                                                <img src="placeholder.jpg" class="card-img" alt="Placeholder Image" style="width: 100px; height: 100px;">
+                                            </a>
                                         @endif
                                     </div>
                                 </div>
                                 <div class="col-8">
                                     <div class="d-flex align-items-start">
-                                        <div>
+                                        <div class="text-decoration-none">
+                                            <a href="{{ route('events.show', ['id' => $event->id]) }}">
                                             <h5 class="date-text">{{ $event->date }}</h5>
+                                            </a>
                                             <p class="description-text">{{ $event->description }}</p>
                                         </div>
                                     </div>

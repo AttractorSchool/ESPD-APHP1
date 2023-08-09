@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -25,7 +26,9 @@ class EventFactory extends Factory
             'location' => $this->faker->address,
             'format' => $this->faker->randomElement(['online', 'offline']),
             'price' => $this->faker->randomFloat(2, 0, 1000),
-            'picture' => $this->getImage(rand(1,5))
+            'picture' => $this->getImage(rand(1,5)),
+            'author_id' => rand(1,10),
+            'quantity' => rand(5,10)
         ];
     }
 
