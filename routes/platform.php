@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 use App\Orchid\Screens\Course\CourseEditScreen;
 use App\Orchid\Screens\Course\CourseListScreen;
+use App\Orchid\Screens\Event\EventEditScreen;
+use App\Orchid\Screens\Event\EventListScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
@@ -131,3 +133,16 @@ Route::screen('/question/create', QuestionEditScreen::class)
 
 Route::screen('/question/{question?}', QuestionEditScreen::class)
     ->name('platform.question.edit');
+
+// Event
+Route::screen('/event', EventListScreen::class)
+    ->name('platform.event.list')
+    ->breadcrumbs(fn(Trail $trail) => $trail
+        ->parent('platform.index')
+        ->push('event'));
+
+Route::screen('/event/create', EventEditScreen::class)
+    ->name('platform.event.create');
+
+Route::screen('/event/{event?}', EventEditScreen::class)
+    ->name('platform.event.edit');

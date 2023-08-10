@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Orchid\Screens\Course;
+namespace App\Orchid\Screens\Event;
 
 use App\Models\Course;
-use App\Orchid\Layouts\Course\EventListLayout;
+use App\Models\Event;
+use App\Orchid\Layouts\Event\EventListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 
-class CourseListScreen extends Screen
+class EventListScreen extends Screen
 {
     /** @var string $name */
-    public string $name = 'Курсы';
+    public string $name = 'Мероприятия';
     /** @var string $description */
-    public string $description = 'Все курсы';
+    public string $description = 'Все мероприятия';
 
     /**
      * Fetch data to be displayed on the screen.
@@ -22,7 +23,7 @@ class CourseListScreen extends Screen
     public function query(): iterable
     {
         return [
-            'сourses' => Course::filters()->defaultSort('id')->paginate()
+            'events' => Event::filters()->defaultSort('id')->paginate()
         ];
     }
 
@@ -34,9 +35,9 @@ class CourseListScreen extends Screen
     public function commandBar(): iterable
     {
         return [
-            Link::make('Создать курс')
+            Link::make('Создать мероприятие')
                 ->icon('pencil')
-                ->route('platform.course.create')
+                ->route('platform.event.create')
         ];
     }
 
