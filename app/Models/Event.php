@@ -9,13 +9,14 @@ use Orchid\Filters\Filterable;
 use Orchid\Filters\Types\Like;
 use Orchid\Screen\AsSource;
 
+
 class Event extends Model
 {
     use HasFactory, Filterable, AsSource;
-
     /**
      * @var string[]
      */
+
     protected $fillable = [
         'title',
         'description',
@@ -26,8 +27,15 @@ class Event extends Model
         'format',
         'quantity',
         'author_id',
-        'time'
     ];
+    /**
+     * @return BelongsTo
+     */
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(City::class);
+
+
 
     /**
      * @var string[]
@@ -50,7 +58,7 @@ class Event extends Model
     /**
      * @return BelongsTo
      */
-    public function users(): BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class,'author_id');
     }
