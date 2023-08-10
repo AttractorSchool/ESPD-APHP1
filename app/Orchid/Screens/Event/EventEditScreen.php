@@ -4,14 +4,17 @@ namespace App\Orchid\Screens\Event;
 
 use App\Http\Requests\AdminCourseRequest;
 use App\Models\Course;
+use App\Models\Event;
 use App\Models\Interest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Fields\DateRange;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Quill;
 use Orchid\Screen\Fields\Relation;
+use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Alert;
 use Orchid\Support\Facades\Layout;
@@ -19,9 +22,9 @@ use Orchid\Support\Facades\Layout;
 class EventEditScreen extends Screen
 {
     /** @var ?string $name */
-    public ?string $name = 'Course Create';
+    public ?string $name = 'Event Create';
     /** @var ?string $description */
-    public ?string $description = 'Course form';
+    public ?string $description = 'Event form';
     /** @var bool $exists */
     protected bool $exists = false;
 
@@ -33,15 +36,15 @@ class EventEditScreen extends Screen
      *
      * @return array
      */
-    public function query(Course $course): iterable
+    public function query(Event $event): iterable
     {
-        $this->exists = $course->exists;
+        $this->exists = $event->exists;
 
         if ($this->exists) {
-            $this->name = 'Course Edit';
+            $this->name = 'Event Edit';
         }
 
-        return compact('course');
+        return compact('event');
     }
 
     /**
@@ -52,11 +55,11 @@ class EventEditScreen extends Screen
     public function commandBar(): iterable
     {
         return [
-            Button::make('Создать курс')
+            Button::make('Создать событие')
                 ->icon('pencil')
                 ->method('save')
                 ->canSee(!$this->exists),
-            Button::make('Обновить курс')
+            Button::make('Обновить событие')
                 ->icon('note')
                 ->method('save')
                 ->canSee($this->exists),
@@ -76,22 +79,46 @@ class EventEditScreen extends Screen
     {
         return [
             Layout::rows([
-                Input::make('course.name')
-                    ->title('Названия курса')
+                Input::make('event.title')
+                    ->title('Названия событии')
                     ->type('text')
                     ->required(),
-                Relation::make('course.author_id')
-                    ->title('Автор курса')
+                Input::make('event.location')
+                    ->title('Локация событии')
+                    ->type('text')
+                    ->required(),
+                Input::make('event.price')
+                    ->title('Цена событии')
+                    ->type('text')
+                    ->required(),
+                Input::make('event.quantity')
+                    ->title('Количество мест событии')
+                    ->type('text')
+                    ->required(),
+                Input::make('event.picture')
+                    ->title('Количество мест событии')
+                    ->type('file')
+                    ->required(),
+                Select::make('event.format')
+                    ->title('Формат событии')
+                    ->options(['online', 'offline'])
+                    ->required(),
+                Input::make('event.date')
+                    ->title('Дата событии')
+                    ->type('date')
+                    ->required(),
+                Relation::make('event.author_id')
+                    ->title('Автор событии')
                     ->fromModel(User::class, 'name', 'id')->required(),
-                Relation::make('course.interest_id')
-                    ->title('Область интереса курса')
-                    ->fromModel(Interest::class, 'name', 'id')->required(),
-                Quill::make('course.mini_description')
-                    ->title('Краткое описание курса')
-                    ->placeholder('Course mini description')->required(),
-                Quill::make('course.description')
-                    ->title('Описание курса')
-                    ->placeholder('Course description')->required(),
+//                Relation::make('event.interest_id')
+//                    ->title('Область интереса курса')
+//                    ->fromModel(Interest::class, 'name', 'id')->required(),
+//                Quill::make('event.mini_description')
+//                    ->title('Краткое описание курса')
+//                    ->placeholder('Event mini description')->required(),
+                Quill::make('event.description')
+                    ->title('Описание событии')
+                    ->placeholder('Event description')->required(),
             ])
         ];
     }
@@ -101,18 +128,18 @@ class EventEditScreen extends Screen
      * @param AdminCourseRequest $request
      * @return RedirectResponse
      */
-    public function save(Course $course, AdminCourseRequest $request): RedirectResponse
+    public function save(Event $event, AdminCourseRequest $request): RedirectResponse
     {
-        $course->fill($request->get('course'))->save();
+        $event->fill($request->get('event'))->save();
 
         Alert::info(
             sprintf(
-                'You are successfully %s an course',
+                'You are successfully %s an event',
                 $this->exists ? 'updated' : 'created'
             )
         );
 
-        return redirect()->route('platform.course.list');
+        return redirect()->route('platform.event.list');
     }
 
 
@@ -120,15 +147,15 @@ class EventEditScreen extends Screen
      * @param Course $course
      * @return RedirectResponse
      */
-    public function remove(Course $course): RedirectResponse
+    public function remove(Event $event): RedirectResponse
     {
-        if ($course->delete()) {
+        if ($event->delete()) {
             Alert::info('You have successfully deleted');
-            return redirect()->route('platform.course.list');
+            return redirect()->route('platform.event.list');
         }
 
         Alert::warning('An error has occurred');
 
-        return redirect()->route('platform.course.edit', $course);
+        return redirect()->route('platform.event.edit', $event);
     }
 }
