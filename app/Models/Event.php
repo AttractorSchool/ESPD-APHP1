@@ -6,13 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+
 class Event extends Model
 {
     use HasFactory;
-
     /**
      * @var string[]
      */
+
     protected $fillable = [
         'title',
         'description',
@@ -24,6 +25,14 @@ class Event extends Model
         'quantity',
         'author_id',
     ];
+    /**
+     * @return BelongsTo
+     */
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(City::class);
+
+
 
     /**
      * @return BelongsTo
@@ -31,5 +40,6 @@ class Event extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
+
     }
 }

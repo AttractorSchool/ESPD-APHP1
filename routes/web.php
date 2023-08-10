@@ -41,9 +41,11 @@ Route::get('/messages/{id}', [ChatController::class, 'showBlade'])->name('showCh
 Route::get('/network', [PageController::class, 'networking'])->name('networking')->middleware('auth');
 Route::get('/allresidents', [PageController::class, 'allResidents'])->name('allResidents')->middleware('auth');
 
+
 Route::get('/events', [EventController::class, 'index'])->name('events')->middleware('auth');
 Route::get('/events/{id}', [EventController::class, 'show'])->name('events.show');
 Route::get('/events/{id}/buy', [EventController::class, 'buyTicket'])->name('buy-ticket')->middleware('auth');
+
 
 Route::get('/notification', [PageController::class, 'notifications'])->name('notifications')->middleware('auth');
 Route::delete('/notification/{notification}', [PageController::class, 'delete_notification'])->name(
@@ -86,7 +88,8 @@ Route::get('course_without_pint', [PageController::class, 'without_point'])->nam
 
 Route::post('reviews', [ActionController::class, 'review'])->name('review_add');
 
-
+//События
+Route::get('/events/{city?}', [PageController::class, 'main_event'])->name('events')->middleware('auth');
 //http://127.0.0.1:8000/notification/toEmail/
 Auth::routes();
 
