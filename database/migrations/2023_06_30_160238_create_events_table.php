@@ -20,6 +20,7 @@ return new class extends Migration
             $table->enum('format', ['online', 'offline']);
             $table->decimal('price');
             $table->string('picture')->nullable();
+            $table->foreignId('city_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

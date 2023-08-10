@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Course;
 use App\Models\CustomNotification;
+use App\Models\Event;
 use App\Models\Response;
 use App\Models\Review;
 use App\Models\Subscription;
 use App\Models\User;
+use App\Models\UserEvent;
 use App\Models\Video;
 use App\Models\VideoTestScore;
 use Illuminate\Contracts\View\View;
@@ -98,5 +100,20 @@ class PageController extends Controller
     public function without_point():RedirectResponse
     {
         return redirect()->back()->with('status', 'Вы не прошли прошлый тест! Пройдите его что бы начать!');
+    }
+    //$city1 = null
+    public function main_event($city = null)
+    {
+        if ($city){
+            $cities = City::all();
+            $city = City::find($city);
+
+
+            return view('front.event.main_event', compact( 'cities', 'city'));
+        }
+            $city = City::first();
+            $cities = City::all();
+
+            return view('front.event.main_event', compact( 'cities', 'city'));
     }
 }

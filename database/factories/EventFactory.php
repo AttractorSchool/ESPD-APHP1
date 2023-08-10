@@ -19,13 +19,14 @@ class EventFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->sentence,
+            'title' => $this->faker->text(20),
             'description' => $this->faker->sentence,
-            'date' => $this->faker->date,
+            'date' => $this->faker->dateTimeBetween('-2month', '+3 month'),
             'location' => $this->faker->address,
             'format' => $this->faker->randomElement(['online', 'offline']),
             'price' => $this->faker->randomFloat(2, 0, 1000),
-            'picture' => $this->getImage(rand(1,5))
+            'picture' => $this->getImage(rand(1,5)),
+            'city_id'  => rand(1, 5)
         ];
     }
 

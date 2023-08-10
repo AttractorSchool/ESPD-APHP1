@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\Course;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class CourseSeeder extends Seeder
 {
@@ -26,6 +28,7 @@ class CourseSeeder extends Seeder
                 форма искусства использует позы, па, прыжки и пируэты, чтобы рассказать уникальные и захватывающие
                 истории. Балетные спектакли завораживают зрителей своим красивым исполнением, эмоциональностью и
                 волшебной атмосферой, создаваемой на сцене.',
+            'photo' => $this->getImage(3)
         ]);
         Course::factory()->create([
             'name'             => 'Курсы по программированию',
@@ -38,6 +41,7 @@ class CourseSeeder extends Seeder
                  позволяющие разрабатывать программы, веб-приложения, мобильные приложения и другие программные решения.
                  Курсы также помогают студентам развить логическое мышление, решение проблем и креативность в области
                  разработки программного обеспечения.',
+            'photo' => $this->getImage(1)
         ]);
 
         Course::factory()->create([
@@ -51,6 +55,7 @@ class CourseSeeder extends Seeder
                  позволяющие разрабатывать программы, веб-приложения, мобильные приложения и другие программные решения.
                  Курсы также помогают студентам развить логическое мышление, решение проблем и креативность в области
                  разработки программного обеспечения.',
+            'photo' => $this->getImage(1)
         ]);
         Course::factory()->create([
             'name'             => 'Курсы по маркетингу',
@@ -63,6 +68,7 @@ class CourseSeeder extends Seeder
                  позволяющие разрабатывать программы, веб-приложения, мобильные приложения и другие программные решения.
                  Курсы также помогают студентам развить логическое мышление, решение проблем и креативность в области
                  разработки программного обеспечения.',
+            'photo' => $this->getImage(2)
         ]);
         Course::factory()->create([
             'name'             => 'Курсы по бизнесу',
@@ -75,6 +81,21 @@ class CourseSeeder extends Seeder
                  позволяющие разрабатывать программы, веб-приложения, мобильные приложения и другие программные решения.
                  Курсы также помогают студентам развить логическое мышление, решение проблем и креативность в области
                  разработки программного обеспечения.',
+            'photo' => $this->getImage(2)
         ]);
+    }
+    /**
+     * @param int $imageNumber
+     * @return string
+     */
+    private function getImage(int $imageNumber = 1): string
+    {
+        $path      = storage_path() . "/seed_pictures/" . $imageNumber . ".jpg";
+        $imageName = md5($path) . '.jpg';
+        $image     = 'pictures/' . $imageName;
+        $resize    = Image::make($path)->fit(300)->encode('jpg');
+        Storage::disk('public')->put($image, $resize->__toString());
+
+        return $image;
     }
 }
