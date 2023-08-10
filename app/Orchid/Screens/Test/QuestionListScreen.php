@@ -4,7 +4,7 @@ namespace App\Orchid\Screens\Test;
 
 use App\Models\Course;
 use App\Models\Question;
-use App\Orchid\Layouts\Course\CourseListLayout;
+use App\Orchid\Layouts\Course\EventListLayout;
 use App\Orchid\Layouts\Test\QuestionListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;

@@ -48,6 +48,11 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.question.list')
                 ->title(__('Question')),
 
+            Menu::make(__('События'))
+                ->icon('database')
+                ->route('platform.event.list')
+                ->title(__('Event')),
+
             Menu::make(__('Users'))
                 ->icon('bs.person-circle')
                 ->route('platform.systems.users')
@@ -66,6 +71,7 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('bs.person')
                 ->route('platform.analytic')
                 ->title(__('Аналитика')),
+
         ];
     }
 

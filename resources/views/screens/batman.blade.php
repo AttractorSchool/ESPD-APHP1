@@ -1,20 +1,22 @@
 <style>
-.all_analytics{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-bottom: 25px;
-}
-.all_analytics .analytic{
-    width: 30%;
-    border: 1px solid black;
-    border-radius: 20px;
-    text-align: center;
-}
-.all_analytics .analytic p{
-    font-size: 20px;
-    font-weight: 700;
-}
+    .all_analytics {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+
+    .all_analytics .analytic {
+        width: 30%;
+        border: 1px solid black;
+        border-radius: 20px;
+        text-align: center;
+    }
+
+    .all_analytics .analytic p {
+        font-size: 20px;
+        font-weight: 700;
+    }
 </style>
 <div class="all_analytics">
     <div class="analytic">

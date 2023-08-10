@@ -116,7 +116,7 @@ class QuestionEditScreen extends Screen
     }
 
     /**
-     * @param Course $course
+     * @param Question $question
      * @param AdminCourseRequest $request
      * @return RedirectResponse
      */
