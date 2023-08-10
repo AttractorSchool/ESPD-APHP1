@@ -19,7 +19,6 @@
         <progress id="myProgress" value="100" max="100" class="col-10" style=""></progress>
     </div>
 </div>
-
 </body>
 
 </html>
