@@ -3,14 +3,14 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8 d-flex align-items-center">
+            <div class="col-md-8 d-flex align-items-center" style="height: 25px">
                 <a href="{{ route('home') }}" class="arrow">
                     <i class="fa fa-arrow-left custom-arrow" style="color: #000"></i>
                 </a>
                 <p class="events-text">Все мероприятия</p>
             </div>
             <div class="calendar-btn">
-                <a class="calendar-link" href="#"><p class="calendar-info">Календарь мероприятий</p></a>
+                <a class="calendar-link" href="{{route('events.upcoming')}}"><p class="calendar-info">Календарь мероприятий</p></a>
             </div>
             @foreach($events as $event)
                 <div class="col-12 mb-4">

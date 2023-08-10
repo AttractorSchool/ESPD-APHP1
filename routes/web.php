@@ -41,7 +41,10 @@ Route::get('/messages/{id}', [ChatController::class, 'showBlade'])->name('showCh
 Route::get('/network', [PageController::class, 'networking'])->name('networking')->middleware('auth');
 Route::get('/allresidents', [PageController::class, 'allResidents'])->name('allResidents')->middleware('auth');
 
+Route::get('/events/upcoming', [EventController::class, 'index'])->name('events.upcoming')->middleware('auth');
 Route::get('/events', [EventController::class, 'show'])->name('events')->middleware('auth');
+Route::get('/events/calendar', [EventController::class, 'calendar'])->name('events.calendar')->middleware('auth');
+
 
 Route::get('/notification', [PageController::class, 'notifications'])->name('notifications')->middleware('auth');
 Route::delete('/notification/{notification}', [PageController::class, 'delete_notification'])->name(
