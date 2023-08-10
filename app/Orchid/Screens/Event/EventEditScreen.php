@@ -3,6 +3,7 @@
 namespace App\Orchid\Screens\Event;
 
 use App\Http\Requests\AdminCourseRequest;
+use App\Http\Requests\AdminEventRequest;
 use App\Models\Course;
 use App\Models\Event;
 use App\Models\Interest;
@@ -123,12 +124,13 @@ class EventEditScreen extends Screen
         ];
     }
 
+
     /**
-     * @param Course $course
-     * @param AdminCourseRequest $request
+     * @param Event $event
+     * @param AdminEventRequest $request
      * @return RedirectResponse
      */
-    public function save(Event $event, AdminCourseRequest $request): RedirectResponse
+    public function save(Event $event, AdminEventRequest $request): RedirectResponse
     {
         $event->fill($request->get('event'))->save();
 
@@ -144,7 +146,7 @@ class EventEditScreen extends Screen
 
 
     /**
-     * @param Course $course
+     * @param Event $event
      * @return RedirectResponse
      */
     public function remove(Event $event): RedirectResponse

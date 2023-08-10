@@ -13,6 +13,7 @@ use Orchid\Screen\AsSource;
 class Event extends Model
 {
     use HasFactory, Filterable, AsSource;
+
     /**
      * @var string[]
      */
@@ -28,13 +29,14 @@ class Event extends Model
         'quantity',
         'author_id',
     ];
+
     /**
      * @return BelongsTo
      */
     public function city(): BelongsTo
     {
         return $this->belongsTo(City::class);
-
+    }
 
 
     /**
