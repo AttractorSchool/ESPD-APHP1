@@ -52,6 +52,6 @@ class Event extends Model
      */
     public function users(): BelongsTo
     {
-        return $this->belongsTo(User::class,'author_id');
+        return $this->belongsTo(User::class, 'author_id');
     }
 }
