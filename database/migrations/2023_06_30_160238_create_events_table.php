@@ -21,8 +21,11 @@ return new class extends Migration
             $table->enum('format', ['online', 'offline']);
             $table->decimal('price');
             $table->string('picture')->nullable();
-            $table->foreignId('city_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('city_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->unsignedBigInteger('author_id')->default(1);
+            $table->integer('quantity');
             $table->timestamps();
+            $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
