@@ -3,7 +3,7 @@ body{
     overflow-x: hidden;
 }
 footer{
-    background-color: #4a43ec;
+    background-color: #4a43ec!important;
     border-radius: 0 0 25px 25px;
 }
 .footer{
@@ -11,7 +11,7 @@ footer{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #4a43ec;
+    background-color: #4a43ec!important;
     border-radius: 0 0 25px 25px;
 }
 .icon-bar{
