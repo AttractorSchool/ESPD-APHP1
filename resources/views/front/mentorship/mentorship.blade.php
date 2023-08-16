@@ -65,8 +65,8 @@
 
         @if(count($recommendedMentors) > 0)
             <div class="row">
+                <h4 class="mt-4">Рекомендуем вам</h4>
                 @foreach ($recommendedMentors as $recommendedMentor)
-                        <h4 class="mt-4">Рекомендуем вам</h4>
                         <div class="col-lg-6 col-md-6 col-6">
                             <div class="card text-center">
                                 <div class="card-body">
