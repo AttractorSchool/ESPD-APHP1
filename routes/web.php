@@ -91,7 +91,7 @@ Route::get('course_without_pint', [PageController::class, 'without_point'])->nam
 Route::post('reviews', [ActionController::class, 'review'])->name('review_add');
 
 //События
-Route::get('/events/{city?}', [PageController::class, 'main_event'])->name('events')->middleware('auth');
+Route::get('/events_main/{city?}', [PageController::class, 'main_event'])->name('events_main')->middleware('auth');
 //http://127.0.0.1:8000/notification/toEmail/
 Auth::routes();
 

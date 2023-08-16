@@ -1,5 +1,8 @@
+<style>
+    @vite(['resources/sass/home.css'])
+</style>
 @extends('layouts.app')
-
+@vite(['resources/sass/home.css'])
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -227,66 +230,48 @@
             @endforeach
         </div>
     </div>
-    <div class="accordian">
-        <div class="card">
-            <div class="card-header">
-                <h3>Heading One </h3>
-                <span class="fa fa-minus"></span>
-            </div>
-            <div class="card-body active">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    Heading One
+                </button>
+            </h2>
+            <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamLorem ipsum dolor sit
                     amet,
                     consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</div>
             </div>
         </div>
-
-        <div class="card">
-            <div class="card-header">
-                <h3>Heading Two </h3>
-                <span class="fa fa-plus"></span>
-            </div>
-            <div class="card-body">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                    Heading Two
+                </button>
+            </h2>
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamLorem ipsum dolor sit
                     amet,
                     consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</div>
             </div>
         </div>
-        <div class="card">
-            <div class="card-header">
-                <h3>Heading Three </h3>
-                <span class="fa fa-plus"></span>
-            </div>
-            <div class="card-body">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                    Heading Three
+                </button>
+            </h2>
+            <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamLorem ipsum dolor sit
                     amet,
                     consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</div>
             </div>
         </div>
     </div>
-
-    </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-    <script>
-        $(document).ready(function () {
-            $(".card-header").click(function () {
-                if ($(this).next(".card-body").hasClass("active")) {
-                    $(this).next(".card-body").removeClass("active").slideUp()
-                    $(this).children("span").removeClass("fa-minus").addClass("fa-plus")
-                } else {
-                    $(".card .card-body").removeClass("active").slideUp()
-                    $(".card .card-header span").removeClass("fa-minus").addClass("fa-plus");
-                    $(this).next(".card-body").addClass("active").slideDown()
-                    $(this).children("span").removeClass("fa-plus").addClass("fa-minus")
-                }
-            })
-        })
-    </script>
-    <script src="{{ asset('js/script.js') }}"></script>
 @endsection

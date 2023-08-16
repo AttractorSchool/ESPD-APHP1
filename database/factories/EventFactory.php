@@ -27,7 +27,7 @@ class EventFactory extends Factory
             'location' => $this->faker->address,
             'format' => $this->faker->randomElement(['online', 'offline']),
             'price' => $this->faker->randomFloat(2, 0, 1000),
-            'picture' => $this->getImage(rand(1,5)),
+            'picture' => $this->getImage(rand(1,4)),
             'city_id'  => rand(1, 5),
             'quantity' => rand(5,10)
 
