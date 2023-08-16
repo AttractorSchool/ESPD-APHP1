@@ -53,12 +53,12 @@ class EventController extends Controller
         }
     }
 
-    public function showEvents()
-    {
-        $events = Event::all();
-
-        return view('front.events', compact('events'));
-    }
+//    public function showEvents()
+//    {
+//        $events = Event::all();
+//
+//        return view('front.events', compact('events'));
+//    }
 
     public function filterEvents(Request $request)
     {
@@ -72,7 +72,7 @@ class EventController extends Controller
             $events = Event::all();
         }
 
-        return view('front.eventsUpcoming', compact('events', 'filter'));
+        return view('front.events.eventsUpcoming', compact('events', 'filter'));
     }
 
     public function calendar(Request $request)
@@ -106,7 +106,7 @@ class EventController extends Controller
             ->orderBy('date')
             ->get();
 
-        return view('front.calendar', compact(
+        return view('front.events.calendar', compact(
             'year', 'month', 'monthName', 'prevMonthDate', 'nextMonthDate', 'days', 'upcomingEvents'
         ));
     }
