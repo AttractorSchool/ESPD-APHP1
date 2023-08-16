@@ -14,7 +14,7 @@
     <!-- Add the slick-theme.css if you want default styling -->
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
     <title>{{ config('app.name', 'Laravel') }}</title>
-    @vite(['resources/js/app.js', 'resources/css/app.css', 'resources/sass/event.css'])
+    @vite(['resources/js/app.js', 'resources/sass/event.css'])
 </head>
 <body>
 
@@ -25,11 +25,11 @@
                 <i class="fa-solid fa-bars-staggered icon-bar" style="color:#ffffff;"></i>
             </button>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Woman Create club</a></li>
-                <li><a class="dropdown-item" href="#">События</a></li>
-                <li><a class="dropdown-item" href="#">Нетворкинг</a></li>
-                <li><a class="dropdown-item" href="#">Менторство</a></li>
-                <li><a class="dropdown-item" href="#">Академия</a></li>
+                <li><a class="dropdown-item" href="{{ route('home') }}">Woman Create club</a></li>
+                <li><a class="dropdown-item" href="{{route('events_main')}}">События</a></li>
+                <li><a class="dropdown-item" href="{{ route('networking') }}">Нетворкинг</a></li>
+                <li><a class="dropdown-item" href="{{ route('mentorship') }}">Менторство</a></li>
+                <li><a class="dropdown-item" href="{{route('academy')}}">Академия</a></li>
             </ul>
         </div>
         <div class="dropdown_location">
@@ -39,7 +39,7 @@
             <p class="city-location">{{$city->name}}, Казастан</p>
             <ul class="dropdown-menu">
                 @foreach($cities as $city1)
-                    <li><a class="dropdown-item" href="{{route('events', ['city' => $city1->id])}}">{{ $city1->name }}</a></li>
+                    <li><a class="dropdown-item" href="{{route('events_main', ['city' => $city1->id])}}">{{ $city1->name }}</a></li>
                 @endforeach
             </ul>
         </div>
@@ -56,7 +56,8 @@
     <div class="carousel_card">
         @foreach($city->events as $event)
             @if($event->date >= \Carbon\Carbon::now())
-                    <div class="col">
+                <div class="col">
+                    <a href="{{ route('events', ['id' =>$event->id ]) }}" style="text-decoration: none">
                         <div class="card" style="border: none">
                             <img src="{{ asset('/storage/' . $event->picture) }}" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -77,6 +78,7 @@
                             <a href="#"><i class="fa-solid fa-bookmark" style="color:#f2766d;"></i></a>
                         </div>
                     </div>
+                </a>
             @endif
 
         @endforeach

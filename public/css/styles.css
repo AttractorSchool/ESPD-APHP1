@@ -359,62 +359,6 @@ p {
     background-color: #f9c70a;
 }
 
-.accordian {
-    max-width: 900px;
-    display: block;
-    margin: 100px auto;
-}
-
-.accordian .card {
-    box-shadow: 0px 0px 20px #d4d4d4;
-    margin-bottom: 20px;
-    float: left;
-    width: 100%;
-}
-
-.accordian .card .card-header h3 {
-    cursor: pointer;
-    color: #ffffff;
-    position: relative;
-    background-color: #24292d;
-    margin: 0;
-    padding: 15px 20px;
-
-}
-
-.accordian .card .card-header {
-    position: relative;
-}
-
-.accordian .card .card-header span {
-    position: absolute;
-    right: 20px;
-    top: 12px;
-    height: 25px;
-    width: 25px;
-    color: #24292d;
-    background-color: #ffffff;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 25px;
-    font-size: 13px;
-}
-
-.accordian .card .card-body {
-    display: none;
-    padding: 20px;
-}
-
-.accordian .card:nth-child(1) .card-body {
-    display: block;
-}
-
-.accordian .card .card-body p {
-    font-size: 15px;
-    line-height: 24px;
-    color: #444444;
-    margin: 0px;
-}
 
 .price-text {
     color: #000;
