@@ -46,7 +46,7 @@ Route::get('/events', [EventController::class, 'index'])->name('events')->middle
 Route::get('/events/{id}', [EventController::class, 'show'])->name('events.show');
 Route::get('/events/{id}/buy', [EventController::class, 'buyTicket'])->name('buy-ticket')->middleware('auth');
 Route::get('/events/upcoming', [EventController::class, 'filterEvents'])->name('events.upcoming')->middleware('auth');
-Route::get('/events/all', [EventController::class, 'showEvents'])->name('events.showEvents')->middleware('auth');
+//Route::get('/events/all', [EventController::class, 'showEvents'])->name('events.showEvents')->middleware('auth');
 Route::get('/events/calendar', [EventController::class, 'calendar'])->name('events.calendar')->middleware('auth');
 
 Route::get('/notification', [PageController::class, 'notifications'])->name('notifications')->middleware('auth');
@@ -69,7 +69,9 @@ Route::get('/notification/toEmail/{notification}', [\App\Http\Controllers\Notifi
 );
 
 Route::get('/subscriptions', [SubscriptionsController::class, 'index'])->name('subscriptions');
-Route::post('/subscribe/{subscription}', [SubscriptionsController::class, 'subscribe'])->name('subscribe');
+Route::post('/subscribe/{subscription}', [SubscriptionsController::class, 'subscribe'])
+    ->name('subscribe')
+    ->middleware('auth');
 
 Route::post('/academy', [\App\Http\Controllers\CourseController::class, 'countPoints'])->name('academy.countPoints');
 Route::get('/academy/{video}', [\App\Http\Controllers\CourseController::class, 'test'])->name('academy.test');
@@ -91,7 +93,9 @@ Route::get('course_without_pint', [PageController::class, 'without_point'])->nam
 Route::post('reviews', [ActionController::class, 'review'])->name('review_add');
 
 //События
+
 Route::get('/events_main/{city?}', [PageController::class, 'main_event'])->name('events_main')->middleware('auth');
+
 //http://127.0.0.1:8000/notification/toEmail/
 Auth::routes();
 

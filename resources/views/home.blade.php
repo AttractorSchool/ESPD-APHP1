@@ -217,13 +217,12 @@
                         <div class="card-body">
                             <h5 class="card-title">{{$subscription->type}}</h5>
                             <p class="card-text">{{$subscription->description}}</p>
-                            <h5>{{$subscription->price}} $</h5>
-
-                            <button type="button" class="btn btn-warning rounded-5" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal">
-                                Оставить заявку
-                            </button>
-                            {{--                            <a href="#" class="btn btn-warning rounded-5">Выбрать тариф</a>--}}
+                            <h5>{{$subscription->price}} тг.</h5>
+                            @auth
+                                <button class="subscribe-btn " data-id="{{ $subscription->id }}" data-type="{{ $subscription->type }}">Подписаться</button>
+                            @else
+                                <p>Чтобы подписаться, необходимо войти в свой аккаунт.</p>
+                            @endauth
                         </div>
                     </div>
                 @endif
@@ -274,4 +273,70 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const subscribeButtons = document.querySelectorAll('.subscribe-btn');
+
+            subscribeButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const subscriptionId = this.dataset.id;
+                    const subscriptionType = this.dataset.type;
+
+                    Swal.fire({
+                        title: 'Вы уверены, что хотите купить подписку?',
+                        text: `Тариф "${subscriptionType}" будет активен после подтверждения.`,
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonText: 'Да',
+                        cancelButtonText: 'Отмена',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            subscribe(subscriptionId, subscriptionType);
+                        }
+                    });
+                });
+            });
+
+            function subscribe(subscriptionId, subscriptionType) {
+                fetch(`/subscribe/${subscriptionId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    },
+                    body: JSON.stringify({
+                        subscription_type: subscriptionType,
+                    }),
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire({
+                                title: 'Успешно!',
+                                text: `Вы успешно подписались на тариф "${subscriptionType}"!`,
+                                icon: 'success',
+                            });
+                        } else {
+                            Swal.fire({
+                                title: 'Ошибка!',
+                                text: 'Скорее всего, у вас уже есть подписка!',
+                                icon: 'error',
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        Swal.fire({
+                            title: 'Ошибка!',
+                            text: 'Что-то пошло не так. Попробуйте позже.',
+                            icon: 'error',
+                        });
+                    });
+            }
+        });
+    </script>
 @endsection

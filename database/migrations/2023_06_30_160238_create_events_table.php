@@ -16,12 +16,12 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->date('date');
-            $table->time('time');
+            $table->time('time')->nullable();
             $table->string('location');
             $table->enum('format', ['online', 'offline']);
             $table->decimal('price');
             $table->string('picture')->nullable();
-            $table->foreignId('city_id')->constrained()->cascadeOnDelete();
+//            $table->foreignId('city_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
