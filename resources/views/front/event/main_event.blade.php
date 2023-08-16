@@ -51,13 +51,13 @@
 <main>
     <div class="title_event">
         <p>Предстоящие мероприятия</p>
-        <a href="#">Просмотреть все <i class="fa-solid fa-play"></i></a>
+        <a href="{{ route('events') }}">Просмотреть все <i class="fa-solid fa-play"></i></a>
     </div>
     <div class="carousel_card">
         @foreach($city->events as $event)
             @if($event->date >= \Carbon\Carbon::now())
                 <div class="col">
-                    <a href="{{ route('events', ['id' =>$event->id ]) }}" style="text-decoration: none">
+                    <a href="{{ route('events.show', ['id' =>$event->id ]) }}" style="text-decoration: none">
                         <div class="card" style="border: none">
                             <img src="{{ asset('/storage/' . $event->picture) }}" class="card-img-top" alt="...">
                             <div class="card-body">
