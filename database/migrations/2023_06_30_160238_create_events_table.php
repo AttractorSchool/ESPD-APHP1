@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->date('date');
-            $table->time('time');
+            $table->time('time')->nullable();
             $table->string('location');
             $table->enum('format', ['online', 'offline']);
             $table->decimal('price');

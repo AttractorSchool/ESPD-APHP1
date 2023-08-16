@@ -27,7 +27,7 @@
             <a class="navbar-brand d-none d-md-block d-m-none" href="{{ url('/') }}">
                 Woman Create club
             </a>
-            <button class="navbar-toggler ms-auto order-0" type="button" data-bs-toggle="collapse"
+            <button class="navbar-toggler order-0" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
@@ -38,7 +38,7 @@
                         <a class="nav-link" href="#">Woman Create club</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('events')}}">События</a>
+                        <a class="nav-link" href="{{route('events_main')}}">События</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('networking') }}">Нетворкинг</a>
@@ -84,7 +84,7 @@
                 </ul>
             </div>
             @if(\Illuminate\Support\Facades\Auth::check())
-                <div class="notification">
+                <div class="notification" style="position: absolute; top: 1px; right: 2%">
                     <a href="{{ route('notifications') }}" style="text-decoration: none"><i class="fa-solid fa-bell"
                                                                                             style="text-decoration: none; color: black"></i></a>
                     @if(count(\Illuminate\Support\Facades\Auth::user()->custom_notifications))

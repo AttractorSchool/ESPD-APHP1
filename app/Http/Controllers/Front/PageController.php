@@ -101,7 +101,6 @@ class PageController extends Controller
     {
         return redirect()->back()->with('status', 'Вы не прошли прошлый тест! Пройдите его что бы начать!');
     }
-    //$city1 = null
     public function main_event($city = null)
     {
         if ($city){

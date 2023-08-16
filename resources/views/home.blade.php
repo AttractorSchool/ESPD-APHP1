@@ -1,5 +1,8 @@
+<style>
+    @vite(['resources/sass/home.css'])
+</style>
 @extends('layouts.app')
-
+@vite(['resources/sass/home.css'])
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -214,79 +217,126 @@
                         <div class="card-body">
                             <h5 class="card-title">{{$subscription->type}}</h5>
                             <p class="card-text">{{$subscription->description}}</p>
-                            <h5>{{$subscription->price}} $</h5>
-
-                            <button type="button" class="btn btn-warning rounded-5" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal">
-                                Оставить заявку
-                            </button>
-                            {{--                            <a href="#" class="btn btn-warning rounded-5">Выбрать тариф</a>--}}
+                            <h5>{{$subscription->price}} тг.</h5>
+                            @auth
+                                <button class="subscribe-btn " data-id="{{ $subscription->id }}" data-type="{{ $subscription->type }}">Подписаться</button>
+                            @else
+                                <p>Чтобы подписаться, необходимо войти в свой аккаунт.</p>
+                            @endauth
                         </div>
                     </div>
                 @endif
             @endforeach
         </div>
     </div>
-    <div class="accordian">
-        <div class="card">
-            <div class="card-header">
-                <h3>Heading One </h3>
-                <span class="fa fa-minus"></span>
-            </div>
-            <div class="card-body active">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    Heading One
+                </button>
+            </h2>
+            <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamLorem ipsum dolor sit
                     amet,
                     consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</div>
             </div>
         </div>
-
-        <div class="card">
-            <div class="card-header">
-                <h3>Heading Two </h3>
-                <span class="fa fa-plus"></span>
-            </div>
-            <div class="card-body">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                    Heading Two
+                </button>
+            </h2>
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamLorem ipsum dolor sit
                     amet,
                     consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</div>
             </div>
         </div>
-        <div class="card">
-            <div class="card-header">
-                <h3>Heading Three </h3>
-                <span class="fa fa-plus"></span>
-            </div>
-            <div class="card-body">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                    Heading Three
+                </button>
+            </h2>
+            <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamLorem ipsum dolor sit
                     amet,
                     consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</div>
             </div>
         </div>
     </div>
+@endsection
 
-    </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+@section('js')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        $(document).ready(function () {
-            $(".card-header").click(function () {
-                if ($(this).next(".card-body").hasClass("active")) {
-                    $(this).next(".card-body").removeClass("active").slideUp()
-                    $(this).children("span").removeClass("fa-minus").addClass("fa-plus")
-                } else {
-                    $(".card .card-body").removeClass("active").slideUp()
-                    $(".card .card-header span").removeClass("fa-minus").addClass("fa-plus");
-                    $(this).next(".card-body").addClass("active").slideDown()
-                    $(this).children("span").removeClass("fa-plus").addClass("fa-minus")
-                }
-            })
-        })
+        document.addEventListener('DOMContentLoaded', function () {
+            const subscribeButtons = document.querySelectorAll('.subscribe-btn');
+
+            subscribeButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const subscriptionId = this.dataset.id;
+                    const subscriptionType = this.dataset.type;
+
+                    Swal.fire({
+                        title: 'Вы уверены, что хотите купить подписку?',
+                        text: `Тариф "${subscriptionType}" будет активен после подтверждения.`,
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonText: 'Да',
+                        cancelButtonText: 'Отмена',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            subscribe(subscriptionId, subscriptionType);
+                        }
+                    });
+                });
+            });
+
+            function subscribe(subscriptionId, subscriptionType) {
+                fetch(`/subscribe/${subscriptionId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    },
+                    body: JSON.stringify({
+                        subscription_type: subscriptionType,
+                    }),
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire({
+                                title: 'Успешно!',
+                                text: `Вы успешно подписались на тариф "${subscriptionType}"!`,
+                                icon: 'success',
+                            });
+                        } else {
+                            Swal.fire({
+                                title: 'Ошибка!',
+                                text: 'Скорее всего, у вас уже есть подписка!',
+                                icon: 'error',
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        Swal.fire({
+                            title: 'Ошибка!',
+                            text: 'Что-то пошло не так. Попробуйте позже.',
+                            icon: 'error',
+                        });
+                    });
+            }
+        });
     </script>
-    <script src="{{ asset('js/script.js') }}"></script>
 @endsection

@@ -1,0 +1,11 @@
+.accordion-button{
+    background-color: #26292D     !important;
+    color: white!important;
+
+}
+.accordion .accordion-button:hover,
+.accordion .accordion-button:focus {
+    text-decoration: none!important;
+    border: none!important;
+}
+
