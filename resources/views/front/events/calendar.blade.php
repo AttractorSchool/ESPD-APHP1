@@ -69,7 +69,7 @@
                 <div class="event-item">
                     <div class="event-image" style="background-color: {{ getRandomColor() }}">
                         @if (isset($event->picture))
-                            <img src="{{ $event->picture }}" alt="{{ $event->title }}">
+                            <img src={{ asset('storage/' . $event->picture) }} alt="{{ $event->title }}">
                         @endif
                     </div>
                     <div class="event-details">
