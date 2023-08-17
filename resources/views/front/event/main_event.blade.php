@@ -37,7 +37,7 @@
                 Ваша локация
             </button>
             <p class="city-location">{{$city->name}}, Казастан</p>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu" style="z-index: 1">
                 @foreach($cities as $city1)
                     <li><a class="dropdown-item" href="{{route('events_main', ['city' => $city1->id])}}">{{ $city1->name }}</a></li>
                 @endforeach
@@ -53,7 +53,7 @@
         <p>Предстоящие мероприятия</p>
         <a href="{{ route('events') }}">Просмотреть все <i class="fa-solid fa-play"></i></a>
     </div>
-    <div class="carousel_card">
+    <div class="carousel_card" style="z-index: -1">
         @foreach($city->events as $event)
             @if($event->date >= \Carbon\Carbon::now())
                 <div class="col">
@@ -84,7 +84,7 @@
         @endforeach
     </div>
 
-    <div class="invite">
+    <div class="invite" style="z-index: -1">
         <h3>Пригласить своих друзей</h3>
         <img class="img_back" src="{{ asset('event/present.png') }}" alt="Present Icon">
         <a href="#" class="invite_button">Пригласить</a>

@@ -74,7 +74,9 @@
                     </div>
                     <div class="event-details">
                         <div class="event-date">{{ \Carbon\Carbon::parse($event->date)->format('l, F d, Y') }}</div>
+                        <a href="{{ route('events.show', ['id' => $event->id]) }}" style="text-decoration: none; color: black">
                         <div class="event-title">{{ $event->title }}</div>
+                            </a>
                     </div>
                 </div>
             @endforeach
