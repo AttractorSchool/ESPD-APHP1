@@ -38,7 +38,7 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.course.list')
                 ->title(__('Course')),
 
-            Menu::make(__('Видио курсов'))
+            Menu::make(__('Видео курсов'))
                 ->icon('database')
                 ->route('platform.video.list')
                 ->title(__('Video')),

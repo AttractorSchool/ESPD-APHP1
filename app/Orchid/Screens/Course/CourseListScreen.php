@@ -3,7 +3,8 @@
 namespace App\Orchid\Screens\Course;
 
 use App\Models\Course;
-use App\Orchid\Layouts\Course\EventListLayout;
+use App\Orchid\Layouts\Course\CourseListLayout;
+use App\Orchid\Layouts\Event\EventListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 
@@ -48,7 +49,8 @@ class CourseListScreen extends Screen
     public function layout(): iterable
     {
         return [
-            EventListLayout::class
+//            EventListLayout::class
+            CourseListLayout::class
         ];
     }
 }

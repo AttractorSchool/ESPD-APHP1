@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->foreignId('author_id')->references('id')->on('users')->constrained()->cascadeOnDelete();
             $table->foreignId('interest_id')->constrained()->cascadeOnDelete();
             $table->text('mini_description');

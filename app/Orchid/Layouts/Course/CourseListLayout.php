@@ -39,7 +39,7 @@ class CourseListLayout extends Table
             TD::make('author_id', 'Автор')
                 ->render(fn(Course $course) => ($course->user->name)),
             TD::make('interest_id', 'Интерес')
-                ->render(fn(Course $course) => ($course->interest->name)),
+                ->render(fn(Course $course) => ($course->interests->name)),
 //            TD::make('mini_description', 'Короткое описание')
 //                ->render(fn(Course $course) => ($course->mini_description)),
 //            TD::make('description', 'Описание')
@@ -48,7 +48,6 @@ class CourseListLayout extends Table
 //                ->render(function (Course $course) {
 //                    return "<img src='" . asset('storage/' . $course->picture) . "' width='100' height='100'>";
 //                }),
-
         ];
     }
 }
