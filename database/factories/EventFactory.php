@@ -28,8 +28,8 @@ class EventFactory extends Factory
             'format' => $this->faker->randomElement(['online', 'offline']),
             'price' => $this->faker->randomFloat(2, 0, 1000),
             'picture' => $this->getImage(rand(1,4)),
-            'quantity' => rand(5,10)
-
+            'quantity' => rand(5,10),
+            'city_id' => rand(1,20)
         ];
     }
 

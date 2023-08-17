@@ -43,7 +43,8 @@ class DatabaseSeeder extends Seeder
             AnswerSeeder::class,
             UserCourseSeeder::class,
             ReviewSeeder::class,
-            UserEventSeeder::class
+            UserEventSeeder::class,
+            MentorSeeder::class
         ]);
     }
 }

@@ -43,11 +43,11 @@ Route::get('/allresidents', [PageController::class, 'allResidents'])->name('allR
 
 
 Route::get('/events', [EventController::class, 'index'])->name('events')->middleware('auth');
+Route::get('/events/upcoming', [EventController::class, 'filterEvents'])->name('events.upcoming')->middleware('auth');
+Route::get('/events/calendar', [EventController::class, 'calendar'])->name('events.calendar')->middleware('auth');
 Route::get('/events/{id}', [EventController::class, 'show'])->name('events.show');
 Route::get('/events/{id}/buy', [EventController::class, 'buyTicket'])->name('buy-ticket')->middleware('auth');
-Route::get('/events/upcoming', [EventController::class, 'filterEvents'])->name('events.upcoming')->middleware('auth');
-//Route::get('/events/all', [EventController::class, 'showEvents'])->name('events.showEvents')->middleware('auth');
-Route::get('/events/calendar', [EventController::class, 'calendar'])->name('events.calendar')->middleware('auth');
+
 
 Route::get('/notification', [PageController::class, 'notifications'])->name('notifications')->middleware('auth');
 Route::delete('/notification/{notification}', [PageController::class, 'delete_notification'])->name(

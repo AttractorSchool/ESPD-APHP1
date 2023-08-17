@@ -131,7 +131,7 @@
         </li>
         <li class="nav-item m-0">
             <div class="icon-container">
-                <a class="nav-link py-1" href="#">
+                <a class="nav-link py-1" href="{{route('academy')}}">
                     <i class="fa-solid fa-book-open" style="color: #000;"></i>
                 </a>
                 <span class="icon-label">Academy</span>
@@ -145,51 +145,6 @@
                 <span class="icon-label">Chat</span>
             </div>
         </li>
-        {{--        @guest--}}
-        {{--            @if (Route::has('login'))--}}
-        {{--                <li class="nav-item m-0">--}}
-        {{--                    <div class="icon-container">--}}
-        {{--                        <a class="nav-link" href="{{ route('login') }}">--}}
-        {{--                            <i class="fas fa-sign-in-alt"></i>--}}
-        {{--                        </a>--}}
-        {{--                        <span class="icon-label">{{ __('Login') }}</span>--}}
-        {{--                    </div>--}}
-        {{--                </li>--}}
-        {{--            @endif--}}
-
-        {{--            @if (Route::has('register'))--}}
-        {{--                <li class="nav-item m-0">--}}
-        {{--                    <div class="icon-container">--}}
-        {{--                        <a class="nav-link" href="{{ route('register') }}">--}}
-        {{--                            <i class="fas fa-user-plus"></i>--}}
-        {{--                        </a>--}}
-        {{--                        <span class="icon-label">{{ __('Register') }}</span>--}}
-        {{--                    </div>--}}
-        {{--                </li>--}}
-        {{--            @endif--}}
-        {{--        @else--}}
-        {{--            <li class="nav-item dropdown">--}}
-        {{--                <div class="icon-container">--}}
-        {{--                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"--}}
-        {{--                       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}
-        {{--                        <i class="fas fa-user-circle"></i>--}}
-        {{--                    </a>--}}
-        {{--                    <span class="icon-label">Profile</span>--}}
-        {{--                </div>--}}
-
-        {{--                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">--}}
-        {{--                    <a class="dropdown-item" href="{{ route('logout') }}"--}}
-        {{--                       onclick="event.preventDefault();--}}
-        {{--                                 document.getElementById('logout-form').submit();">--}}
-        {{--                        {{ __('Logout') }}--}}
-        {{--                    </a>--}}
-
-        {{--                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">--}}
-        {{--                        @csrf--}}
-        {{--                    </form>--}}
-        {{--                </div>--}}
-        {{--            </li>--}}
-        {{--        @endguest--}}
         <li class="nav-item m-0">
             <div class="icon-container">
                 <a class="nav-link py-1" href="{{route('profile.show')}}">

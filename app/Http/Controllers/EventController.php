@@ -53,14 +53,11 @@ class EventController extends Controller
         }
     }
 
-//    public function showEvents()
-//    {
-//        $events = Event::all();
-//
-//        return view('front.events', compact('events'));
-//    }
-
-    public function filterEvents(Request $request)
+    /**
+     * @param Request $request
+     * @return View
+     */
+    public function filterEvents(Request $request): View
     {
         $filter = $request->input('filter', 'upcoming');
 
@@ -75,7 +72,11 @@ class EventController extends Controller
         return view('front.events.eventsUpcoming', compact('events', 'filter'));
     }
 
-    public function calendar(Request $request)
+    /**
+     * @param Request $request
+     * @return View
+     */
+    public function calendar(Request $request): View
     {
         $today = Carbon::today();
         $year = $request->input('year', $today->year);
