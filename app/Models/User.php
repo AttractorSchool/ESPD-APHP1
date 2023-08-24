@@ -231,4 +231,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Event::class, 'author_id');
     }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function orders(): BelongsToMany
+    {
+        return $this->belongsToMany(Order::class, 'orders', 'user_id', 'id');
+    }
 }
