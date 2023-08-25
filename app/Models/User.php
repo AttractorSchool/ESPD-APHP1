@@ -231,4 +231,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Event::class, 'author_id');
     }
+    public function favourites():HasMany{
+        return $this->hasMany(Favourite::class, 'user_id');
+    }
+    public function course():HasMany{
+        return $this->hasMany(UserCourse::class, 'user_id');
+    }
 }

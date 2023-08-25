@@ -7,9 +7,13 @@
                 <a href="{{ route('events') }}" class="arrow-back-register mb-2">
                     <i class="fas fa-arrow-left"></i>
                 </a>
-                <a href="#" class="heart-button">
-                    <i class="fas fa-bookmark"></i>
-                </a>
+{{--                <form method="POST" action="{{ route('favourite.save') }}" >--}}
+{{--                    @csrf--}}
+
+{{--                    <input type="hidden" name="course_id" value="{{ $event->id }}">--}}
+{{--                    <input type="hidden" name="user_id" value="{{ auth()->id() }}">--}}
+{{--                    <button type="submit" class="heart-button" data-course-id="{{ $event->id }}" style="border: none"> <i class="fas fa-bookmark" style="color: {{\App\Models\Favourite::where('course_id', $event->id)->where('user_id', \Illuminate\Support\Facades\Auth::id())->first() ? '#27ae60' : '#fffff'}}"></i></button>--}}
+{{--                </form>--}}
                 <div class="card-show-mentor">
                     <img src="{{ asset('storage/' . $event->picture) }}" alt="Avatar" class="card-img-top">
                     <div class="card-body">

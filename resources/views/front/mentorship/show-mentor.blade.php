@@ -9,9 +9,13 @@
                 <a href="{{ '/mentorship' }}" class="arrow-back mb-2">
                     <i class="fas fa-arrow-left"></i>
                 </a>
-                <a href="#" class="heart-button">
-                    <i class="fas fa-heart"></i>
-                </a>
+                                <form method="POST" action="{{ route('favourite.save') }}" >
+                                    @csrf
+
+                                    <input type="hidden" name="mentor_id" value="{{ $mentor->id }}">
+                                    <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                                    <button type="submit" class="heart-button" style="border: none"> <i class="fas fa-heart" style="color: {{\App\Models\Favourite::where('mentor_id', $mentor->id)->where('user_id', \Illuminate\Support\Facades\Auth::id())->first() ? '#27ae60' : '#fffff'}}"></i></button>
+                                </form>
                 <div class="card-show-mentor">
                     <img src="{{ asset('storage/' . $mentor->avatar) }}" alt="Avatar" class="card-img-top">
                     <div class="card-body">

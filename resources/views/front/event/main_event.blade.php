@@ -37,9 +37,9 @@
                 Ваша локация
             </button>
             <p class="city-location">{{$city->name}}, Казастан</p>
-            <ul class="dropdown-menu" style="z-index: 1">
+            <ul class="dropdown-menu" style="z-index: 10!important;">
                 @foreach($cities as $city1)
-                    <li><a class="dropdown-item" href="{{route('events_main', ['city' => $city1->id])}}">{{ $city1->name }}</a></li>
+                    <li><a class="dropdown-item" style="z-index: 10!important;" href="{{route('events_main', ['city' => $city1->id])}}">{{ $city1->name }}</a></li>
                 @endforeach
             </ul>
         </div>
@@ -53,7 +53,7 @@
         <p>Предстоящие мероприятия</p>
         <a href="{{ route('events') }}">Просмотреть все <i class="fa-solid fa-play"></i></a>
     </div>
-    <div class="carousel_card" style="z-index: -1">
+    <div class="carousel_card" style="z-index: 1!important;">
         @foreach($city->events as $event)
             @if($event->date >= \Carbon\Carbon::now())
                 <div class="col">
@@ -75,7 +75,12 @@
                             </p>
                         </div>
                         <div class="save">
-                            <a href="#"><i class="fa-solid fa-bookmark" style="color:#f2766d;"></i></a>
+                            <form method="POST" action="{{ route('favourite.save') }}" >
+                                @csrf
+                                <input type="hidden" name="events_id" value="{{ $event->id }}">
+                                <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                                <button type="submit" class="heart-button_c" style="background-color: transparent; border: none"> <i class="fa-solid fa-bookmark" style="color: {{\App\Models\Favourite::where('events_id', $event->id)->where('user_id', \Illuminate\Support\Facades\Auth::id())->first() ? '#f2766d' : '#000'}}"></i></button>
+                            </form>
                         </div>
                     </div>
                 </a>

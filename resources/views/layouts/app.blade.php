@@ -84,7 +84,7 @@
                 </ul>
             </div>
             @if(\Illuminate\Support\Facades\Auth::check())
-                <div class="notification" style="position: absolute; top: 1px; right: 2%">
+                <div class="notification" style="position: absolute; top: 1px; right: 60px">
                     <a href="{{ route('notifications') }}" style="text-decoration: none"><i class="fa-solid fa-bell"
                                                                                             style="text-decoration: none; color: black"></i></a>
                     @if(count(\Illuminate\Support\Facades\Auth::user()->custom_notifications))
@@ -92,6 +92,9 @@
                             <p class="no_overflow">{{ count(\Illuminate\Support\Facades\Auth::user()->custom_notifications) }}</p>
                         </div>
                     @endif
+                </div>
+                <div class="favourite" style="position: absolute; top: 1px; right: 2%">
+                    <a href="{{ route('favourite') }}" style="text-decoration: none"><i class="fa-solid fa-heart" style="text-decoration: none; color: black"></i></a>
                 </div>
             @endif
         </div>

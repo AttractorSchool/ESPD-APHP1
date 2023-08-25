@@ -46,4 +46,10 @@ body {
     .footer-desktop {
         display: block;
     }
+    .navbar-collapse{
+        margin-right: 55px;
+    }
+    .notification{
+        right: 80px!important;
+    }
 }

@@ -7,6 +7,7 @@ use App\Models\City;
 use App\Models\Course;
 use App\Models\CustomNotification;
 use App\Models\Event;
+use App\Models\Favourite;
 use App\Models\Response;
 use App\Models\Review;
 use App\Models\Subscription;
@@ -114,5 +115,48 @@ class PageController extends Controller
             $cities = City::all();
 
             return view('front.event.main_event', compact( 'cities', 'city'));
+    }
+    public function favourite()
+    {
+        $favourites = Auth::user()->favourites;
+        return view('front.favourite.favourite', compact('favourites'));
+    }
+    public function save_favourite(Request $request):RedirectResponse
+    {
+//        $favourite_first = Favourite::where('course_id', $request->input('course_id'))->where('user_id', Auth::id())->first();
+//        if ($favourite_first)
+//        {
+//            $favourite_first->delete();
+//            return redirect()->back();
+//        }
+            if ($request->input('events_id')){
+                $favourite_event = Favourite::where('events_id', $request->input('events_id'))->where('user_id', Auth::id())->first();
+                if ($favourite_event){
+                    $favourite_event->delete();
+
+                    return redirect()->back();
+                }
+            }elseif ($request->input('course_id')){
+                $favourite_course = Favourite::where('course_id', $request->input('course_id'))->where('user_id', Auth::id())->first();
+                if ($favourite_course){
+                    $favourite_course->delete();
+
+                    return redirect()->back();
+                }
+            }elseif ($request->input('mentor_id')){
+                $favourite_mentor = Favourite::where('mentor_id', $request->input('mentor_id'))->where('user_id', Auth::id())->first();
+                if ($favourite_mentor){
+                    $favourite_mentor   ->delete();
+
+                    return redirect()->back();
+                }
+            }
+
+            $data = $request->all();
+
+            $favourite = Favourite::create($data);
+
+
+            return redirect()->back();
     }
 }
