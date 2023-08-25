@@ -485,7 +485,19 @@ p {
     width: 40px;
     height: 40px;
 }
-
+.favourite{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+    background-color: #D8A4B4;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+.favourite i{
+    text-decoration: none;
+}
 .notification .not {
     position: absolute;
     top: 0;
@@ -646,7 +658,7 @@ p {
     line-height: 2.375rem;
     text-align: center;
     pointer-events: none;
-    color: #aaa;
+        color: #aaa;
 }
 
 .course-card {

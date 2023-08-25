@@ -44,7 +44,8 @@ class DatabaseSeeder extends Seeder
             UserCourseSeeder::class,
             ReviewSeeder::class,
             UserEventSeeder::class,
-            MentorSeeder::class
+            MentorSeeder::class,
+            FavouriteSeeder::class,
         ]);
     }
 }

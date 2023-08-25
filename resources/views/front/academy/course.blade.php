@@ -10,9 +10,14 @@
         <div class="h1_course">
             <h1>{{ $course->name }}</h1>
         </div>
-        <a href="#" class="heart-button_c">
-            <i class="fas fa-heart"></i>
-        </a>
+        <form method="POST" action="{{ route('favourite.save') }}" >
+            @csrf
+
+            <input type="hidden" name="course_id" value="{{ $course->id }}">
+            <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+
+            <button type="submit" class="heart-button_c" data-course-id="{{ $course->id }}"> <i class="fas fa-heart" style="color: {{\App\Models\Favourite::where('course_id', $course->id)->where('user_id', \Illuminate\Support\Facades\Auth::id())->first() ? '#27ae60' : '#fffff'}}"></i></button>
+        </form>
     </div>
     <div class="course_material">
         <h2 style="margin-left: 10px">Материалы по курсу</h2>

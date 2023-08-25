@@ -24,7 +24,13 @@
                     </h5>
                     <p class="card-text-course-text">{{$course->mini_description}}</p>
                     <p class="card-text-course-bottom">Author: {{$author->name}}</p>
-                    <button class="favorite-btn" data-course-id="{{ $course->id }}"></button>
+                    <form method="POST" action="{{ route('favourite.save') }}" >
+                        @csrf
+
+                        <input type="hidden" name="course_id" value="{{ $course->id }}">
+                        <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                        <button type="submit" class="favorite-btn" data-course-id="{{ $course->id }}" style="background-color: {{\App\Models\Favourite::where('course_id', $course->id)->where('user_id', \Illuminate\Support\Facades\Auth::id())->first() ? '#27ae60' : '#fffff'}}"></button>
+                    </form>
                 </div>
             </div>
             </a>

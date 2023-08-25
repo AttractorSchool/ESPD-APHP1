@@ -239,4 +239,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Order::class, 'orders', 'user_id', 'id');
     }
+  
+    public function favourites():HasMany{
+        return $this->hasMany(Favourite::class, 'user_id');
+    }
+  
+    public function course():HasMany{
+        return $this->hasMany(UserCourse::class, 'user_id');
 }
