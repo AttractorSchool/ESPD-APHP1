@@ -10,10 +10,4 @@ class UserCourse extends Model
 {
     use HasFactory;
 
-    public $fillable = ['user_id', 'course_id'];
-
-    public function user():BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 }
