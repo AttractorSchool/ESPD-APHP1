@@ -217,11 +217,11 @@ class User extends Authenticatable
     }
 
     /**
-     * @return HasMany
+     * @return BelongsToMany
      */
-    public function courses():HasMany
+    public function courses(): BelongsToMany
     {
-        return $this->hasMany(UserCourse::class, );
+        return $this->belongsToMany(Course::class, 'user_courses');
     }
 
     /**

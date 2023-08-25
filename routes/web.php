@@ -26,6 +26,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::get('/residents', [PageController::class, 'residents'])->name('residents');
 Route::post('/form', [FormController::class, 'store'])->name('front.form');
 Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show')->middleware('auth');
+Route::get('/profile_edit', [ProfileController::class, 'edit'])->name('edit_profile')->middleware('auth');
 Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 Route::post('/connect', [ActionController::class, 'connect'])->name('connect')->middleware('auth');
 Route::put('/connect_final/{response}/{notification}', [ActionController::class, 'connect_final'])->name(
