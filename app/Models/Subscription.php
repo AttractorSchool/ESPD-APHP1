@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Subscription extends Model
@@ -22,5 +23,14 @@ class Subscription extends Model
     public function userSubscriptions(): HasMany
     {
         return $this->hasMany(UserSubscription::class);
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function orders(): BelongsToMany
+    {
+        return $this->belongsToMany(Order::class, 'user_subscriptions')
+            ->withPivot('start_date', 'end_date');
     }
 }

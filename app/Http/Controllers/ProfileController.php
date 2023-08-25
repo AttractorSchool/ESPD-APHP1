@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Interest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,8 +13,16 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $interests = Interest::all();
+        $courses = $user->courses;
 
-        return view('front/profile', compact('user', 'interests'));
+        return view('front/profile', compact('user', 'interests', 'courses'));
+    }
+    public function edit()
+    {
+        $user = Auth::user();
+        $interests = Interest::all();
+        $courses = $user->courses;
+        return view('front/edit_profile', compact('user','interests', 'courses'));
     }
 
     public function update(Request $request)
@@ -44,11 +53,8 @@ class ProfileController extends Controller
         $user->city = $request->input('city');
         $user->phone = $request->input('phone');
         $user->description = $request->input('description');
-
-
-        $user->save();
-
         $user->interests()->sync($request->input('interests', []));
+        $user->save();
 
         return redirect()->route('profile.update')->with('success', 'Profile updated successfully!');
     }

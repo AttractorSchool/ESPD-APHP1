@@ -217,11 +217,11 @@ class User extends Authenticatable
     }
 
     /**
-     * @return HasMany
+     * @return BelongsToMany
      */
-    public function courses():HasMany
+    public function courses(): BelongsToMany
     {
-        return $this->hasMany(UserCourse::class, );
+        return $this->belongsToMany(Course::class, 'user_courses');
     }
 
     /**
@@ -231,10 +231,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(Event::class, 'author_id');
     }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function orders(): BelongsToMany
+    {
+        return $this->belongsToMany(Order::class, 'orders', 'user_id', 'id');
+    }
+  
     public function favourites():HasMany{
         return $this->hasMany(Favourite::class, 'user_id');
     }
+  
     public function course():HasMany{
         return $this->hasMany(UserCourse::class, 'user_id');
-    }
 }

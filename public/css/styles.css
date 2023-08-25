@@ -908,3 +908,25 @@ p {
     box-shadow: rgba(39, 174, 96, .2) 0 6px 12px;
 }
 
+.show-profile{
+    margin: -58px;
+}
+.profile-show .gradient-custom-2 {
+    background: #fbc2eb;
+
+    background: -webkit-linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1));
+
+    background: linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1))
+}
+
+.profile-interest-text {
+    background: #0e0d12;
+}
+
+.profile-parameters{
+    padding-top: 54px;
+    margin-right: 86px;
+}
+.profile-email {
+    font-size: 11px;
+}
