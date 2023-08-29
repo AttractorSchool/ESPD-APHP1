@@ -217,9 +217,15 @@
                         <div class="card-body">
                             <h5 class="card-title">{{$subscription->type}}</h5>
                             <p class="card-text">{{$subscription->description}}</p>
-                            <h5>{{$subscription->price}} тг.</h5>
+                            <h5>{{ round($subscription->price) }} тг.</h5>
                             @auth
-                                <button class="subscribe-btn " data-id="{{ $subscription->id }}" data-type="{{ $subscription->type }}">Подписаться</button>
+                                <a class="subscribe-btn btn btn-primary" style="background-color: #f9c70a"
+                                   href="{{ route('payment', ['type' => $subscription->type,
+                        'subscriptionId' => $subscription->id,
+                        'subscriptionPrice' => $subscription->price]) }}">
+                                    Подписаться
+                                </a>
+                                </form>
                             @else
                                 <p>Чтобы подписаться, необходимо войти в свой аккаунт.</p>
                             @endauth
@@ -232,7 +238,8 @@
     <div class="accordion accordion-flush" id="accordionFlushExample">
         <div class="accordion-item">
             <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                     Heading One
                 </button>
             </h2>
@@ -241,12 +248,14 @@
                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamLorem ipsum dolor sit
                     amet,
                     consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</div>
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+                </div>
             </div>
         </div>
         <div class="accordion-item">
             <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
                     Heading Two
                 </button>
             </h2>
@@ -255,12 +264,14 @@
                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamLorem ipsum dolor sit
                     amet,
                     consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</div>
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+                </div>
             </div>
         </div>
         <div class="accordion-item">
             <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
                     Heading Three
                 </button>
             </h2>
@@ -269,74 +280,9 @@
                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamLorem ipsum dolor sit
                     amet,
                     consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</div>
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+                </div>
             </div>
         </div>
     </div>
-@endsection
-
-@section('js')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const subscribeButtons = document.querySelectorAll('.subscribe-btn');
-
-            subscribeButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    const subscriptionId = this.dataset.id;
-                    const subscriptionType = this.dataset.type;
-
-                    Swal.fire({
-                        title: 'Вы уверены, что хотите купить подписку?',
-                        text: `Тариф "${subscriptionType}" будет активен после подтверждения.`,
-                        icon: 'question',
-                        showCancelButton: true,
-                        confirmButtonText: 'Да',
-                        cancelButtonText: 'Отмена',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            subscribe(subscriptionId, subscriptionType);
-                        }
-                    });
-                });
-            });
-
-            function subscribe(subscriptionId, subscriptionType) {
-                fetch(`/subscribe/${subscriptionId}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    },
-                    body: JSON.stringify({
-                        subscription_type: subscriptionType,
-                    }),
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            Swal.fire({
-                                title: 'Успешно!',
-                                text: `Вы успешно подписались на тариф "${subscriptionType}"!`,
-                                icon: 'success',
-                            });
-                        } else {
-                            Swal.fire({
-                                title: 'Ошибка!',
-                                text: 'Скорее всего, у вас уже есть подписка!',
-                                icon: 'error',
-                            });
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        Swal.fire({
-                            title: 'Ошибка!',
-                            text: 'Что-то пошло не так. Попробуйте позже.',
-                            icon: 'error',
-                        });
-                    });
-            }
-        });
-    </script>
 @endsection

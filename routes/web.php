@@ -68,10 +68,13 @@ Route::get('/notification/toEmail/{notification}', [\App\Http\Controllers\Notifi
     'notification.send'
 );
 
+
 Route::get('/subscriptions', [SubscriptionsController::class, 'index'])->name('subscriptions');
-Route::post('/subscribe/{subscription}', [SubscriptionsController::class, 'subscribe'])
+Route::get('/subscriptions/payment', [SubscriptionsController::class, 'showCardForm'])->name('payment');
+Route::post('/subscribe', [SubscriptionsController::class, 'subscribe'])
     ->name('subscribe')
     ->middleware('auth');
+
 
 Route::post('/academy', [\App\Http\Controllers\CourseController::class, 'countPoints'])->name('academy.countPoints');
 Route::get('/academy/{video}', [\App\Http\Controllers\CourseController::class, 'test'])->name('academy.test');
