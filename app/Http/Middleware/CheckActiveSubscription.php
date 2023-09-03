@@ -11,7 +11,7 @@ class CheckActiveSubscription
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
      */
     public function handle(Request $request, Closure $next): Response
     {
@@ -21,6 +21,15 @@ class CheckActiveSubscription
             if (!$request->session()->has('subscription_checked')) {
                 $request->session()->put('subscription_checked', true);
                 return redirect()->route('subscriptions');
+            }
+        }
+        if ($user) {
+            $subs = $user->subscription;
+            foreach ($subs as &$sub) {
+                if ($sub->end_date <= now()) {
+                    $sub->delete();
+                    $request->session()->forget('subscription_checked');
+                }
             }
         }
 

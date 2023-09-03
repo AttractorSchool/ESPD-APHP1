@@ -57,7 +57,7 @@ Route::delete('/notification/{notification}', [PageController::class, 'delete_no
 
 Route::post('/connectToMentor', [ActionController::class, 'connectToMentor'])->name('connectToMentor');
 
-Route::get('/mentorship', [MentorController::class, 'index'])->name('mentorship');
+Route::get('/mentorship', [MentorController::class, 'index'])->name('mentorship')->middleware('auth');
 Route::get('/mentorship/test', [MentorController::class, 'mentorshipTest'])->name('mentorship.test');
 Route::post('/mentorship/result', [MentorController::class, 'mentorshipResult'])->name('mentorship.result');
 Route::get('/mentors', [MentorController::class, 'showAllMentors'])->name('mentors');
@@ -68,7 +68,6 @@ Route::get('/mentors/{id}', [MentorController::class, 'show'])
 Route::get('/notification/toEmail/{notification}', [\App\Http\Controllers\NotificationController::class, 'send'])->name(
     'notification.send'
 );
-
 
 Route::get('/subscriptions', [SubscriptionsController::class, 'index'])->name('subscriptions');
 Route::get('/subscriptions/payment', [SubscriptionsController::class, 'showCardForm'])->name('payment');
@@ -83,7 +82,9 @@ Route::get('/academy/result/{score}', [\App\Http\Controllers\CourseController::c
     'academy.test.result'
 );
 Route::get('/interests', [\App\Http\Controllers\InterestController::class, 'index'])->name('academy');
-Route::get('/filtered-courses', [\App\Http\Controllers\CourseController::class, 'showFilteredCourses'])->name('filtered.courses');
+Route::get('/filtered-courses', [\App\Http\Controllers\CourseController::class, 'showFilteredCourses'])->name(
+    'filtered.courses'
+);
 Route::get('/courses/{id}', [\App\Http\Controllers\CourseController::class, 'show'])->name('show.course');
 Route::get('/reviews/{id}', [\App\Http\Controllers\CourseController::class, 'showAllReviews'])->name('show.reviews');
 
