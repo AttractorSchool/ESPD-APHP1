@@ -48,8 +48,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'permissions'          => 'array',
-        'email_verified_at'    => 'datetime',
+        'permissions' => 'array',
+        'email_verified_at' => 'datetime',
     ];
 
     /**
@@ -58,11 +58,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $allowedFilters = [
-           'id'         => Where::class,
-           'name'       => Like::class,
-           'email'      => Like::class,
-           'updated_at' => WhereDateStartEnd::class,
-           'created_at' => WhereDateStartEnd::class,
+        'id' => Where::class,
+        'name' => Like::class,
+        'email' => Like::class,
+        'updated_at' => WhereDateStartEnd::class,
+        'created_at' => WhereDateStartEnd::class,
     ];
 
     /**
@@ -77,6 +77,7 @@ class User extends Authenticatable
         'updated_at',
         'created_at',
     ];
+
     /**
      * @return HasMany
      */
@@ -104,7 +105,6 @@ class User extends Authenticatable
     public function cityName(): string
     {
         return $this->city()->get('name');
-
     }
 
     /**
@@ -183,7 +183,7 @@ class User extends Authenticatable
     /**
      * @return HasMany
      */
-    public function courses_author():HasMany //только автор(ментор) может пользоваться
+    public function courses_author(): HasMany //только автор(ментор) может пользоваться
     {
         return $this->hasMany(Course::class, 'author_id');
     }
@@ -197,6 +197,7 @@ class User extends Authenticatable
             ->withPivot('start_date', 'end_date')
             ->withTimestamps();
     }
+
 
     /**
      * @return HasMany
@@ -227,7 +228,7 @@ class User extends Authenticatable
     /**
      * @return HasMany
      */
-    public function events():HasMany
+    public function events(): HasMany
     {
         return $this->hasMany(Event::class, 'author_id');
     }
@@ -240,11 +241,12 @@ class User extends Authenticatable
         return $this->belongsToMany(Order::class, 'orders', 'user_id', 'id');
     }
 
-    public function favourites():HasMany{
+    public function favourites(): HasMany
+    {
         return $this->hasMany(Favourite::class, 'user_id');
     }
 
-    public function course():HasMany
+    public function course(): HasMany
     {
         return $this->hasMany(UserCourse::class, 'user_id');
     }
