@@ -1,0 +1,38 @@
+.num-ratings {
+    font-size: 12px;
+}
+
+.interest-text-show {
+    color: #E94AD0;
+    margin-right: 8px;
+}
+
+.card-materials {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 18px;
+    box-shadow: none;
+    padding: 10px;
+    height: auto;
+}
+
+.text-materials {
+    color: black;
+}
+
+.fa-download {
+    color: #5316B6;
+}
+
+.booking-button {
+    color: #fff;
+    font-size: 14px;
+    padding: 10px;
+    border: none;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #804FEB;
+    width: 80%;
+}

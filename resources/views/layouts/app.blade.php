@@ -6,77 +6,29 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <link href="https://show.cloudpayments.ru/assets/css/style.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/media.css') }}" rel="stylesheet">
     <script src="/js/app.js"></script>
     <title>{{ config('app.name', 'Laravel') }}</title>
-
     <!-- Fonts -->
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    <style>
-        html, body {
-            height: 100%;
-        }
-
-        body {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .content {
-            flex: 1;
-        }
-
-        .footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #f5f5f5;
-            padding: 10px;
-        }
-
-        .footer-mobile {
-            display: none;
-        }
-
-        .footer-desktop {
-            display: none;
-        }
-
-        @media (max-width: 767px) {
-            .footer-desktop {
-                display: none;
-            }
-
-            .footer-mobile {
-                display: block;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .footer-mobile {
-                display: none;
-            }
-
-            .footer-desktop {
-                display: block;
-            }
-        }
-    </style>
+    <script src="https://checkout.cloudpayments.ru/checkout.js"></script>
 </head>
+
 <body>
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
-            <a class="navbar-brand d-none d-md-block d-m-none" href="{{ url('/home') }}">
+            <a class="navbar-brand d-none d-md-block d-m-none" href="{{ url('/') }}">
                 Woman Create club
             </a>
-            <button class="navbar-toggler ms-auto order-0" type="button" data-bs-toggle="collapse"
+            <button class="navbar-toggler order-0" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
@@ -87,18 +39,17 @@
                         <a class="nav-link" href="#">Woman Create club</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">События</a>
+                        <a class="nav-link" href="{{route('events_main')}}">События</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Нетворкинг</a>
+                        <a class="nav-link" href="{{ route('networking') }}">Нетворкинг</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Менторство</a>
+                        <a class="nav-link" href="{{ route('mentorship') }}">Менторство</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Академия</a>
+                        <a class="nav-link" href="{{route('academy')}}">Академия</a>
                     </li>
-                    <!-- Authentication Links -->
                     @guest
                         @if (Route::has('login'))
                             <li class="nav-item">
@@ -133,105 +84,121 @@
                     @endguest
                 </ul>
             </div>
+            @if(\Illuminate\Support\Facades\Auth::check())
+                <div class="notification" style="position: absolute; top: 1px; right: 60px">
+                    <a href="{{ route('notifications') }}" style="text-decoration: none"><i class="fa-solid fa-bell"
+                                                                                            style="text-decoration: none; color: black"></i></a>
+                    @if(count(\Illuminate\Support\Facades\Auth::user()->custom_notifications))
+                        <div class="not no_overflow">
+                            <p class="no_overflow">{{ count(\Illuminate\Support\Facades\Auth::user()->custom_notifications) }}</p>
+                        </div>
+                    @endif
+                </div>
+                <div class="favourite" style="position: absolute; top: 1px; right: 2%">
+                    <a href="{{ route('favourite') }}" style="text-decoration: none"><i class="fa-solid fa-heart" style="text-decoration: none; color: black"></i></a>
+                </div>
+            @endif
         </div>
     </nav>
 
-    <main class="py-4">
+    <main class="py-4" style="padding-top: 0">
+        @if (session('status'))
+            <div class="alert alert-primary" role="alert">
+                {{session('status')}}
+            </div>
+        @endif
+            @if (session('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{session('error')}}
+                </div>
+            @endif
         @yield('content')
+        @yield('js')
     </main>
 
 </div>
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 
-@if($isMobile)
-    <footer class="footer footer-mobile">
-        <ul class="footer-icons nav d-flex justify-content-between">
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-home"></i>
+<footer class="footer footer-mobile px-4 py-0">
+    <ul class="footer-icons nav d-flex justify-content-between">
+        <li class="nav-item m-0">
+            <div class="icon-container">
+                <a class="nav-link py-1" href="/">
+                    <i class="fas fa-home" style="color: #8C8C8C"></i>
                 </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-search"></i>
+                <span class="icon-label">Home</span>
+            </div>
+        </li>
+        <li class="nav-item m-0">
+            <div class="icon-container">
+                <a class="nav-link py-1" href="{{ route('networking') }}">
+                    <i class="fa-solid fa-user-group" style="color: #000;"></i>
                 </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-bell"></i>
+                <span class="icon-label">Network</span>
+            </div>
+        </li>
+        <li class="nav-item m-0">
+            <div class="icon-container">
+                <a class="nav-link py-1" href="{{route('academy')}}">
+                    <i class="fa-solid fa-book-open" style="color: #000;"></i>
                 </a>
-            </li>
-            @guest
-                @if (Route::has('login'))
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                    </li>
-                @endif
+                <span class="icon-label">Academy</span>
+            </div>
+        </li>
+        <li class="nav-item m-0">
+            <div class="icon-container">
+                <a class="nav-link py-1" href="{{route('chat')}}">
+                    <i class="fas fa-message"></i>
+                </a>
+                <span class="icon-label">Chat</span>
+            </div>
+        </li>
+        <li class="nav-item m-0">
+            <div class="icon-container">
+                <a class="nav-link py-1" href="{{route('profile.show')}}">
+                    <i class="fas fa-user-circle" style="color: #8C8C8C"></i>
+                </a>
+                <span class="icon-label">Profile</span>
+            </div>
+        </li>
+    </ul>
+</footer>
 
-                @if (Route::has('register'))
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                    </li>
-                @endif
-            @else
-                <li class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        <i class="fas fa-user-circle"></i>
-                    </a>
-
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                           onclick="event.preventDefault();
-                                 document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
+<footer class="footer footer-desktop">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <ul class="footer-icons nav d-flex justify-content-start">
+                    <li class="nav-item social-link">
+                        <a class="nav-link" href="https://www.instagram.com">
+                            <i class="fab fa-instagram"></i>
                         </a>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </div>
-                </li>
-            @endguest
-        </ul>
-    </footer>
-@else
-    <footer class="footer footer-desktop">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <ul class="footer-icons nav d-flex justify-content-start">
-                        <li class="nav-item social-link">
-                            <a class="nav-link" href="https://www.instagram.com">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item social-link">
-                            <a class="nav-link" href="https://web.whatsapp.com">
-                                <i class="fab fa-whatsapp"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item social-link">
-                            <a class="nav-link" href="https://web.telegram.org">
-                                <i class="fab fa-telegram"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-lg-6">
-                    <ul class="footer-links nav d-flex justify-content-end">
-                        <li class="nav-item">
-                            <a class="nav-link contacts" href="#">Контакты</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link faq" href="#">Вопросы FAQ</a>
-                        </li>
-                    </ul>
-                </div>
+                    </li>
+                    <li class="nav-item social-link">
+                        <a class="nav-link" href="https://web.whatsapp.com">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item social-link">
+                        <a class="nav-link" href="https://web.telegram.org">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-6">
+                <ul class="footer-links nav d-flex justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link contacts" href="#">Контакты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link faq" href="#">Вопросы FAQ</a>
+                    </li>
+                </ul>
             </div>
         </div>
-    </footer>
-@endif
+    </div>
+</footer>
 </body>
 </html>

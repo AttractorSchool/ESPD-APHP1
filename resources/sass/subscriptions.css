@@ -1,0 +1,23 @@
+.subscription-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.subscriptions {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.subscribe-btn {
+    color: black;
+    font-size: 14px;
+    padding: 10px;
+    border: none;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #f9c70a;
+    width: 80%;
+}

@@ -13,9 +13,7 @@ return new class extends Migration
     {
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['free', 'standard', 'premium']);
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->enum('type', ['Free', 'Standard', 'Premium']);
             $table->decimal('price');
             $table->text('description');
             $table->timestamps();

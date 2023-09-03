@@ -1,0 +1,17 @@
+.mentor_favourite{
+    height: 60px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #EDEAE4;
+    margin-bottom: 0;
+}
+.mentor-photo{
+    height: 50px;
+    border-radius: 50%;
+}
+.mentor-favourite-text p{
+    margin-top: 5px;
+}
+.course-favourite{
+}

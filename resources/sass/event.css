@@ -1,0 +1,168 @@
+body{
+    margin: 0;
+    overflow-x: hidden;
+}
+footer{
+    background-color: #4a43ec!important;
+    border-radius: 0 0 25px 25px;
+}
+.footer{
+    padding: 20px 10px 80px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #4a43ec!important;
+    border-radius: 0 0 25px 25px;
+}
+.icon-bar{
+
+}
+.notification{
+    background-color: #5c56ee;
+    border-radius: 50%;
+}
+.location p{
+    margin: 0;
+}
+.fa-bell{
+    padding: 6px 8px;
+}
+.city-location{
+    text-align: center;
+    color: white;
+}
+.dropdown_location button{
+    color: white;
+    border: white;
+}
+.title_event{
+    display: flex;
+    margin: 30px 15px;
+    justify-content: space-between;
+    font-size: 12px;
+}
+.title_event a{
+    text-decoration: none;
+    color: #7c7e8f;
+}
+.col{
+    margin-left: 10px;
+    position: relative;
+}
+.card{
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+}
+.slick-track{
+    min-height: 290px;
+    max-height: 350px;
+}
+.slick-prev{
+    position: absolute;
+    left: 0;
+    bottom: auto;
+    z-index: 50;
+}
+.slick-next{
+    position: absolute;
+    right: 3%;
+    bottom: auto;
+    z-index: 50;
+}
+.slick-prev:before{
+    color: black;
+    font-size: 30px;
+}
+.slick-next:before{
+    color: black;
+    font-size: 30px;
+}
+.card-title{
+    font-size: 13px;
+}
+.card-text{
+    font-size: 10px;
+    color: #7c7e8f;
+}
+.data{
+    position: absolute;
+    top: 2%;
+    left: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    border-radius: 10px;
+    background-color: rgba(255,255,255,0.5);
+}
+.data{
+    color: #f2766d;
+}
+.day{
+    margin: 0;
+}
+.month{
+    margin: 0;
+}
+.save{
+    position: absolute;
+    top: 2%;
+    right: 5%;
+    background-color: rgba(255,255,255,0.5);
+    width: 25px;
+    height: 30px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.invite{
+    position: relative;
+    margin: 20px 20px 0 20px;
+    border-radius: 20px;
+    background-color: #d6feff;
+    height: 180px;
+}
+.invite h3{
+    padding-top: 20px;
+    padding-left: 20px;
+    font-size: 16px;
+    font-weight: 600;
+}
+.invite_button{
+    text-decoration: none;
+    position: absolute;
+    bottom: 6%;
+    left: 6%;
+    margin-top: 100px;
+    background-color: #00f8ff;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 10px;
+    color: black;
+}
+.img_back{
+    position: absolute;
+    top: 13%;
+    right: 0;
+    z-index: 0;
+}
+.social{
+    position:fixed;
+    bottom: 0;
+    background-color: #b3d7ff;
+    width: 100%;
+    height: 130px;
+    border-radius: 35px 35px 0 0;
+}
+.social h4{
+    margin: 20px 0 0 20px;
+}
+.social-cards{
+    display: flex;
+    margin: 15px 10px 0 10px;
+}
+.social-card{
+    margin-left: 20px;
+    text-align: center;
+}
