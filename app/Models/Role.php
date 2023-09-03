@@ -10,6 +10,8 @@ class Role extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['slug', 'name'];
+
     /**
      * @return BelongsToMany
      */
