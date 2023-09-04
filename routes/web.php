@@ -58,12 +58,17 @@ Route::delete('/notification/{notification}', [PageController::class, 'delete_no
 Route::post('/connectToMentor', [ActionController::class, 'connectToMentor'])->name('connectToMentor');
 
 Route::get('/mentorship', [MentorController::class, 'index'])->name('mentorship')->middleware('auth');
-Route::get('/mentorship/test', [MentorController::class, 'mentorshipTest'])->name('mentorship.test');
-Route::post('/mentorship/result', [MentorController::class, 'mentorshipResult'])->name('mentorship.result');
+Route::get('/mentorship/test', [MentorController::class, 'mentorshipTest'])->name('mentorship.test')->middleware(
+    'auth'
+);
+Route::post('/mentorship/result', [MentorController::class, 'mentorshipResult'])->name('mentorship.result')->middleware(
+    'auth'
+);
 Route::get('/mentors', [MentorController::class, 'showAllMentors'])->name('mentors');
 Route::get('/mentors/{id}', [MentorController::class, 'show'])
     ->name('mentors.show')
-    ->middleware('register.guest');
+//    ->middleware('register.guest');
+    ->middleware('auth');
 
 Route::get('/notification/toEmail/{notification}', [\App\Http\Controllers\NotificationController::class, 'send'])->name(
     'notification.send'
