@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Models\City;
+use App\Models\Event;
 use App\Models\Interest;
 use App\Models\Role;
 use App\Models\Subscription;
@@ -521,5 +523,66 @@ class MainPageTest extends TestCase
         $response->assertSeeText('Материалы от');
         $response->assertSeeText($mentor->name);
         $response->assertSeeText('Забронировать сессию');
+    }
+
+    public function test_events_with_login_without_buy_subscriptions(): void
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $response = $this->get(route('events_main'));
+
+        $response->assertStatus(302);
+        $response->assertRedirect(route('subscriptions'));
+    }
+
+    public function test_events_without_login(): void
+    {
+        $response = $this->get(route('events_main'));
+
+        $response->assertStatus(302);
+        $response->assertRedirect(route('login'));
+    }
+
+    public function test_events_with_login_show_question(): void
+    {
+        $user = User::factory()->create();
+        Subscription::create([
+            'type' => 'Free',
+            'description' => 'Доступ к блаблабла',
+            'price' => 0,
+        ]);
+
+        $city = City::create([
+            'name' => 'Алматы'
+        ]);
+        $events = Event::factory(20)->create([
+            'city_id' => $city->id,
+            'author_id' => 1
+        ]);
+
+
+        $startDate = Carbon::now();
+        $startDate->addDays(7);
+
+        $subscrate = new UserSubscription();
+        $subscrate->user_id = $user->id;
+        $subscrate->subscription_id = 1;
+        $subscrate->start_date = Carbon::now();
+        $subscrate->end_date = $startDate->toDateTimeString();
+        $subscrate->save();
+
+        $this->actingAs($user);
+
+        $response = $this->get(route('events_main'));
+
+        $response->assertStatus(200);
+        $response->assertSeeText('Предстоящие мероприятия');
+        $response->assertSeeText($events[0]->name);
+//        $response->assertSeeText(date('d', strtotime($events[0]->date)));
+//        $response->assertSeeText(date('M', strtotime($events[0]->date)));
+        $response->assertSeeText('участников');
+        $response->assertSeeText('Пригласить своих друзей');
+        $response->assertSeeText('Пригласить');
     }
 }
