@@ -9,13 +9,15 @@
                 <a href="{{ '/mentorship' }}" class="arrow-back mb-2">
                     <i class="fas fa-arrow-left"></i>
                 </a>
-                                <form method="POST" action="{{ route('favourite.save') }}" >
-                                    @csrf
+                <form method="POST" action="{{ route('favourite.save') }}">
+                    @csrf
 
-                                    <input type="hidden" name="mentor_id" value="{{ $mentor->id }}">
-                                    <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-                                    <button type="submit" class="heart-button" style="border: none"> <i class="fas fa-heart" style="color: {{\App\Models\Favourite::where('mentor_id', $mentor->id)->where('user_id', \Illuminate\Support\Facades\Auth::id())->first() ? '#27ae60' : '#fffff'}}"></i></button>
-                                </form>
+                    <input type="hidden" name="mentor_id" value="{{ $mentor->id }}">
+                    <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                    <button type="submit" class="heart-button" style="border: none"><i class="fas fa-heart"
+                                                                                       style="color: {{\App\Models\Favourite::where('mentor_id', $mentor->id)->where('user_id', \Illuminate\Support\Facades\Auth::id())->first() ? '#27ae60' : '#fffff'}}"></i>
+                    </button>
+                </form>
                 <div class="card-show-mentor">
                     <img src="{{ asset('storage/' . $mentor->avatar) }}" alt="Avatar" class="card-img-top">
                     <div class="card-body">
@@ -70,7 +72,9 @@
                                                 @php
                                                     $requested = true;
                                                 @endphp
-                                                <button class="booking-button mt-4" disabled style="background-color: gray;">Сессия забронирована</button>
+                                                <button class="booking-button mt-4" disabled
+                                                        style="background-color: gray;">Сессия забронирована
+                                                </button>
                                             @endif
                                         @endforeach
                                         @unless($requested)
@@ -79,7 +83,9 @@
                                         @endunless
                                     </form>
                                 @else
-                                    <button class="booking-button mt-4" disabled style="background-color: gray;">Забронировать сессию</button>
+                                    <button class="booking-button mt-4" disabled style="background-color: gray;">
+                                        Забронировать сессию
+                                    </button>
                                 @endif
                             @else
                                 <a href="{{ route('register') }}" class="booking-button mt-4">Забронировать сессию</a>
