@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Review;
+use App\Models\Subscription;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Jenssegers\Agent\Agent;
 
@@ -24,9 +27,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $agent = new Agent();
-        $isMobile = $agent->isMobile();
+        $reviews = Review::with('user')->get();
+        $users = User::all();
+        $subscriptions = Subscription::all();
 
-        return view('home', ['isMobile' => $isMobile]);
+        return view('home',compact('reviews', 'users', 'subscriptions'));
     }
 }

@@ -12,7 +12,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ActionController extends Controller
+class   ActionController extends Controller
 {
     /**
      * @param ConnectRequest $request

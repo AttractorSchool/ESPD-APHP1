@@ -6,7 +6,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link href="https://show.cloudpayments.ru/assets/css/style.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="/css/app.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
@@ -18,7 +18,6 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    <script src="https://checkout.cloudpayments.ru/checkout.js"></script>
 </head>
 
 <body>
@@ -36,7 +35,7 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul class="navbar-nav text-end">
                     <li class="nav-item d-md-none">
-                        <a class="nav-link" href="#">Woman Create club</a>
+                        <a class="nav-link" href="{{ route('home') }}">Woman Create club</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('events_main')}}">События</a>
@@ -107,11 +106,6 @@
                 {{session('status')}}
             </div>
         @endif
-            @if (session('error'))
-                <div class="alert alert-danger" role="alert">
-                    {{session('error')}}
-                </div>
-            @endif
         @yield('content')
         @yield('js')
     </main>
