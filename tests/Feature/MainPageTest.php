@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\City;
+use App\Models\CustomNotification;
 use App\Models\Event;
 use App\Models\Interest;
 use App\Models\Role;
@@ -11,10 +12,16 @@ use App\Models\User;
 use App\Models\UserInterest;
 use App\Models\UserSubscription;
 use Carbon\Carbon;
+use Hash;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
+use Jenssegers\Agent\Agent;
 use Tests\TestCase;
+use Illuminate\Http\Request;
+
 
 class MainPageTest extends TestCase
 {
@@ -86,33 +93,32 @@ class MainPageTest extends TestCase
         $response->assertRedirect(route('subscriptions'));
     }
 
-//    не работает главная страница
-    //    public function test_mainPage_with_login_with_buy_subscriptions(): void
-//    {
-//        $user = User::factory()->create();
-//        Subscription::create([
-//            'type' => 'Free',
-//            'description' => 'Доступ к блаблабла',
-//            'price' => 0,
-//        ]);
-//
-//        $startDate = Carbon::now();
-//        $startDate->addDays(7);
-//
-//        $subscrate = new UserSubscription();
-//        $subscrate->user_id = $user->id;
-//        $subscrate->subscription_id = 1;
-//        $subscrate->start_date = Carbon::now();
-//        $subscrate->end_date = $startDate->toDateTimeString();
-//        $subscrate->save();
-//
-//        $this->actingAs($user);
-//
-//        $response = $this->get('/');
-//
-//        $response->assertStatus(200);
-//        $response->assertSeeText('Чем «Woman Create» отличается от других сообществ?');
-//    }
+    public function test_mainPage_with_login_with_buy_subscriptions(): void
+    {
+        $user = User::factory()->create();
+        Subscription::create([
+            'type' => 'Free',
+            'description' => 'Доступ к блаблабла',
+            'price' => 0,
+        ]);
+
+        $startDate = Carbon::now();
+        $startDate->addDays(7);
+
+        $subscrate = new UserSubscription();
+        $subscrate->user_id = $user->id;
+        $subscrate->subscription_id = 1;
+        $subscrate->start_date = Carbon::now();
+        $subscrate->end_date = $startDate->toDateTimeString();
+        $subscrate->save();
+
+        $this->actingAs($user);
+
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+        $response->assertSeeText('Чем «Woman Create» отличается от других сообществ?');
+    }
 
     public function test_networking_without_login(): void
     {
@@ -192,35 +198,38 @@ class MainPageTest extends TestCase
     }
 
 //    не работает кнопка подключиться
-//    public function test_connect_with_login_make_in_db_connecting(): void
-//    {
-//        $user2 = User::factory()->create();
-//
-//        $user = User::factory()->create();
-//        Subscription::create([
-//            'type' => 'Free',
-//            'description' => 'Доступ к блаблабла',
-//            'price' => 0,
-//        ]);
-//
-//        $startDate = Carbon::now();
-//        $startDate->addDays(7);
-//
-//        $subscrate = new UserSubscription();
-//        $subscrate->user_id = $user->id;
-//        $subscrate->subscription_id = 1;
-//        $subscrate->start_date = Carbon::now();
-//        $subscrate->end_date = $startDate->toDateTimeString();
-//        $subscrate->save();
-//
-//        $this->actingAs($user);
-//        $request = ['second_id' => $user2->id];
-//
-//        $response = $this->post(route('connect', $request));
-//
-//        $response->assertStatus(200);
-//        $response->assertSeeText('Люди, которых вы можете знать');
-//    }
+
+    /**
+     * @group connect
+     */
+    public function test_connect_with_login_make_in_db_connecting(): void
+    {
+        $user2 = User::factory()->create();
+
+        $user = User::factory()->create();
+        Subscription::create([
+            'type' => 'Free',
+            'description' => 'Доступ к блаблабла',
+            'price' => 0,
+        ]);
+
+        $startDate = Carbon::now();
+        $startDate->addDays(7);
+
+        $subscrate = new UserSubscription();
+        $subscrate->user_id = $user->id;
+        $subscrate->subscription_id = 1;
+        $subscrate->start_date = Carbon::now();
+        $subscrate->end_date = $startDate->toDateTimeString();
+        $subscrate->save();
+
+        $this->actingAs($user);
+        $request = ['second_id' => $user2->id];
+
+        $response = $this->post(route('connect', $request));
+
+        $response->assertStatus(302);
+    }
 
     public function test_Mentors_with_login_without_buy_subscriptions(): void
     {
@@ -584,5 +593,250 @@ class MainPageTest extends TestCase
         $response->assertSeeText('участников');
         $response->assertSeeText('Пригласить своих друзей');
         $response->assertSeeText('Пригласить');
+    }
+
+    /**
+     * @group login
+     */
+    public function test_get_login_blade(): void
+    {
+        $response = $this->get(route('login'));
+        $response->assertStatus(200);
+        $response->assertSeeText('Email Address');
+        $response->assertSeeText('Password');
+        $response->assertSeeText('Login');
+    }
+
+    /**
+     * @group login
+     */
+    public function test_post_login_success(): void
+    {
+        $user = User::factory()->create();
+        $appUrl = env('APP_URL');
+
+        $response = $this->post($appUrl . '/login', [
+            'email' => $user->email,
+            'password' => $user->password,
+        ]);
+
+        $response->assertStatus(302);
+        $response->assertRedirect(route('home'));
+    }
+
+    /**
+     * @group login
+     */
+    public function test_post_login_error_in_email_request(): void
+    {
+        $user = User::factory()->create();
+
+        $request = Request::create('/login', 'POST', [
+            'email' => '',
+            'password' => $user->password,
+        ]);
+
+        Route::post('/login', 'App\Http\Controllers\Auth\LoginController@login');
+        $response = $this->json('POST', '/login', $request->all());
+
+        $response->assertStatus(422);
+        $response->assertSeeText('The email field is required.');
+    }
+
+    /**
+     * @group login
+     */
+    public function test_post_login_error_required_request(): void
+    {
+        $user = User::factory()->create();
+
+        $request = Request::create('/login', 'POST', [
+            'email' => '',
+            'password' => $user->password,
+        ]);
+
+        Route::post('/login', 'App\Http\Controllers\Auth\LoginController@login');
+        $response = $this->json('POST', '/login', $request->all());
+
+        $response->assertStatus(422);
+        $response->assertSeeText('The email field is required.');
+    }
+
+    /**
+     * @group login
+     */
+    public function test_post_password_not_required_request(): void
+    {
+        $user = User::factory()->create();
+
+        $request = Request::create('/login', 'POST', [
+            'email' => $user->email,
+            'password' => 'hello',
+        ]);
+
+        Route::post('/login', 'App\Http\Controllers\Auth\LoginController@login');
+        $response = $this->json('POST', '/login', $request->all());
+
+        $response->assertStatus(422);
+        $response->assertSeeText('These credentials do not match our records.');
+    }
+
+    /**
+     * @group login
+     */
+    public function test_post_register_success(): void
+    {
+        $user = new User();
+        $user->email = 'hydro_oxide@mail.ru';
+        $user->phone = '87478149123';
+        $user->city = 'Almaty';
+        $user->country = 'Kaz';
+        $user->name = 'Arys';
+        $user->lastname = 'Yessalinov';
+        $user->password = Hash::make('password');
+        $request = Request::create('/register', 'POST', [
+            'name' => 'Arys',
+            'lastname' => 'Yessalinov',
+            'country' => 'Kaz',
+            'city' => 'Almaty',
+            'phone' => '87478149123',
+            'email' => 'hydro_oxide@mail.ru',
+            'password' => 'password',
+        ]);
+
+        Route::post('/register', 'App\Http\Controllers\Auth\RegisterController@register');
+        $response = $this->json('POST', '/register', $request->all());
+
+        $response->assertStatus(201);
+        $response->assertRedirect(route('home'));
+        $this->assertDatabaseHas('users', [
+            'name' => $user->name,
+            'lastname' => $user->lastname,
+            'country' => $user->country,
+            'city' => $user->city,
+            'phone' => $user->phone,
+            'email' => $user->email,
+        ]);
+    }
+
+    /**
+     * @group login
+     */
+    public function test_post_register_error_required_in_email(): void
+    {
+        $user = new User();
+        $user->email = 'hydro_oxide@mail.ru';
+        $user->phone = '87478149123';
+        $user->city = 'Almaty';
+        $user->country = 'Kaz';
+        $user->name = 'Arys';
+        $user->lastname = 'Yessalinov';
+        $user->password = Hash::make('password');
+        $request = Request::create('/register', 'POST', [
+            'name' => 'Arys',
+            'lastname' => 'Yessalinov',
+            'country' => 'Kaz',
+            'city' => 'Almaty',
+            'phone' => '87478149123',
+            'email' => '',
+            'password' => 'password',
+        ]);
+
+        Route::post('/register', 'App\Http\Controllers\Auth\RegisterController@register');
+        $response = $this->json('POST', '/register', $request->all());
+
+        $response->assertStatus(422);
+        $response->assertSeeText('The email field is required.');
+    }
+
+    /**
+     * @group login
+     */
+    public function test_post_register_error_required_in_phone(): void
+    {
+        $user = new User();
+        $user->email = 'hydro_oxide@mail.ru';
+        $user->phone = '87478149123';
+        $user->city = 'Almaty';
+        $user->country = 'Kaz';
+        $user->name = 'Arys';
+        $user->lastname = 'Yessalinov';
+        $user->password = Hash::make('password');
+        $request = Request::create('/register', 'POST', [
+            'name' => 'Arys',
+            'lastname' => 'Yessalinov',
+            'country' => 'Kaz',
+            'city' => 'Almaty',
+            'phone' => '',
+            'email' => 'hydro_oxide@mail.ru',
+            'password' => 'password',
+        ]);
+
+        Route::post('/register', 'App\Http\Controllers\Auth\RegisterController@register');
+        $response = $this->json('POST', '/register', $request->all());
+
+        $response->assertStatus(422);
+        $response->assertSeeText('The phone field must be a number.');
+    }
+
+    /**
+     * @group login
+     */
+    public function test_post_register_error_required_in_name(): void
+    {
+        $user = new User();
+        $user->email = 'hydro_oxide@mail.ru';
+        $user->phone = '87478149123';
+        $user->city = 'Almaty';
+        $user->country = 'Kaz';
+        $user->name = 'Arys';
+        $user->lastname = 'Yessalinov';
+        $user->password = Hash::make('password');
+        $request = Request::create('/register', 'POST', [
+            'name' => '',
+            'lastname' => 'Yessalinov',
+            'country' => 'Kaz',
+            'city' => 'Almaty',
+            'phone' => '87478149123',
+            'email' => 'hydro_oxide@mail.ru',
+            'password' => 'password',
+        ]);
+
+        Route::post('/register', 'App\Http\Controllers\Auth\RegisterController@register');
+        $response = $this->json('POST', '/register', $request->all());
+
+        $response->assertStatus(422);
+        $response->assertSeeText('The name field is required.');
+    }
+
+    /**
+     * @group login
+     */
+    public function test_post_register_error_because_have_in_bd(): void
+    {
+        $user = new User();
+        $user->email = 'hydro_oxide@mail.ru';
+        $user->phone = '87478149123';
+        $user->city = 'Almaty';
+        $user->country = 'Kaz';
+        $user->name = 'Arys';
+        $user->lastname = 'Yessalinov';
+        $user->password = Hash::make('password');
+        $user->save();
+        $request = Request::create('/register', 'POST', [
+            'name' => 'Arys',
+            'lastname' => 'Yessalinov',
+            'country' => 'Kaz',
+            'city' => 'Almaty',
+            'phone' => '87478149123',
+            'email' => 'hydro_oxide@mail.ru',
+            'password' => 'password',
+        ]);
+
+        Route::post('/register', 'App\Http\Controllers\Auth\RegisterController@register');
+        $response = $this->json('POST', '/register', $request->all());
+
+        $response->assertStatus(422);
+        $response->assertSeeText('The email has already been taken.');
     }
 }
