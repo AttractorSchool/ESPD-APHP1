@@ -68,8 +68,14 @@
             @foreach ($upcomingEvents as $event)
                 <div class="event-item">
                     <div class="event-image" style="background-color: {{ getRandomColor() }}">
-                        @if (isset($event->picture))
-                            <img src={{ asset('storage/' . $event->picture) }} alt="{{ $event->title }}">
+                        @if ($event->picture !== null)
+                            @if (strpos($event->picture, 'storage') !== false)
+                                <img class="card-img-top" src="{{asset($event->picture)}}" alt="course_picture">
+                            @else
+                                <img class="card-img-top" src="{{asset('/storage/' . $event->picture)}}" alt="{{$event->picture}}">
+                            @endif
+                        @else
+                            <img class="card-img-top" src='https://i.pinimg.com/originals/9a/7c/6c/9a7c6c2c028e05473faf627ac33cef94.jpg' width='100' height='100'>
                         @endif
                     </div>
                     <div class="event-details">

@@ -29,9 +29,6 @@
                                                     <img class="card-img-top" style="height: 100px;" src="{{asset('/storage/' . $event->picture)}}" alt="{{$event->picture}}">
                                                 </a>
                                             @endif
-{{--                                            <a href="{{ route('events.show', ['id' => $event->id]) }}">--}}
-{{--                                            <img src="{{ asset('/storage/' . $event->picture) }}" class="card-img-pic" alt="Event Image" style="height: 100px;">--}}
-{{--                                            </a>--}}
                                         @else
                                             <a href="{{ route('events.show', ['id' => $event->id]) }}">
                                                 <img src="placeholder.jpg" class="card-img" alt="Placeholder Image" style="width: 100px; height: 100px;">
