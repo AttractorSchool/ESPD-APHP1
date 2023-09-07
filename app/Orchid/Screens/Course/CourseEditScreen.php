@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Picture;
 use Orchid\Screen\Fields\Quill;
 use Orchid\Screen\Fields\Relation;
 use Orchid\Screen\Screen;
@@ -83,15 +84,27 @@ class CourseEditScreen extends Screen
                 Relation::make('course.author_id')
                     ->title('Автор курса')
                     ->fromModel(User::class, 'name', 'id')->required(),
+
                 Relation::make('course.interest_id')
                     ->title('Область интереса курса')
                     ->fromModel(Interest::class, 'name', 'id')->required(),
+
                 Quill::make('course.mini_description')
                     ->title('Краткое описание курса')
-                    ->placeholder('Course mini description')->required(),
+                    ->placeholder('Course mini description')
+                    ->toolbar(['text'])
+                    ->required(),
+
                 Quill::make('course.description')
                     ->title('Описание курса')
-                    ->placeholder('Course description')->required(),
+                    ->placeholder('Course description')
+                    ->toolbar(['text'])
+                    ->required(),
+
+                Picture::make('course.photo')
+                    ->title('Фото курса')
+                    ->storage('public')
+                    ->targetRelativeUrl(),
             ])
         ];
     }
@@ -103,6 +116,10 @@ class CourseEditScreen extends Screen
      */
     public function save(Course $course, AdminCourseRequest $request): RedirectResponse
     {
+        if ($request->input('course.photo')){
+
+        }
+        $course->photo = $request->input('course.photo');
         $course->fill($request->get('course'))->save();
 
         Alert::info(

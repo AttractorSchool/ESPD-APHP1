@@ -156,7 +156,17 @@ class UserEditScreen extends Screen
                 'required',
                 Rule::unique(User::class, 'email')->ignore($user),
             ],
+            'user.phone' => [
+                'required',
+                Rule::unique(User::class, 'phone')->ignore($user),
+            ]
         ]);
+//        dd($request->get('user'));
+        $user->lastname = $request->input('user.lastname');
+        $user->avatar   = $request->input('user.avatar');
+        $user->phone    = $request->input('user.phone');
+        $user->city     = $request->input('user.city');
+        $user->country  = $request->input('user.country');
 
         $permissions = collect($request->get('permissions'))
             ->map(fn ($value, $key) => [base64_decode($key) => $value])
@@ -173,6 +183,7 @@ class UserEditScreen extends Screen
             ->save();
 
         $user->replaceRoles($request->input('user.roles'));
+
 
         Toast::info(__('User was saved.'));
 

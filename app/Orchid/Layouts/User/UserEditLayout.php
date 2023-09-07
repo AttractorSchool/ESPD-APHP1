@@ -6,6 +6,7 @@ namespace App\Orchid\Layouts\User;
 
 use Orchid\Screen\Field;
 use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Picture;
 use Orchid\Screen\Fields\Upload;
 use Orchid\Screen\Layouts\Rows;
 use Orchid\Support\Facades\Layout;
@@ -27,6 +28,14 @@ class UserEditLayout extends Rows
                 ->title(__('Name'))
                 ->placeholder(__('Name')),
 
+            Input::make('user.lastname')
+                ->type('text')
+                ->max(255)
+                ->required()
+                ->title(__('Lastname'))
+                ->placeholder(__('Lastname')),
+
+
             Input::make('user.email')
                 ->type('email')
                 ->required()
@@ -34,23 +43,27 @@ class UserEditLayout extends Rows
                 ->placeholder(__('Email')),
 
             Input::make('user.country')
-                ->type('country')
+                ->type('text')
                 ->required()
                 ->title(__('Country'))
                 ->placeholder(__('Country')),
 
             Input::make('user.city')
-                ->type('city')
+                ->type('text')
                 ->required()
                 ->title(__('City'))
                 ->placeholder(__('City')),
 
             Input::make('user.phone')
-                ->type('phone')
+                ->type('text')
                 ->required()
                 ->title(__('Phone'))
                 ->placeholder(__('Phone')),
 
+            Picture::make('user.avatar')
+                ->title('Фото пользователя')
+                ->storage('public')
+                ->targetRelativeUrl(),
         ];
     }
 }

@@ -31,7 +31,13 @@ class UserListLayout extends Table
         return [
             TD::make('picture')
                 ->render(function (User $user) {
-                    return "<img src='" . asset('storage/' . $user->avatar) . "' width='100' height='100'>";
+                    if ($user->avatar !== null){
+                        if (strpos($user->avatar, 'storage') !== false){
+                            return "<img src='" . asset($user->avatar) . "' width='100' height='100'>";
+                        }
+                        return "<img src='" . asset('storage/' . $user->avatar) . "' width='100' height='100'>";
+                    }
+                    return "<img src='https://cdn4.iconfinder.com/data/icons/people-of-medical-education-and-science/512/People_Medical_Education_Science_lab_scientist_woman-1024.png' width='100' height='100'>";
                 }),
 
             TD::make('name', __('Name'))

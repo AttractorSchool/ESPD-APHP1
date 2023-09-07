@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('mentor_id')->nullable()->constrained()->onDelete('cascade')->references('id')->on('users');
             $table->foreignId('course_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->foreignId('events_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('events_id')->nullable()->constrained()->cascadeOnDelete()->on('events');
             $table->timestamps();
         });
     }

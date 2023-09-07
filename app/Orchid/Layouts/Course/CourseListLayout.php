@@ -33,6 +33,16 @@ class CourseListLayout extends Table
                 ->filter()
                 ->render(fn(Course $course) => Link::make($course->id)
                     ->route('platform.course.edit', ['course' => $course])),
+            TD::make('picture')
+                ->render(function (Course $course) {
+                    if ($course->photo !== null){
+                        if (strpos($course->photo, 'storage') !== false){
+                            return "<img src='" . asset($course->photo) . "' width='100' height='100'>";
+                        }
+                        return "<img src='" . asset('storage/' . $course->photo) . "' width='100' height='100'>";
+                    }
+                    return "<img src='https://static.tildacdn.com/tild3233-6135-4939-b563-333265623830/onlajn-kursy3.jpg' width='100' height='100'>";
+                }),
             TD::make('name', 'Названия')
                 ->render(fn(Course $course) => Link::make($course->name)
                     ->route('platform.course.edit', ['course' => $course])),

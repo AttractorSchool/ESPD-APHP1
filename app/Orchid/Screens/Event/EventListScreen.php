@@ -23,7 +23,7 @@ class EventListScreen extends Screen
     public function query(): iterable
     {
         return [
-            'events' => Event::filters()->defaultSort('id')->paginate()
+            'events' => Event::filters()->orderBy('id', 'desc')->defaultSort('id')->paginate(5)
         ];
     }
 

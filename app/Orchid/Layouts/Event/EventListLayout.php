@@ -4,12 +4,13 @@ namespace App\Orchid\Layouts\Event;
 
 use App\Models\Course;
 use App\Models\Event;
+use Orchid\Platform\Models\User;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Fields\Cropper;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 
-class EventListLayout extends Table
+class   EventListLayout extends Table
 {
     /**
      * Data source.
@@ -36,7 +37,13 @@ class EventListLayout extends Table
                     ->route('platform.event.edit', ['event' => $event])),
             TD::make('picture')
                 ->render(function (Event $event) {
-                    return "<img src='" . asset('storage/' . $event->picture) . "' width='100' height='100'>";
+                    if ($event->picture !== null){
+                        if (strpos($event->picture, 'storage') !== false){
+                            return "<img src='" . asset($event->picture) . "' width='100' height='100'>";
+                        }
+                        return "<img src='" . asset('storage/' . $event->picture) . "' width='100' height='100'>";
+                    }
+                    return "<img src='https://i.pinimg.com/originals/9a/7c/6c/9a7c6c2c028e05473faf627ac33cef94.jpg' width='100' height='100'>";
                 }),
             TD::make('title', 'Названия')
                 ->render(fn(Event $event) => Link::make($event->title)

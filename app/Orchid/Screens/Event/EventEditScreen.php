@@ -4,6 +4,7 @@ namespace App\Orchid\Screens\Event;
 
 use App\Http\Requests\AdminCourseRequest;
 use App\Http\Requests\AdminEventRequest;
+use App\Models\City;
 use App\Models\Course;
 use App\Models\Event;
 use App\Models\Interest;
@@ -13,6 +14,7 @@ use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Fields\DateRange;
 use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Picture;
 use Orchid\Screen\Fields\Quill;
 use Orchid\Screen\Fields\Relation;
 use Orchid\Screen\Fields\Select;
@@ -84,30 +86,42 @@ class EventEditScreen extends Screen
                     ->title('Названия событии')
                     ->type('text')
                     ->required(),
+
                 Input::make('event.location')
                     ->title('Локация событии')
                     ->type('text')
                     ->required(),
+
+
                 Input::make('event.price')
                     ->title('Цена событии')
                     ->type('text')
                     ->required(),
+
                 Input::make('event.quantity')
                     ->title('Количество мест событии')
                     ->type('text')
                     ->required(),
-                Input::make('event.picture')
-                    ->title('Количество мест событии')
-                    ->type('file')
-                    ->required(),
+
+                Picture::make('event.picture')
+                    ->title('Фото пользователя')
+                    ->storage('public')
+                    ->targetRelativeUrl(),
+
                 Select::make('event.format')
                     ->title('Формат событии')
                     ->options(['online', 'offline'])
                     ->required(),
+                Relation::make('event.city_id')
+                    ->title('Город')
+                    ->help('Если оффлайн')
+                    ->fromModel(City::class, 'name', 'id'),
+
                 Input::make('event.date')
                     ->title('Дата событии')
                     ->type('date')
                     ->required(),
+
                 Relation::make('event.author_id')
                     ->title('Автор событии')
                     ->fromModel(User::class, 'name', 'id')->required(),
@@ -119,7 +133,9 @@ class EventEditScreen extends Screen
 //                    ->placeholder('Event mini description')->required(),
                 Quill::make('event.description')
                     ->title('Описание событии')
-                    ->placeholder('Event description')->required(),
+                    ->placeholder('Event description')
+                    ->toolbar(['text'])
+                    ->required(),
             ])
         ];
     }
@@ -132,6 +148,8 @@ class EventEditScreen extends Screen
      */
     public function save(Event $event, AdminEventRequest $request): RedirectResponse
     {
+        $event->picture = $request->input('event.picture');
+        $event->city_id = $request->input('event.city_id');
         $event->fill($request->get('event'))->save();
 
         Alert::info(

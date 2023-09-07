@@ -3,6 +3,7 @@
 namespace App\Orchid\Screens\Test;
 
 use App\Http\Requests\AdminCourseRequest;
+use App\Models\Answer;
 use App\Models\Course;
 use App\Models\Question;
 use App\Models\Video;
@@ -123,7 +124,18 @@ class QuestionEditScreen extends Screen
     public function save(Question $question, Request $request): RedirectResponse
     {
         $question->fill($request->get('question'))->save();
-        dump($request->get('answers'));
+
+        $answer1 = new Answer();
+        $answer1->question_id = $question->id;
+        $answer1->text        = $request->input('answers.text1');
+        $answer1->boolean     = 1;
+        $answer1->save();
+
+        $answer2 = new Answer();
+        $answer2->question_id = $question->id;
+        $answer2->text        = $request->input('answers.text2');
+        $answer2->boolean     = 0;
+        $answer2->save();
 
         Alert::info(
             sprintf(

@@ -26,7 +26,13 @@
                     </div>
                 </div>
                 <div class="course-divider"></div>
-                <p class="card-text text-start course-description">{{ $course->description }}</p>
+
+                <span class="card-text text-start course-description">{!! $course->description !!}</span>
+                <style>
+                    .card-text p{
+                        color: black;
+                    }
+                </style>
                 <div class="course-divider"></div>
                 <div class="course-feedback">
                     <h5 class="card-title">Отзывы о курсе</h5>

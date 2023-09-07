@@ -33,6 +33,10 @@ class Favourite extends Model
     public function course():BelongsTo{
         return $this->belongsTo(Course::class);
     }
+
+    /**
+     * @return BelongsTo
+     */
     public function event():BelongsTo{
         return $this->belongsTo(Event::class);
     }

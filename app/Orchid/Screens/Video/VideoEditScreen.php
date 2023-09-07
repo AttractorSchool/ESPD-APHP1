@@ -33,6 +33,7 @@ class VideoEditScreen extends Screen
      */
     public function query(Video $video): iterable
     {
+        $video->load('attachment');
         $this->exists = $video->exists;
 
         if ($this->exists) {
@@ -75,15 +76,20 @@ class VideoEditScreen extends Screen
         return [
             Layout::rows([
                 Input::make('video.name')
-                    ->title('Названия курса')
+                    ->title('Названия видео')
                     ->type('text')
                     ->required(),
                 Relation::make('video.course_id')
                     ->title('К какому курсу относиться видео')
                     ->fromModel(Course::class, 'name', 'id')->required(),
-                Upload::make('video.video')
+                Input::make('video.video')
+                ->type('hidden')
+                ->value(1),
+
+                Upload::make('video.attachment')
                     ->title('Загрузите видео')
                     ->acceptedFiles('.mp4, .avi,.mkv')
+                    ->storage('public')
                     ->maxFiles(1)
             ])
         ];
@@ -96,9 +102,13 @@ class VideoEditScreen extends Screen
      */
     public function save(Video $video, AdminVideoRequest $request): RedirectResponse
     {
-        dump($request);
+
+        $video->video = $request->input('video.attachment')[0];
         $video->fill($request->get('video'))->save();
 
+        $video->attachment()->syncWithoutDetaching(
+            $request->input('video.attachment', [])
+        );
         Alert::info(
             sprintf(
                 'You are successfully %s an course',

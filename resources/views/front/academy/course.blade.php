@@ -5,10 +5,18 @@
 @section('content')
     <div class="header_course">
         <div class="image">
-            <img src="{{asset('/storage/' . $course->photo)}}" alt="{{$course->photo}}">
+            @if ($course->photo !== null)
+                @if (strpos($course->photo, 'storage') !== false)
+                    <img src="{{asset($course->photo)}}" alt="course_picture">
+                @else
+                    <img src="{{asset('/storage/' . $course->photo)}}" alt="{{$course->photo}}">
+                @endif
+            @else
+                    <img src='https://i.pinimg.com/originals/9a/7c/6c/9a7c6c2c028e05473faf627ac33cef94.jpg' width='100' height='100'>
+            @endif
         </div>
         <div class="h1_course">
-            <h1>{{ $course->name }}</h1>
+            <h1>{!! $course->name !!}</h1>
         </div>
         <form method="POST" action="{{ route('favourite.save') }}" >
             @csrf
@@ -22,13 +30,15 @@
     <div class="course_material">
         <h2 style="margin-left: 10px">Материалы по курсу</h2>
         <div class="videos">
-            @for($i = 1; $i <= count($videos); $i++)
-                    <a class="video" href="@if(($course->videos->first() == $videos->find($i)) || !is_null($score->where('video_id', $videos->find($i-1)->id)->first()))
-                     {{ route('video', ['video' => $videos->find($i)]) }}
-                     @else
-                     {{ route('without_point') }}
-                    @endif"><i class="bi bi-play-circle"></i>{{$videos->find($i)->name}}</a>
-             @endfor
+            @foreach($course->videos as $video)
+                @if($course->videos->first()->id === $video->id)
+                    <a href="{{ route('video', ['video' => $video]) }}" class="video">{{$video->name}}</a>
+                @elseif(!is_null($score->where('video_id', $course->videos[$video->id - 2]->id)->first()))
+                    <a href="{{ route('video', ['video' => $video->id]) }}" class="video">{{$video->name}}</a>
+                @else
+                    <a class="video" href="{{ route('without_point') }}">{{ $video->name }}</a>
+                @endif
+            @endforeach
         </div>
     </div>
     <hr class="border-2">

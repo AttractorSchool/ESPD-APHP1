@@ -22,7 +22,7 @@
                     <h5 class="card-title">
                         <a class="course-title" href="{{route('show.course', ['id' => $course->id])}}">{{ $course->name }} </a>
                     </h5>
-                    <p class="card-text-course-text">{{$course->mini_description}}</p>
+                    <p class="card-text-course-text">{!! $course->mini_description !!}</p>
                     <p class="card-text-course-bottom">Author: {{$author->name}}</p>
                     <form method="POST" action="{{ route('favourite.save') }}" >
                         @csrf

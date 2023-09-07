@@ -89,8 +89,9 @@ class PageController extends Controller
     {
         $videos = Video::all();
         $videos = $videos->where('course_id', $course->id);
+        $score = VideoTestScore::where('user_id', Auth::id());
 
-        $score =  VideoTestScore::all();
+//        $score =  VideoTestScore::all();
 
         return view('front.academy.course', compact('course',  'videos', 'score'));
     }
@@ -98,10 +99,12 @@ class PageController extends Controller
     {
         return view('front.academy.video', compact('video'));
     }
+
     public function without_point():RedirectResponse
     {
         return redirect()->back()->with('status', 'Вы не прошли прошлый тест! Пройдите его что бы начать!');
     }
+
     public function main_event($city = null)
     {
         if ($city){
@@ -123,12 +126,7 @@ class PageController extends Controller
     }
     public function save_favourite(Request $request):RedirectResponse
     {
-//        $favourite_first = Favourite::where('course_id', $request->input('course_id'))->where('user_id', Auth::id())->first();
-//        if ($favourite_first)
-//        {
-//            $favourite_first->delete();
-//            return redirect()->back();
-//        }
+
             if ($request->input('events_id')){
                 $favourite_event = Favourite::where('events_id', $request->input('events_id'))->where('user_id', Auth::id())->first();
                 if ($favourite_event){
@@ -146,7 +144,7 @@ class PageController extends Controller
             }elseif ($request->input('mentor_id')){
                 $favourite_mentor = Favourite::where('mentor_id', $request->input('mentor_id'))->where('user_id', Auth::id())->first();
                 if ($favourite_mentor){
-                    $favourite_mentor   ->delete();
+                    $favourite_mentor->delete();
 
                     return redirect()->back();
                 }

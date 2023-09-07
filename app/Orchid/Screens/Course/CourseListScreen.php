@@ -23,7 +23,7 @@ class CourseListScreen extends Screen
     public function query(): iterable
     {
         return [
-            'сourses' => Course::filters()->defaultSort('id')->paginate()
+            'сourses' => Course::filters()->orderBy('id', 'desc')->defaultSort('id')->paginate(5)
         ];
     }
 

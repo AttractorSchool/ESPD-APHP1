@@ -16,7 +16,15 @@
                     <tr>
                         <td>
                             <a href="{{ route('mentors.show', ['id' => $mentor->id]) }}">
-                                <img src="{{ asset('storage/' . $mentor->avatar) }}" alt="Avatar" class="img-fluid card-mentors">
+                                @if ($mentor->avatar !== null)
+                                    @if (strpos($mentor->avatar, 'storage') !== false)
+                                        <img class="img-fluid card-mentors" src="{{asset($mentor->avatar)}}" alt="Avatar">
+                                    @else
+                                        <img class="img-fluid card-mentors" src="{{asset('/storage/' . $mentor->avatar)}}" alt="{{$mentor->avatar}}">
+                                    @endif
+                                @else
+                                    <img class="img-fluid card-mentors" src='https://i.pinimg.com/originals/9a/7c/6c/9a7c6c2c028e05473faf627ac33cef94.jpg' alt="Avatar">
+                                @endif
                             </a>
                         </td>
                         <td class="text-center">

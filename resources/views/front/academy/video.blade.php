@@ -11,10 +11,15 @@
 @section('content')
     <a class="back" href="{{ route('course', ['course' => $video->course]) }}"> < Back </a>
     <h1>{{$video->name}}</h1>
-
-    <video class="js-player" controls preload>
-        <source src="{{ asset('upload') }}/{{$video->video}}" type="video/mp4">
-    </video>
+    @if (!is_null($video->attachment->first()))
+        <video class="js-player" controls preload>
+            <source src="{{ asset('storage/' . $video->attachment->first()->path . $video->attachment->first()->name . '.' . $video->attachment->first()->extension)}}" type="video/mp4">
+        </video>
+    @else
+        <video class="js-player" controls preload>
+            <source src="{{ asset('upload') }}/{{$video->video}}" type="video/mp4">
+        </video>
+    @endif
 
     <div class="tests">
         <a href="{{route('academy.test', ['video' => $video])}}" class="test">Пройти тест></a>

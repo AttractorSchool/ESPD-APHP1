@@ -166,3 +166,6 @@ footer{
     margin-left: 20px;
     text-align: center;
 }
+.slick-track{
+    min-height: 360px;
+}

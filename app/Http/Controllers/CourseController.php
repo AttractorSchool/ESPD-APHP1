@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
-class CourseController extends Controller
+class   CourseController extends Controller
 {
     public function showFilteredCourses(Request $request): View
     {

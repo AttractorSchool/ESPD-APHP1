@@ -19,7 +19,7 @@
 <body>
 
 <footer>
-    <div class="footer">
+    <div class="footer" style="position: relative">
         <div class="dropdown">
             <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa-solid fa-bars-staggered icon-bar" style="color:#ffffff;"></i>
@@ -53,13 +53,21 @@
         <p>Предстоящие мероприятия</p>
         <a href="{{ route('events') }}">Просмотреть все <i class="fa-solid fa-play"></i></a>
     </div>
-    <div class="carousel_card" style="z-index: 1!important;">
+    <div class="carousel_card" style="z-index: 1!important; margin-bottom: 10px">
         @foreach($city->events as $event)
             @if($event->date >= \Carbon\Carbon::now())
                 <div class="col">
                     <a href="{{ route('events.show', ['id' =>$event->id ]) }}" style="text-decoration: none">
                         <div class="card" style="border: none">
-                            <img src="{{ asset('/storage/' . $event->picture) }}" class="card-img-top" alt="...">
+                            @if ($event->picture !== null)
+                                @if (strpos($event->picture, 'storage') !== false)
+                                    <img class="card-img-top" src="{{asset($event->picture)}}" alt="Event">
+                                @else
+                                    <img class="card-img-top" src="{{asset('/storage/' . $event->picture)}}" alt="Event">
+                                @endif
+                            @else
+                                <img class="card-img-top" src='https://i.pinimg.com/originals/9a/7c/6c/9a7c6c2c028e05473faf627ac33cef94.jpg' alt="Event">
+                            @endif
                             <div class="card-body">
                                 <h5 class="card-title">{{ $event->title }}</h5>
                                 <p class="card-text">{{ \App\Models\UserEvent::where('event_id', $event->id)->count() }} участников</p>
@@ -118,8 +126,8 @@
     $(document).ready(function(){
         $('.carousel_card').slick({
             infinite: true,
-            slidesToShow: 1.9,
-            slidesToScroll: 1
+            slidesToShow: 1.65,
+            slidesToScroll: 2
         });
     });
 </script>
