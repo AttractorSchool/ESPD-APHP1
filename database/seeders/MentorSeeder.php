@@ -15,7 +15,7 @@ class MentorSeeder extends Seeder
             'slug' => 'mentor',
         ]);
 
-        $users = User::limit(10)->get();
+        $users = User::skip(10)->take(11)->get();
 
         foreach ($users as $user) {
             $user->roles()->attach($mentorRole);

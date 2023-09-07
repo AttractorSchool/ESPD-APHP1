@@ -94,7 +94,8 @@
                     @endif
                 </div>
                 <div class="favourite" style="position: absolute; top: 1px; right: 2%">
-                    <a href="{{ route('favourite') }}" style="text-decoration: none"><i class="fa-solid fa-heart" style="text-decoration: none; color: black"></i></a>
+                    <a href="{{ route('favourite') }}" style="text-decoration: none"><i class="fa-solid fa-heart"
+                                                                                        style="text-decoration: none; color: black"></i></a>
                 </div>
             @endif
         </div>
@@ -104,6 +105,11 @@
         @if (session('status'))
             <div class="alert alert-primary" role="alert">
                 {{session('status')}}
+            </div>
+        @endif
+        @if (session('error'))
+            <div class="alert alert-primary" role="alert">
+                {{session('error')}}
             </div>
         @endif
         @yield('content')
