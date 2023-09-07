@@ -15,7 +15,15 @@
 {{--                    <button type="submit" class="heart-button" data-course-id="{{ $event->id }}" style="border: none"> <i class="fas fa-bookmark" style="color: {{\App\Models\Favourite::where('course_id', $event->id)->where('user_id', \Illuminate\Support\Facades\Auth::id())->first() ? '#27ae60' : '#fffff'}}"></i></button>--}}
 {{--                </form>--}}
                 <div class="card-show-mentor">
-                    <img src="{{ asset('storage/' . $event->picture) }}" alt="Avatar" class="card-img-top">
+                    @if ($event->picture !== null)
+                        @if (strpos($event->picture, 'storage') !== false)
+                            <img class="card-img-top" src="{{asset($event->picture)}}" alt="course_picture">
+                        @else
+                            <img class="card-img-top" src="{{asset('/storage/' . $event->picture)}}" alt="{{$event->picture}}">
+                        @endif
+                    @else
+                        <img class="card-img-top" src='https://i.pinimg.com/originals/9a/7c/6c/9a7c6c2c028e05473faf627ac33cef94.jpg' width='100' height='100'>
+                    @endif
                     <div class="card-body">
                         <h1>{{ $event->title }}</h1>
 

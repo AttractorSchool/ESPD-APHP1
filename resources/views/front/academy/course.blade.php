@@ -31,13 +31,13 @@
         <h2 style="margin-left: 10px">Материалы по курсу</h2>
         <div class="videos">
             @foreach($course->videos as $video)
-                @if($course->videos->first()->id === $video->id)
+{{--                @if($course->videos->first()->id === $video->id)--}}
                     <a href="{{ route('video', ['video' => $video]) }}" class="video">{{$video->name}}</a>
-                @elseif(!is_null($score->where('video_id', $course->videos[$video->id - 2]->id)->first()))
-                    <a href="{{ route('video', ['video' => $video->id]) }}" class="video">{{$video->name}}</a>
-                @else
-                    <a class="video" href="{{ route('without_point') }}">{{ $video->name }}</a>
-                @endif
+{{--                @elseif(!is_null($score->where('video_id', $course->videos[$video->id - 2]->id)->first()))--}}
+{{--                    <a href="{{ route('video', ['video' => $video->id]) }}" class="video">{{$video->name}}</a>--}}
+{{--                @else--}}
+{{--                    <a class="video" href="{{ route('without_point') }}">{{ $video->name }}</a>--}}
+{{--                @endif--}}
             @endforeach
         </div>
     </div>
