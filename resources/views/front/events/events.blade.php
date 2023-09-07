@@ -22,13 +22,16 @@
                                         @if (isset($event, $event->picture))
                                                 @if (strpos($event->picture, 'storage') !== false)
                                                 <a href="{{ route('events.show', ['id' => $event->id]) }}">
-                                                    <img class="card-img-top" src="{{asset($event->picture)}}" alt="course_picture">
+                                                    <img class="card-img-top" style="height: 100px;" src="{{asset($event->picture)}}" alt="course_picture">
                                                 </a>
                                                 @else
                                                 <a href="{{ route('events.show', ['id' => $event->id]) }}">
-                                                    <img class="card-img-top" src="{{asset('/storage/' . $event->picture)}}" alt="{{$event->picture}}">
+                                                    <img class="card-img-top" style="height: 100px;" src="{{asset('/storage/' . $event->picture)}}" alt="{{$event->picture}}">
                                                 </a>
                                             @endif
+{{--                                            <a href="{{ route('events.show', ['id' => $event->id]) }}">--}}
+{{--                                            <img src="{{ asset('/storage/' . $event->picture) }}" class="card-img-pic" alt="Event Image" style="height: 100px;">--}}
+{{--                                            </a>--}}
                                         @else
                                             <a href="{{ route('events.show', ['id' => $event->id]) }}">
                                                 <img src="placeholder.jpg" class="card-img" alt="Placeholder Image" style="width: 100px; height: 100px;">
@@ -42,7 +45,12 @@
                                             <a href="{{ route('events.show', ['id' => $event->id]) }}">
                                             <h5 class="date-text">{{ $event->date }}</h5>
                                             </a>
-                                            <p class="description-text">{{ $event->description }}</p>
+                                            <div class="description-text">{!! $event->description !!}</div>
+                                            <style>
+                                                .description-text p{
+                                                    color: black;
+                                                }
+                                            </style>
                                         </div>
                                     </div>
                                 </div>
