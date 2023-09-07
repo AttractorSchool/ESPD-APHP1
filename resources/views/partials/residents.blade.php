@@ -24,7 +24,7 @@
                             <div class="profile-card">
                                 <img class="card-background-image"
                                      src="https://img.rawpixel.com/private/static/images/website/2022-05/v944-bb-16-job598.jpg?w=1200&h=1200&dpr=1&fit=clip&crop=default&fm=jpg&q=75&vib=3&con=3&usm=15&cs=srgb&bg=F4F4F3&ixlib=js-2.2.1&s=846eb3fbf937d787169767fd6a98a4b8">
-                                <img src="{{asset('images/3.jpg')}}" alt="Фото профиля" class="image">
+                                <img class="image" src="{{asset('/storage/' . $user->avatar)}}" alt="{{$user->name}}">
                                 <h2>{{$user->name}}</h2>
                                 <p>Профессия</p>
                                 <p>

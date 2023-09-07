@@ -67,7 +67,6 @@ Route::post('/mentorship/result', [MentorController::class, 'mentorshipResult'])
 Route::get('/mentors', [MentorController::class, 'showAllMentors'])->name('mentors');
 Route::get('/mentors/{id}', [MentorController::class, 'show'])
     ->name('mentors.show')
-//    ->middleware('register.guest');
     ->middleware('auth');
 
 Route::get('/notification/toEmail/{notification}', [\App\Http\Controllers\NotificationController::class, 'send'])->name(
