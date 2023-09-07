@@ -19,8 +19,8 @@ class UserSeeder extends Seeder
                 'email' => 'admin@admin.com',
                 'name' => 'admin',
                 'lastname' => 'admin',
-                'country' => 'KAZ',
-                'city' => 'Алмата',
+                'country' => 'Казахстан',
+                'city' => 'Алматы',
                 'permissions' => [
                     "platform.index" => true,
                     "platform.systems.roles" => true,
