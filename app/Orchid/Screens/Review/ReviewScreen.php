@@ -1,43 +1,41 @@
 <?php
 
-namespace App\Orchid\Screens\Video;
+namespace App\Orchid\Screens\Review;
 
-use App\Models\Course;
-use App\Models\Video;
-use App\Orchid\Layouts\Video\VideoListLayout;
+use App\Models\Review;
+use App\Orchid\Layouts\Review\ReviewListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
+use Orchid\Screen\TD;
+use Orchid\Support\Facades\Layout;
 
-class VideoListScreen extends Screen
+class ReviewScreen extends Screen
 {
     /** @var string $name */
-    public string $name = 'Видео с курсов';
+    public string $name = 'Отзывы';
     /** @var string $description */
-    public string $description = 'Все видео';
+    public string $description = 'Отзывы в главной страницы';
 
     /**
-     * Fetch data to be displayed on the screen.
-     *
      * @return array
      */
     public function query(): iterable
     {
         return [
-            'videos' => Video::filters()->defaultSort('id')->paginate()
+            'reviews' => Review::filters()->defaultSort('id')->paginate(7)
         ];
     }
 
     /**
-     * The screen's action buttons.
      *
      * @return \Orchid\Screen\Action[]
      */
     public function commandBar(): iterable
     {
         return [
-            Link::make('Создать видео')
+            Link::make('Создать отзыв')
                 ->icon('pencil')
-                ->route('platform.video.create')
+                ->route('platform.review.create')
         ];
     }
 
@@ -49,7 +47,7 @@ class VideoListScreen extends Screen
     public function layout(): iterable
     {
         return [
-            VideoListLayout::class
+            ReviewListLayout::class
         ];
     }
 }

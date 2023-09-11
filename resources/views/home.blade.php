@@ -42,35 +42,60 @@
 
         <div id="carouselExampleCaptions" class="carousel slide">
             <div class="carousel-inner">
+                @if($reviews->isEmpty())
+                    <div class="carousel-item active">
+                        <li class="card">
+                            <div class="img">
+                                <img class="img-fluid card-mentors"
+                                     src='https://cdn4.iconfinder.com/data/icons/people-of-medical-education-and-science/512/People_Medical_Education_Science_lab_scientist_woman-1024.png' alt="review_fake">
+                            </div>
+                            <h2 style="overflow: hidden">Анастасия</h2>
+                            <span class="text-center">Очень крутой сайт!</span>
+                        </li>
+                    </div>
+                    <div class="carousel-item">
+                        <li class="card">
+                            <div class="img">
+                                <img class="img-fluid card-mentors"
+                                     src='https://cdn4.iconfinder.com/data/icons/people-of-medical-education-and-science/512/People_Medical_Education_Science_lab_scientist_woman-1024.png' alt="review_fake">
+                            </div>
+                            <h2 style="overflow: hidden">Джоан</h2>
+                            <span class="text-center">Очень крутой сайт!</span>
+                        </li>
+                    </div>
+                    <div class="carousel-item">
+                        <li class="card">
+                            <div class="img">
+                                <img class="img-fluid card-mentors"
+                                     src='https://cdn4.iconfinder.com/data/icons/people-of-medical-education-and-science/512/People_Medical_Education_Science_lab_scientist_woman-1024.png' alt="review_fake">
+                            </div>
+                            <h2 style="overflow: hidden">Кристина</h2>
+                            <span class="text-center">Очень крутой сайт!</span>
+                        </li>
+                    </div>
+                @else
+                    @foreach($reviews as $review)
 
-                @foreach($reviews as $review)
-                    @if($review===$reviews[0])
-                        <div class="carousel-item active">
-                            <li class="card">
-                                <div class="img">
-                                    <img src="https://vokrug.tv/pic/news/f/b/9/2/fb927aca1ca4a42d9bd46ce4e3330bdd.jpg"
-                                         alt="img"
-                                         draggable="false">
-                                </div>
-                                <h2 style="overflow: hidden">{{ $review->author->name }}</h2>
-                                <span class="text-center">{{ $review->body }}</span>
-                            </li>
-                        </div>
-                    @else
-                        <div class="carousel-item">
-                            <li class="card">
-                                <div class="img">
-                                    <img src="https://vokrug.tv/pic/news/f/b/9/2/fb927aca1ca4a42d9bd46ce4e3330bdd.jpg"
-                                         alt="img"
-                                         draggable="false">
-                                </div>
-                                <h2 style="overflow: hidden">{{ $review->author->name }}</h2>
-                                <span class="text-center">{{ $review->body }}</span>
-                            </li>
-                        </div>
-                    @endif
-                @endforeach
-
+                            <div class="carousel-item {{$review->id === $reviews->first()->id ? 'active' : ''}}">
+                                <li class="card">
+                                    <div class="img">
+                                        @if(is_null($review->user->avatar))
+                                            <img class="img-fluid card-mentors"
+                                                 src='https://cdn4.iconfinder.com/data/icons/people-of-medical-education-and-science/512/People_Medical_Education_Science_lab_scientist_woman-1024.png' alt="review">
+                                        @else
+                                            @if (strpos($review->user->avatar, 'storage') !== false)
+                                                <img class="img-fluid card-mentors" src="{{asset($review->user->avatar)}}" alt="review">
+                                            @else
+                                                <img class="img-fluid card-mentors" src="{{asset('/storage/' . $review->user->avatar)}}" alt="review">
+                                            @endif
+                                        @endif
+                                    </div>
+                                    <h2 style="overflow: hidden">{{ $review->user->name }}</h2>
+                                    <span class="text-center">{{ $review->body }}</span>
+                                </li>
+                            </div>
+                    @endforeach
+                @endif
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
                     data-bs-slide="prev">
@@ -93,11 +118,17 @@
                 <div class="carousel-inner">
 
                     @foreach($users as $user)
-                        @if($user===$users[0])
-                            <div class="carousel-item active">
+                            <div class="carousel-item {{$users->first()->id === $user->id ? 'active' : ''}}">
                                 <div class="resident mx-auto">
-                                    <img src="https://vokrug.tv/pic/news/f/b/9/2/fb927aca1ca4a42d9bd46ce4e3330bdd.jpg"
-                                         alt=" ">
+                                    @if(is_null($user->avatar))
+                                        <img src="https://cdn4.iconfinder.com/data/icons/people-of-medical-education-and-science/512/People_Medical_Education_Science_lab_scientist_woman-1024.png" alt="user_photo">
+                                    @else
+                                        @if (strpos($user->avatar, 'storage') !== false)
+                                            <img class="img-fluid card-mentors" src="{{asset($user->avatar)}}" alt="Avatar">
+                                        @else
+                                            <img class="img-fluid card-mentors" src="{{asset('/storage/' . $user->avatar)}}" alt="Avatar    ">
+                                        @endif
+                                    @endif
                                     <div class="resident-info">
                                         @foreach ($user->reviews as $review)
                                             <p>{{ $review->body }}</p>
@@ -106,20 +137,6 @@
                                     <h3 style="overflow:hidden;">{{ $user->name }}</h3>
                                 </div>
                             </div>
-                        @else
-                            <div class="carousel-item">
-                                <div class="resident mx-auto">
-                                    <img src="https://vokrug.tv/pic/news/f/b/9/2/fb927aca1ca4a42d9bd46ce4e3330bdd.jpg"
-                                         alt=" ">
-                                    <div class="resident-info">
-                                        @foreach ($user->reviews as $review)
-                                            <p>{{ $review->body }}</p>
-                                        @endforeach
-                                    </div>
-                                    <h3 style="overflow:hidden;">{{ $user->name }}</h3>
-                                </div>
-                            </div>
-                        @endif
                     @endforeach
 
                 </div>
@@ -146,7 +163,9 @@
                     нашей
                     платформы
                 </p>
-                <button class="calendar-button">Получить календарь</button>
+                <a href="{{$calendar ? asset('storage/' . $calendar->attachment->first()->path . $calendar->attachment->first()->name
+                . '.' . $calendar->attachment->first()->extension) : "#"}}" class="calendar-button" style="text-decoration: none; color: white">Получить календарь</a>
+
             </div>
 
         </div>
@@ -240,7 +259,7 @@
             <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                    Heading One
+                    Вопрос Первый
                 </button>
             </h2>
             <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
@@ -256,7 +275,7 @@
             <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                    Heading Two
+                    Вопрос Второй
                 </button>
             </h2>
             <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
@@ -272,7 +291,7 @@
             <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                    Heading Three
+                    Вопрос Третий
                 </button>
             </h2>
             <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">

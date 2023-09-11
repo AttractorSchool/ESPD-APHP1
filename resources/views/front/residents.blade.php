@@ -16,7 +16,17 @@
                         <h5 class="card-title align-middle col-12 text-center">{{$user->name}}</h5>
                     </div>
                     <div class="">
-                        <img class="card-img-top mb-2 rounded-bottom-2" src="{{asset('/storage/' . $user->avatar)}}" alt="{{$user->name}}">
+
+                        @if(!is_null($user->avatar))
+                            @if (strpos($user->avatar, 'storage') !== false)
+                                <img class="card-img-top mb-2 rounded-bottom-2" src="{{asset($user->avatar)}}" alt="Avatar" style="max-height: 183.2px; object-fit: cover">
+                            @else
+                                <img class="card-img-top mb-2 rounded-bottom-2" src="{{asset('/storage/' . $user->avatar)}}" alt="Avatar">
+                            @endif
+                        @else
+                            <img class="card-img-top mb-2 rounded-bottom-2"
+                                 src='https://cdn4.iconfinder.com/data/icons/people-of-medical-education-and-science/512/People_Medical_Education_Science_lab_scientist_woman-1024.png' alt="review_fake">
+                        @endif
                     </div>
                 </div>
 

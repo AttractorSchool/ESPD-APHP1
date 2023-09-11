@@ -16,7 +16,6 @@ class CheckActiveSubscription
     public function handle(Request $request, Closure $next): Response
     {
         $user = $request->user();
-
         if ($user && !$user->hasActiveSubscription()) {
             if (!$request->session()->has('subscription_checked')) {
                 $request->session()->put('subscription_checked', true);

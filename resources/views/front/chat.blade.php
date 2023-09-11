@@ -39,10 +39,37 @@
             font-size: 10px;
             padding: 0 5px;
         }
+        img{
+            height: 50px;
+            object-fit: cover;
+            border-radius: 50%
+        }
     </style>
     <div class="wrapper-chat" style=" height: 85vh">
-        <div class="title">Chat with "{{$response->first->name}}"
-            <div class="icon"></div>
+        <div class="title">Chat with "{{$response->first->name === auth()->user()->name ? $response->second->name : $response->first->name}}"
+                @if($response->first->name === auth()->user()->name)
+                    @if(is_null($response->second->avatar))
+                        <img class="mentor-photo"
+                             src='https://cdn4.iconfinder.com/data/icons/people-of-medical-education-and-science/512/People_Medical_Education_Science_lab_scientist_woman-1024.png' alt="user_avatar">
+                    @else
+                        @if (strpos($response->second->avatar, 'storage') !== false)
+                            <img src="{{asset($response->second->avatar)}}" alt="user_avatar">
+                        @else
+                            <img src="{{asset('/storage/' . $response->second->avatar)}}" alt="user_avatar">
+                        @endif
+                    @endif
+                @else
+                    @if(is_null($response->first->avatar))
+                        <img class="mentor-photo"
+                             src='https://cdn4.iconfinder.com/data/icons/people-of-medical-education-and-science/512/People_Medical_Education_Science_lab_scientist_woman-1024.png' alt="user_avatar">
+                    @else
+                        @if (strpos($response->first->avatar, 'storage') !== false)
+                            <img src="{{asset($response->first->avatar)}}" alt="user_avatar">
+                        @else
+                            <img src="{{asset('/storage/' . $response->first->avatar)}}" alt="user_avatar">
+                        @endif
+                    @endif
+            @endif
         </div>
         <div class="body">
             <div class="box">

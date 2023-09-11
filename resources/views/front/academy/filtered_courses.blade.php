@@ -1,5 +1,10 @@
 @extends('layouts.app')
-
+<style>
+    img{
+        max-height: 200px;
+        object-fit: cover;
+    }
+</style>
 @section('content')
     <div class="container">
         <a href="{{ url()->previous() }}" class="arrow-back-register mb-2"><i class="fas fa-arrow-left"></i></a>
@@ -15,9 +20,16 @@
                 $author = $authors->firstWhere('id', $course->author_id)
             @endphp
             <div class="card bg-dark text-white course-card">
-                <img class="card-img course-img"
-                     src="https://d1ymz67w5raq8g.cloudfront.net/Pictures/1024x536/P/web/n/z/b/onlinecourses_shutterstock_490891228_2000px_728945.jpg"
-                     alt="Card image">
+                @if(is_null($course->photo))
+                    <img class="card-img course-img"
+                         src='https://d1ymz67w5raq8g.cloudfront.net/Pictures/1024x536/P/web/n/z/b/onlinecourses_shutterstock_490891228_2000px_728945.jpg' alt="course">
+                @else
+                    @if (strpos($course->photo, 'storage') !== false)
+                        <img class="card-img course-img" src="{{asset($course->photo)}}" alt="course">
+                    @else
+                        <img class="card-img course-img" src="{{asset('/storage/' . $course->photo)}}" alt="course">
+                    @endif
+                @endif
                 <div class="card-img-overlay">
                     <h5 class="card-title">
                         <a class="course-title" href="{{route('show.course', ['id' => $course->id])}}">{{ $course->name }} </a>

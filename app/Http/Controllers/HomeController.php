@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Calendar;
 use App\Models\Review;
 use App\Models\Subscription;
 use App\Models\User;
@@ -30,7 +31,8 @@ class HomeController extends Controller
         $reviews = Review::with('user')->get();
         $users = User::all();
         $subscriptions = Subscription::all();
+        $calendar = Calendar::all()->first();
 
-        return view('home',compact('reviews', 'users', 'subscriptions'));
+        return view('home',compact('reviews', 'users', 'subscriptions', 'calendar'));
     }
 }

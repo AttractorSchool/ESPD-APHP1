@@ -146,3 +146,26 @@ Route::screen('/event/create', EventEditScreen::class)
 
 Route::screen('/event/{event?}', EventEditScreen::class)
     ->name('platform.event.edit');
+
+//Calendar
+Route::screen('calendar', \App\Orchid\Screens\Calendar\CalendarScreen::class)
+    ->name('platform.calendar.list');
+
+Route::screen('calendar/create', \App\Orchid\Screens\Calendar\CalendarEditScreen::class)
+    ->name('platform.calendar.create');
+
+Route::screen('calendar/{calendar?}', \App\Orchid\Screens\Calendar\CalendarEditScreen::class)
+    ->name('platform.calendar.edit');
+
+//Review
+Route::screen('review', \App\Orchid\Screens\Review\ReviewScreen::class)
+    ->name('platform.review.list');
+
+Route::screen('review/create', \App\Orchid\Screens\Review\ReviewEditScreen::class)
+    ->name('platform.review.create');
+
+Route::screen('review/{review?}', \App\Orchid\Screens\Review\ReviewEditScreen::class)
+    ->name('platform.review.edit');
+//Notification
+Route::screen('notification', \App\Orchid\Screens\Noification\NotificationCreateScreen::class)
+    ->name('platform.notification.create');

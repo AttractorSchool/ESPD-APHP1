@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\CustomNotification;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Review>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class ReviewFactory extends Factory
+class CustomNotificationFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,8 +18,6 @@ class ReviewFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => rand(2, 9),
-            'body'    => $this->faker->realTextBetween(10, 50)
         ];
     }
 }

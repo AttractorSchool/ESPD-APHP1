@@ -14,17 +14,26 @@ class ResponseSeeder extends Seeder
      */
     public function run(): void
     {
-        $users = User::all();
+        Response::factory([
+            'first_id' => 2,
+            'second_id' => 1,
+            'confirm_first' => 1])->create();
+        Response::factory([
+            'first_id' => 3,
+            'second_id' => 1,
+            'confirm_first' => 1])->create();
+        Response::factory([
+            'first_id' => 4,
+            'second_id' => 1,
+            'confirm_first' => 1])->create();
+        Response::factory([
+            'first_id' => 5,
+            'second_id' => 1,
+            'confirm_first' => 1])->create();
+        Response::factory([
+            'first_id' => 6,
+            'second_id' => 1,
+            'confirm_first' => 1])->create();
 
-        foreach ($users as $user) {
-            $randomUserId = $users->whereNotIn('id', [$user->id])->pluck('id')->random();
-
-            Response::factory()->create([
-                'first_id' => $user->id,
-                'second_id' => $randomUserId,
-                'confirm_first' => false,
-                'confirm_second' => false,
-            ]);
-        }
     }
 }

@@ -3,65 +3,51 @@
 @section('content')
     <div class="container">
         <div class="text">
-            <h4>Люди, которых вы можете знать в Алматы по тегу #design</h4>
+            <h4>Люди, которых вы можете знать в {{auth()->user()->city}}</h4>
         </div>
 
-        <div class="res">
-            <div class="filter">
-                <form action="{{ route('networking') }}" method="GET">
-                    @foreach($cities as $city)
-                    @endforeach
-                </form>
-            </div>
-
-            @if(count($recommendedUsers) > 0)
                 <h4 class="mt-4">Рекомендуем вам</h4>
                 <div class="row">
 
                     <div class="profile-cards">
-                        @foreach($recommendedUsers as $recommendedUser)
-                            @if($recommendedUser->id !== auth()->user()->id)
-                                @php
-                                    $requested = false;
-                                    $city = $cities->firstWhere('id', $recommendedUser->city);
-                                @endphp
-                                @if($recommendedUser->city === auth()->user()->city)
-                                    <div class="profile-card">
-                                        <img class="card-background-image" src="https://img.rawpixel.com/private/static/images/website/2022-05/v944-bb-16-job598.jpg?w=1200&h=1200&dpr=1&fit=clip&crop=default&fm=jpg&q=75&vib=3&con=3&usm=15&cs=srgb&bg=F4F4F3&ixlib=js-2.2.1&s=846eb3fbf937d787169767fd6a98a4b8">
+
+                        @foreach($users_filtered as $user)
+                                <div class="profile-card">
+                                    <img class="card-background-image"
+                                         src="https://img.rawpixel.com/private/static/images/website/2022-05/v944-bb-16-job598.jpg?w=1200&h=1200&dpr=1&fit=clip&crop=default&fm=jpg&q=75&vib=3&con=3&usm=15&cs=srgb&bg=F4F4F3&ixlib=js-2.2.1&s=846eb3fbf937d787169767fd6a98a4b8">
+                                    @if(!is_null($user->avatar))
+                                        @if (strpos($user->avatar, 'storage') !== false)
+                                            <img class="image" src="{{asset($user->avatar)}}" style="object-fit: cover" alt="Avatar">
+                                        @else
+                                            <img class="image" src="{{asset('/storage/' . $user->avatar)}}" alt="Avatar">
+                                        @endif
+                                    @else
                                         <img src="{{asset('images/3.jpg')}}" alt="Фото профиля" class="image">
-                                        <h2>{{$recommendedUser->name}}</h2>
-                                        <p>Профессия</p>
-                                        <p>
-                                            @foreach ($recommendedUser->interests as $interest)
-                                                <span>{{ $interest->name }}</span>
-                                            @endforeach
-                                        </p>
-                                        <p>{{$recommendedUser->city}}</p>
-                                        <form class="connect-form" method="POST" action="{{ route('connect') }}">
-                                            @csrf
-                                            @foreach($notifications as $notification)
-                                                @if($notification->first_id == auth()->user()->id && $notification->user_id == $recommendedUser->id)
-                                                    @php
-                                                        $requested = true;
-                                                    @endphp
-                                                    <button class="requested" disabled>Запрошено</button>
-                                                @endif
-                                            @endforeach
-                                            @unless($requested)
-                                                <div class="notification_btn">
-                                                    <input type="hidden" value="{{ $recommendedUser->id }}" name="second_id">
+                                    @endif
+                                    <h2>{{$user->name}}</h2>
+                                    <p>Профессия</p>
+                                    <p>
+                                        @foreach ($user->interests as $interest)
+                                            <span>{{ $interest->name }}</span>
+                                        @endforeach
+                                    </p>
+                                    <p>{{$user->city}}</p>
+                                    <form class="connect-form" method="POST" action="{{ route('connect') }}">
+                                        @csrf
+                                            @if(\App\Models\Response::where('first_id', auth()->id())->where('second_id', $user->id)->first())
+                                                <button class="requested" disabled>Запрошено</button>
+                                            @else
+                                                <div class="notification_btn" style="display: {{\App\Models\Response::where('first_id', auth()->id()) ? 'block' : 'none'}}">
+                                                    <input type="hidden" value="{{ $user->id }}" name="second_id">
                                                     <button class="connect-button">Подключиться</button>
                                                 </div>
-                                            @endunless
-                                        </form>
-                                    </div>
-                                @endif
-                            @endif
-                        @endforeach
+                                            @endif
 
+                                    </form>
+                                </div>
+                        @endforeach
                     </div>
                 </div>
-            @endif
             <div class="res_1">
                 <a class="all_res" href="{{route('allResidents')}}">Все резиденты</a>
             </div>

@@ -10,14 +10,17 @@ use App\Models\Event;
 use App\Models\Favourite;
 use App\Models\Response;
 use App\Models\Review;
+use App\Models\Role;
 use App\Models\Subscription;
 use App\Models\User;
 use App\Models\UserEvent;
+use App\Models\UserRole;
 use App\Models\Video;
 use App\Models\VideoTestScore;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
@@ -44,33 +47,55 @@ class PageController extends Controller
      */
     public function networking(Request $request): View
     {
-        $recommendedUsers = [];
 
-        $recommendedUsers = User::all();
-        if (Auth::check()) {
-            $userInterests = Auth::user()->interests->pluck('id')->toArray();
-            $userRoles = Auth::user()->roles->pluck('id')->toArray();
-            if (!empty($userInterests) and !empty($userRoles)) {
-                $recommendedUsers = User::whereHas('roles', function ($query) use ($userRoles) {
-                    $query->where('name', 'resident');
-                })
-                    ->whereHas('interests', function ($query) use ($userInterests) {
-                        $query->whereIn('interests.id', $userInterests);
-                    })
-                    ->with('interests')
-                    ->get();
+        $login_user = auth()->user();
+        $users_filtered= array();
+        $users = User::all();
+
+        foreach ($users as $user){
+            if ($user->city === $login_user->city) {
+                if ($user->name !== $login_user->name) {
+                    if ($user->name !== 'admin') {
+                        if (!$user->roles->isEmpty()) {
+                            if (!($user->roles->first()->name === 'mentor')) {
+                                $users_filtered[count($users_filtered) + 1] = $user;
+                            }
+                        } else {
+                            $users_filtered[count($users_filtered) + 1] = $user;
+                        }
+                    }
+                }
             }
         }
-        $cities = City::all();
-        $notifications = CustomNotification::all();
-        return view('front.mainNetwork', compact('recommendedUsers', 'cities', 'notifications'));
+
+
+
+        return view('front.mainNetwork', compact('users_filtered'));
     }
-    public function allResidents(Request $request): View
+    public function allResidents(): View
     {
-        $users = User::all();
-        $cities = City::all();
+        $login_user = auth()->user();
+        $users_filtered= array();
+        $users = User::paginate(8);
+
+        foreach ($users as $user){
+                if ($user->name !== $login_user->name) {
+                    if ($user->name !== 'admin') {
+                        if (!$user->roles->isEmpty()) {
+                            if (!($user->roles->first()->name === 'mentor')) {
+//                                $users_filtered[count($users_filtered) + 1] = $user;
+                                $users->where('id', $user->id);
+                            }
+                        } else {
+//                            $users_filtered[count($users_filtered) + 1] = $user;
+                             $users->where('id', $user->id);
+                        }
+                    }
+                }
+            }
+
         $notifications = CustomNotification::all();
-        return view('partials.residents', compact('users', 'cities', 'notifications'));
+        return view('partials.residents', compact('users', 'notifications'));
     }
 
 
@@ -84,6 +109,16 @@ class PageController extends Controller
         return view('front.notification', compact('notifications'));
     }
 
+    public function delete_notification(CustomNotification $notification):RedirectResponse{
+        $notification->delete();
+
+        return redirect()->back();
+    }
+
+    /**
+     * @param Course $course
+     * @return View
+     */
     public function course(Course $course):View
     {
         $videos = Video::all();
@@ -156,4 +191,5 @@ class PageController extends Controller
 
             return redirect()->back();
     }
+
 }
