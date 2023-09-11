@@ -5,7 +5,6 @@
             const player = Plyr.setup('.js-player');
         });
     </script>
-    @vite(['resources/sass/video.css'])
 @extends('layouts.app')
 
 @section('content')
