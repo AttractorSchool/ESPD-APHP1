@@ -69,8 +69,8 @@ class Course extends Model
     /**
      * @return HasMany
      */
-    public function reviews(): HasMany
+    public function comments(): HasMany
     {
-        return $this->hasMany(Review::class);
+        return $this->hasMany(Comment::class);
     }
 }

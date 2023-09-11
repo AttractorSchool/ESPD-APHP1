@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ConnectRequest;
+use App\Models\Comment;
 use App\Models\CustomNotification;
 use App\Models\Response;
 use App\Models\Review;
@@ -175,18 +176,30 @@ class   ActionController extends Controller
         return true;
     }
 
-    public function review(Request $request):RedirectResponse
+    public function comments(Request $request):RedirectResponse
     {
+        $comment_exsts = Comment::where('course_id', $request->input('course_id'))->where('author_id', Auth::id());
         $request->validate([
-           'rating' => 'required|int|min:1|max:5',
             'body'  => 'required|min:5|max:128',
         ]);
-        $review = new Review();
-        $review->rating    = $request->input('rating');
-        $review->body      = $request->input('body');
-        $review->author_id = Auth::id();
-        $review->course_id = $request->input('course_id');
-        $review->save();
+        if ($comment_exsts){
+            $comment_exsts->update($request->except('_token'));
+//            $comment_exsts->body = $request->input('body');
+//            if ($request->input('rating')){
+//                $comment_exsts->rating    = $request->input('rating');
+//            }
+//            $comment_exsts->save();
+
+            return redirect()->back()->with('status', 'Вы оставили отзыв');
+        }
+        $comment = new Comment();
+        if ($request->input('rating')){
+            $comment->rating    = $request->input('rating');
+        }
+        $comment->body      = $request->input('body');
+        $comment->author_id = Auth::id();
+        $comment->course_id = $request->input('course_id');
+        $comment->save();
 
         return redirect()->back()->with('status', 'Вы оставили отзыв');
     }

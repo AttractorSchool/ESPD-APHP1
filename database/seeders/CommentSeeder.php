@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Review;
+use App\Models\Comment;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ReviewSeeder extends Seeder
+class CommentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Review::factory(4)->create();
+        Comment::factory(20)->create();
     }
 }

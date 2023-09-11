@@ -17,11 +17,8 @@ class ReviewFactory extends Factory
     public function definition(): array
     {
         return [
-            'author_id' => rand(11, 20),
-            'user_id'   => rand(1,10),
-            'body'      => $this->faker->realTextBetween(10, 50),
-            'rating'    => rand(1,5),
-//            'course_id' => null
+            'user_id' => rand(2, 9),
+            'body'    => $this->faker->realTextBetween(10, 50)
         ];
     }
 }

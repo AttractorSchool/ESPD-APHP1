@@ -518,9 +518,11 @@ p {
 }
 
 .notification_container {
+    position: relative;
     min-height: 100px;
     padding: 0 30px;
-    margin-bottom: 15px;
+    margin-bottom: 15px!important;
+    border-radius: 15px;
     background-color: #e6f2ff;
     display: flex;
     justify-content: space-between;
@@ -589,7 +591,7 @@ p {
     min-height: 100px;
     padding: 0 30px;
     margin-bottom: 15px;
-    background-color: white;
+    background-color: #e6f2ff;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -782,7 +784,8 @@ p {
 }
 
 .interest-img {
-    filter: brightness(55%)
+    filter: brightness(55%);
+    object-fit: cover;
 }
 
 .interest-title {

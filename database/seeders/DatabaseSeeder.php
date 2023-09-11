@@ -14,18 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-//        $role_date = [
-//            [   'id' => 1,
-//                'slug' => 'mentor',
-//            ]
-//        ];
-//        $role_user_date = [
-//          [
-//              'user_id' => '2',
-//              'role_id' =>  '1'
-//          ]
-//        ];
-//        DB::table('role_users')->insert($role_date);
         $this->call([
             CitySeeder::class,
             SubscriptionSeeder::class,
@@ -42,6 +30,7 @@ class DatabaseSeeder extends Seeder
             QuestionSeeder::class,
             AnswerSeeder::class,
             UserCourseSeeder::class,
+            CommentSeeder::class,
             ReviewSeeder::class,
             UserEventSeeder::class,
             MentorSeeder::class,

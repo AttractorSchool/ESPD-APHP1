@@ -1,20 +1,33 @@
 @extends('layouts.app')
 
 @section('content')
+    <style>
+        img{
+            max-height: 150px;
+            object-fit: cover;
+            margin-top: 50px;
+        }
+    </style>
     <section class="profile-show h-100 gradient-custom-2">
         <div class="container py-5 h-100 show-profile">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col col-lg-9 col-xl-7">
                     <div class="card">
                         <div class="rounded-top text-white d-flex flex-row"
-                             style="background-color: #000; height:200px;">
-                            <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
-                                <img @if(isset($user, $user->avatar)) src="{{ asset('/storage/' . $user->avatar) }}"
-                                     @endif class="img-fluid img-thumbnail mt-4 mb-2"
-                                     style="width: 150px; height: 150px; z-index: 1">
-                                <a href="{{route('edit_profile')}}" style="display: flex; text-decoration: none">
-                                    <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
-                                            style="z-index: 1;">
+                             style="background-color: #000; height:225px;">
+                            <div class="ms-4 mt-5 d-flex flex-column;" style="width: 175px; align-items: center">
+                                @if(is_null($user->avatar))
+                                    <img class="img-fluid img-thumbnail mt-4 mb-2" src="https://cdn4.iconfinder.com/data/icons/people-of-medical-education-and-science/512/People_Medical_Education_Science_lab_scientist_woman-1024.png" alt="user_avatar">
+                                @else
+                                    @if (strpos($user->avatar, 'storage') !== false)
+                                        <img class="img-fluid img-thumbnail mt-4 mb-2" src="{{asset($user->avatar)}}" alt="user_avatar">
+                                    @else
+                                        <img class="img-fluid img-thumbnail mt-4 mb-2" src="{{asset('/storage/' . $user->avatar)}}" alt="user_avatar">
+                                    @endif
+                                @endif
+                                <a href="{{route('edit_profile')}}" style="display: flex; text-decoration: none; margin-top: 250px">
+                                    <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark "
+                                            style="z-index: 1; min-width: 100px">
                                         Edit profile
                                     </button>
                                 </a>

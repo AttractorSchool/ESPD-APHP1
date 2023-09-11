@@ -91,7 +91,7 @@ Route::get('/filtered-courses', [\App\Http\Controllers\CourseController::class, 
     'filtered.courses'
 );
 Route::get('/courses/{id}', [\App\Http\Controllers\CourseController::class, 'show'])->name('show.course');
-Route::get('/reviews/{id}', [\App\Http\Controllers\CourseController::class, 'showAllReviews'])->name('show.reviews');
+Route::get('/comments/{id}', [\App\Http\Controllers\CourseController::class, 'showAllComments'])->name('show.comments');
 
 Route::delete('/academy/{video}', [\App\Http\Controllers\CourseController::class, 'skipTest'])->name(
     'academy.skipTest'
@@ -100,7 +100,7 @@ Route::get('/courses/{course}/main', [PageController::class, 'course'])->name('c
 Route::get('/videos/{video}', [PageController::class, 'video'])->name('video');
 Route::get('course_without_pint', [PageController::class, 'without_point'])->name('without_point');
 
-Route::post('reviews', [ActionController::class, 'review'])->name('review_add');
+Route::post('comments', [ActionController::class, 'comments'])->name('comment_add');
 
 //События
 Route::get('/events_main/{city?}', [PageController::class, 'main_event'])->name('events_main')->middleware('auth');

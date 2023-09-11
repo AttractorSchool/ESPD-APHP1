@@ -45,10 +45,10 @@
     <div class="feedback">
         <div class="feedback_main">
             <p>Оставить отзыв</p>
-            <a href="#">Все отзывы</a>
+            <a href="{{ route('show.comments', ['id' => $video->course]) }}">Все отзывы</a>
         </div>
         <div class="rating_css">
-            <form action="{{ route('review_add') }}" method="post" class="form">
+            <form action="{{ route('comment_add') }}" method="post" class="form">
                 @csrf
                 <div class="star_icon">
                         @for($i = 1; $i < 6; $i++)

@@ -34,22 +34,22 @@ class PlatformProvider extends OrchidServiceProvider
     {
         return [
             Menu::make(__('Курсы'))
-                ->icon('database')
+                ->icon('easel')
                 ->route('platform.course.list')
                 ->title(__('Course')),
 
             Menu::make(__('Видео курсов'))
-                ->icon('database')
+                ->icon('camera')
                 ->route('platform.video.list')
                 ->title(__('Video')),
 
             Menu::make(__('Тесты для видео'))
-                ->icon('database')
+                ->icon('chat-text')
                 ->route('platform.question.list')
                 ->title(__('Question')),
 
             Menu::make(__('События'))
-                ->icon('database')
+                ->icon('geo-alt')
                 ->route('platform.event.list')
                 ->title(__('Event')),
 
@@ -70,8 +70,25 @@ class PlatformProvider extends OrchidServiceProvider
             Menu::make('Аналитика')
                 ->icon('bs.person')
                 ->route('platform.analytic')
-                ->title(__('Аналитика')),
+                ->title(__('Аналитика'))
+                ->divider(),
 
+            Menu::make('Календарь')
+                ->icon('calendar-plus')
+                ->route('platform.calendar.list')
+                ->title('Календарь')
+            ->divider(),
+
+            Menu::make('Отзывы')
+                ->icon('card-text')
+                ->route('platform.review.list')
+                ->title('Отзывы')
+            ->divider(),
+            Menu::make('Уведомление')
+                ->icon('bell')
+                ->route('platform.notification.create')
+                ->title('Уведомление')
+                ->divider()
         ];
     }
 

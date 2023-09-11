@@ -36,19 +36,19 @@
                 <div class="course-divider"></div>
                 <div class="course-feedback">
                     <h5 class="card-title">Отзывы о курсе</h5>
-                    <h5><a class="course-all-feedback" href="{{route('show.reviews', ['id' => $course->id])}}">Все отзывы</a></h5>
+                    <h5><a class="course-all-feedback" href="{{route('show.comments', ['id' => $course->id])}}">Все отзывы</a></h5>
                 </div>
-                @foreach ($course->reviews as $review)
+                @foreach ($course->comments as $comment)
                     @php
-                        $author = $author->firstWhere('id', $review->author_id);
+                        $author = $author->firstWhere('id', $comment->author_id);
                     @endphp
                             <div class="feedback-details">
                             <img class="mr-3" src="{{asset('images/3.jpg')}}" style="width: 40px; height: 40px; border-radius: 50%" alt="Generic placeholder image">
                             <div class="media-body">
-                                <h5 class="mt-0 mb-1 feedback-author-name">{{$author->name}}</h5>
+                                <h5 class="mt-0 mb-1 feedback-author-name">{{$comment->author->name}}</h5>
                             </div>
                                 </div>
-                                {{$review->body}}
+                                {{$comment->body}}
                             </div>
                     <div class="feedback-divider"></div>
                 @endforeach

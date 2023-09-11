@@ -16,14 +16,17 @@
                         <h5 class="card-title align-middle col-12 text-center">{{$user->name}}</h5>
                     </div>
                     <div class="">
-                        {{--                        <a href="#" class="btn btn-warning text-white rounded-5"--}}
-                        {{--                           style="position: absolute;right: 4%;bottom: 4%;">--}}
-                        {{--                            <i class="col-12"--}}
-                        {{--                               style="height: 10rem;background-image: url({{public_path('free-icon-arrow-right-2268462.png')}})"></i>--}}
-                        {{--                        </a>--}}
-                        <img
-                            src=" https://whatsism.com/uploads/posts/2021-12/1638354391_750e983b-095e-4f57-8a3b-9f1dcb3c89fb.jpeg"
-                            class="card-img-top mb-2 rounded-bottom-2" alt="{{$user->name}}">
+                        @if(!is_null($user->avatar))
+                            @if (strpos($user->avatar, 'storage') !== false)
+                                <img class="card-img-top mb-2 rounded-bottom-2" src="{{asset($user->avatar)}}" alt="Avatar" style="max-height: 183.2px; object-fit: cover">
+                            @else
+                                <img class="card-img-top mb-2 rounded-bottom-2" src="{{asset('/storage/' . $user->avatar)}}" alt="Avatar">
+                            @endif
+                        @else
+                            <img class="card-img-top mb-2 rounded-bottom-2"
+                                 src='https://cdn4.iconfinder.com/data/icons/people-of-medical-education-and-science/512/People_Medical_Education_Science_lab_scientist_woman-1024.png' alt="review_fake">
+                        @endif
+
                     </div>
                 </div>
 

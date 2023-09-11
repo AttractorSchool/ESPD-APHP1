@@ -26,6 +26,7 @@ class User extends Authenticatable
         'lastname',
         'avatar',
         'email',
+        'password',
         'phone',
         'country',
         'city',
@@ -96,18 +97,18 @@ class User extends Authenticatable
         return $this->hasMany(CustomNotification::class, 'user_id');
     }
 
-    /**
-     * @return BelongsTo
-     */
-    public function city(): BelongsTo
-    {
-        return $this->belongsTo(City::class);
-    }
-
-    public function cityName(): string
-    {
-        return $this->city()->get('name');
-    }
+//    /**
+//     * @return BelongsTo
+//     */
+//    public function city(): BelongsTo
+//    {
+//        return $this->belongsTo(City::class);
+//    }
+//
+//    public function cityName(): string
+//    {
+//        return $this->city()->get('name');
+//    }
 
     /**
      * @return BelongsToMany

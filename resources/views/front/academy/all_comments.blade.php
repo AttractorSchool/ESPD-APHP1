@@ -8,16 +8,22 @@
             <div class="card shadow-0 border" style="background-color: #f0f2f5;">
                 <div class="card-body p-4">
                     <div class="form-outline mb-4">
-                        <input type="text" id="addANote" class="form-control" placeholder="Type comment..."/>
-                        <label class="form-label" for="addANote">+ Add a note</label>
+                        <form action="{{ route('comment_add') }}" method="post" class="form">
+                            @csrf
+                            <input type="hidden" name="course_id" value="{{$course->id}}">
+                            <input type="text" name="body" id="addANote" class="form-control" placeholder="Type comment..."/>
+                            <div class="button">
+                                <button type="submit" class="form-label"  style="border: none; margin-top: 5px">+ Add a note</button>
+                            </div>
+                        </form>
                     </div>
-                    @foreach ($course->reviews as $review)
+                    @foreach ($course->comments as $comment)
                         @php
-                            $author = $author->firstWhere('id', $review->author_id);
+                            $author = $author->firstWhere('id', $comment->author_id);
                         @endphp
                         <div class="card mb-4">
                             <div class="card-body">
-                                <p style="color: #0b4e58">{{$review->body}}</p>
+                                <p style="color: #0b4e58">{{$comment->body}}</p>
                                 <div class="d-flex justify-content-between">
                                     <div class="d-flex flex-row align-items-center">
                                         <img src="{{asset('images/3.jpg')}}"

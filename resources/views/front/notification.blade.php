@@ -2,6 +2,10 @@
 
 @section('content')
     <div class="container">
+        <h1>Уведомления</h1>
+        @if($notifications->isEmpty())
+            <h4>У вас нет уведомлений!</h4>
+        @endif
         @foreach($notifications as $notification)
             @if($notification->type==1)
                 <div class="notification_container">
@@ -22,11 +26,18 @@
                             <button>Подключиться</button>
                         </form>
                     </div>
+                    <div class="exit_del">
+                        <form action="{{ route('delete_notification', ['notification' => $notification]) }}" method="POST">
+                            @method('delete')
+                            @csrf
+                            <button class="no_overflow">X</button>
+                        </form>
+                    </div>
                 </div>
             @endif
             @if($notification->type==2)
                 <div class="notification_container_text">
-                    <div class="title">
+                    <div class="title" style="background-color: #e6f2ff">
                         <h4 class="no_overflow">{{ $notification->title }}</h4>
                     </div>
                     <div class="body">

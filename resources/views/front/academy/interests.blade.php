@@ -7,7 +7,16 @@
         <div class="interests-container">
             @foreach ($interests as $interest)
                 <div class="card bg-dark text-white interest-card">
-                    <img src="https://rnn.ng/wp-content/uploads/2023/01/computer-sci.jpg" class="interest-img" alt="...">
+                    @if(is_null($interest->picture))
+                        <img class="interest-img"
+                             src='https://rnn.ng/wp-content/uploads/2023/01/computer-sci.jpg' alt="interest">
+                    @else
+                        @if (strpos($interest->picture, 'storage') !== false)
+                            <img class="interest-img" src="{{asset($interest->picture)}}" alt="interest">
+                        @else
+                            <img class="interest-img" src="{{asset('/storage/' . $interest->picture)}}" alt="interest">
+                        @endif
+                    @endif
                     <div>
                     </div>
                     <div class="card-img-overlay-interest  interest" data-id="{{ $interest->id }}">
