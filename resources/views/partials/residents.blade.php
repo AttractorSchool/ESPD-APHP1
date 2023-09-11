@@ -3,59 +3,52 @@
 @section('content')
     <div class="container">
         <div class="text">
-            <h4>Люди, которых вы можете знать в Алматы по тегу #design</h4>
+            <h4>Все резиденты!</h4>
         </div>
-
-        <div class="res">
-            <div class="filter">
-                <form action="{{ route('allResidents') }}" method="GET">
-                    @foreach($cities as $city)
-                    @endforeach
-                </form>
-            </div>
 
             <div class="profile-cards">
                 @foreach($users as $user)
-                    @if($user->id !== auth()->user()->id)
-                        @php
-                            $requested = false;
-                            $city = $cities->firstWhere('id', $user->city);
-                        @endphp
-                            <div class="profile-card">
-                                <img class="card-background-image"
-                                     src="https://img.rawpixel.com/private/static/images/website/2022-05/v944-bb-16-job598.jpg?w=1200&h=1200&dpr=1&fit=clip&crop=default&fm=jpg&q=75&vib=3&con=3&usm=15&cs=srgb&bg=F4F4F3&ixlib=js-2.2.1&s=846eb3fbf937d787169767fd6a98a4b8">
-                                <img class="image" src="{{asset('/storage/' . $user->avatar)}}" alt="{{$user->name}}">
-                                <h2>{{$user->name}}</h2>
-                                <p>Профессия</p>
-                                <p>
-                                    @foreach ($user->interests as $interest)
-                                        <span>{{ $interest->name }}</span>
-                                    @endforeach
-                                </p>
-                                <p>{{$user->city}}</p>
-                                <form class="connect-form" method="POST" action="{{ route('connect') }}">
-                                    @csrf
-                                    @foreach($notifications as $notification)
-                                        @if($notification->first_id == auth()->user()->id && $notification->user_id == $user->id)
-                                            @php
-                                                $requested = true;
-                                            @endphp
-                                            <button class="requested" disabled>Запрошено</button>
-                                        @endif
-                                    @endforeach
-                                    @unless($requested)
-                                        <div class="notification_btn">
-                                            <input type="hidden" value="{{ $user->id }}" name="second_id">
-                                            <button class="connect-button">Подключиться</button>
-                                        </div>
-                                    @endunless
-                                </form>
-                            </div>
+                    <div class="profile-card">
+                        <img class="card-background-image"
+                             src="https://img.rawpixel.com/private/static/images/website/2022-05/v944-bb-16-job598.jpg?w=1200&h=1200&dpr=1&fit=clip&crop=default&fm=jpg&q=75&vib=3&con=3&usm=15&cs=srgb&bg=F4F4F3&ixlib=js-2.2.1&s=846eb3fbf937d787169767fd6a98a4b8">
+                        @if(!is_null($user->avatar))
+                            @if (strpos($user->avatar, 'storage') !== false)
+                                <img class="image" src="{{asset($user->avatar)}}" style="object-fit: cover" alt="Avatar">
+                            @else
+                                <img class="image" src="{{asset('/storage/' . $user->avatar)}}" alt="Avatar">
+                            @endif
+                        @else
+                            <img class="image"
+                                 src='https://cdn4.iconfinder.com/data/icons/people-of-medical-education-and-science/512/People_Medical_Education_Science_lab_scientist_woman-1024.png' alt="review_fake">
                         @endif
-                @endforeach
+                        <h2>{{$user->name}}</h2>
+                        <p>Профессия</p>
+                        <p>
+                            @foreach ($user->interests as $interest)
+                                <span>{{ $interest->name }}</span>
+                            @endforeach
+                        </p>
+                        <p>{{$user->city}}</p>
+                        <form class="connect-form" method="POST" action="{{ route('connect') }}">
+                            @csrf
+                            @if(\App\Models\Response::where('first_id', auth()->id())->where('second_id', $user->id)->first())
+                                <button class="requested" disabled>Запрошено</button>
+                            @else
+                                <div class="notification_btn" style="display: {{\App\Models\Response::where('first_id', auth()->id()) ? 'block' : 'none'}}">
+                                    <input type="hidden" value="{{ $user->id }}" name="second_id">
+                                    <button class="connect-button">Подключиться</button>
+                                </div>
+                            @endif
 
+                        </form>
+                    </div>
+                @endforeach
             </div>
         </div>
+    <div class="paginate" style="margin-left: 25%">
+        {{$users->links('pagination::bootstrap-4')}}
+    </div>
+
         <div class="res_1">
             <a class="all_res" href="{{route('networking')}}">Ближе всех</a>
         </div>

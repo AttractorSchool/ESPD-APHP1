@@ -5,23 +5,32 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Orchid\Filters\Filterable;
+use Orchid\Filters\Types\Where;
+use Orchid\Screen\AsSource;
 
 class Review extends Model
 {
-    use HasFactory;
+    use HasFactory, AsSource, Filterable;
 
     /**
      * @var string[]
      */
-    protected $fillable = ['rating', 'body','author_id', 'user_id', 'course_id'];
+    protected $fillable = ['user_id', 'body'];
+    /**
+     * @var array
+     */
+    protected $allowedFilters = [
+        'id' => Where::class
+    ];
 
     /**
-     * @return BelongsTo
+     * @var array
      */
-    public function author(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'author_id');
-    }
+    protected $allowedSorts = [
+        'id'
+        ];
+
     /**
      * @return BelongsTo
      */
@@ -29,11 +38,5 @@ class Review extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-    /**
-     * @return BelongsTo
-     */
-    public function course(): BelongsTo
-    {
-        return $this->belongsTo(Course::class);
-    }
+
 }

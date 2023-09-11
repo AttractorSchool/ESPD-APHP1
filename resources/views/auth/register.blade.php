@@ -9,7 +9,6 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                     @csrf
-
                         <div class="form-group row mb-3">
                             <label for="avatar" class="col-md-4 col-form-label text-md-right"></label>
 
@@ -92,11 +91,9 @@
                                    class="col-md-4 col-form-label text-md-end"></label>
 
                             <div class="col-md-6">
-                                <input id="country" type="text"
-                                       class="form-control @error('country') is-invalid @enderror" name="country"
-                                       value="{{ old('country') }}" required autocomplete="country"
-                                       placeholder="Страна">
-
+                                <select class="" name="country" style="border: 1px solid #DEE2E6; width: 50%;">
+                                    <option>Казахстан</option>
+                                </select>
                                 @error('country')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -110,11 +107,28 @@
                                    class="col-md-4 col-form-label text-md-end"></label>
 
                             <div class="col-md-6">
-                                <input id="city" type="text"
-                                       class="form-control @error('city') is-invalid @enderror" name="city"
-                                       value="{{ old('city') }}" required autocomplete="city"
-                                       placeholder="Город">
-
+                                <select class="" name="city" style="border: 1px solid #DEE2E6; width: 50%;">
+                                    <option>Алматы</option>
+                                    <option>Астана</option>
+                                    <option>Шымкент</option>
+                                    <option>Актобе</option>
+                                    <option>Караганда</option>
+                                    <option>Тараз</option>
+                                    <option>Усть-Каменогорск</option>
+                                    <option>Павлодар</option>
+                                    <option>Атырау</option>
+                                    <option>Семей</option>
+                                    <option>Кызылорда</option>
+                                    <option>Костанай</option>
+                                    <option>Уральск</option>
+                                    <option>Петропавловск</option>
+                                    <option>Туркестан</option>
+                                    <option>Кокшетау</option>
+                                    <option>Темиртау</option>
+                                    <option>Талдыкорган</option>
+                                    <option>Экибастуз</option>
+                                    <option>Рудный</option>
+                                </select>
                                 @error('city')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

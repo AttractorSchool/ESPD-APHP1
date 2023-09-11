@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Jenssegers\Agent\Agent;
 
@@ -24,9 +26,7 @@ class LoginController extends Controller
      */
     public function showLoginForm(): View
     {
-        $agent = new Agent();
-        $isMobile = $agent->isMobile();
 
-        return view('auth.login', compact('isMobile'));
+        return view('auth.login');
     }
 }

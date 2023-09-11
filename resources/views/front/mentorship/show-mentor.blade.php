@@ -19,7 +19,17 @@
                     </button>
                 </form>
                 <div class="card-show-mentor">
-                    <img src="{{ asset('storage/' . $mentor->avatar) }}" alt="Avatar" class="card-img-top">
+                    <div class="img">
+                        @if(is_null($mentor->avatar))
+                            <img class="card-img-top"
+                                 src='https://cdn4.iconfinder.com/data/icons/people-of-medical-education-and-science/512/People_Medical_Education_Science_lab_scientist_woman-1024.png' alt="mentor_avatar">
+                        @else
+                            @if (strpos($mentor->avatar, 'storage') !== false)
+                                <img class="card-img-top" src="{{asset($mentor->avatar)}}" alt="mentor_avatar">
+                            @else
+                                <img class="card-img-top" src="{{asset('/storage/' . $mentor->avatar)}}" alt="mentor_avatar">
+                            @endif
+                        @endif
                     <div class="card-body">
                         <h5 class="card-title mt-4 mb-3">{{ $mentor->name }}</h5>
                         <div class="star-rating" data-rating="{{ $mentor->ratings_avg_rating }}">

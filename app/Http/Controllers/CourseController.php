@@ -38,15 +38,15 @@ class   CourseController extends Controller
     public function show($id): view
     {
         $authors = User::all();
-        $course = Course::with('reviews')->find($id);
+        $course = Course::with('comments')->find($id);
         return view('front.academy.show-course', compact('course', 'authors'));
     }
 
-    public function showAllReviews($id)
+    public function showAllComments($id)
     {
         $authors = User::all();
-        $course = Course::with('reviews')->find($id);
-        return view('front.academy.all_reviews', compact('course', 'authors'));
+        $course = Course::with('comments')->find($id);
+        return view('front.academy.all_comments', compact('course', 'authors'));
 
     }
     public function test(Video $video)
