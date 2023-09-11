@@ -49,16 +49,15 @@ class PageController extends Controller
         $recommendedUsers = User::all();
         if (Auth::check()) {
             $userInterests = Auth::user()->interests->pluck('id')->toArray();
-
-            if (!empty($userInterests)) {
-                $recommendedUsers = User::whereHas('roles', function ($query) {
+            $userRoles = Auth::user()->roles->pluck('id')->toArray();
+            if (!empty($userInterests) and !empty($userRoles)) {
+                $recommendedUsers = User::whereHas('roles', function ($query) use ($userRoles) {
                     $query->where('name', 'resident');
                 })
                     ->whereHas('interests', function ($query) use ($userInterests) {
                         $query->whereIn('interests.id', $userInterests);
                     })
                     ->with('interests')
-                    ->take(2)
                     ->get();
             }
         }
