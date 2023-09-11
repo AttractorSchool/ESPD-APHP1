@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
             UserEventSeeder::class,
             MentorSeeder::class,
             FavouriteSeeder::class,
+            CustomNotificationSeeder::class
         ]);
     }
 }

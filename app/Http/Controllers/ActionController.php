@@ -182,24 +182,20 @@ class   ActionController extends Controller
         $request->validate([
             'body'  => 'required|min:5|max:128',
         ]);
-        if ($comment_exsts){
-            $comment_exsts->update($request->except('_token'));
-//            $comment_exsts->body = $request->input('body');
-//            if ($request->input('rating')){
-//                $comment_exsts->rating    = $request->input('rating');
-//            }
-//            $comment_exsts->save();
 
-            return redirect()->back()->with('status', 'Вы оставили отзыв');
+        if ($comment_exsts->first()){
+            $comment_exsts->update($request->except('_token'));
+
+        }else{
+            $comment = new Comment();
+            if ($request->input('rating')){
+                $comment->rating    = $request->input('rating');
+            }
+            $comment->body      = $request->input('body');
+            $comment->author_id = Auth::id();
+            $comment->course_id = $request->input('course_id');
+            $comment->save();
         }
-        $comment = new Comment();
-        if ($request->input('rating')){
-            $comment->rating    = $request->input('rating');
-        }
-        $comment->body      = $request->input('body');
-        $comment->author_id = Auth::id();
-        $comment->course_id = $request->input('course_id');
-        $comment->save();
 
         return redirect()->back()->with('status', 'Вы оставили отзыв');
     }

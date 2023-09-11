@@ -789,15 +789,18 @@ p {
 }
 
 .interest-title {
-    margin-top: 121px;
-    margin-left: -7px;
+    position: absolute;
+    bottom: 22%;
+    left: 25%;
 }
 
 .interest-count {
+    position: absolute;
     padding: 0;
     color: gold;
     font-weight: bold;
-    margin-left: -87px;
+    bottom: 0;
+    left: 25%;
 }
 
 .card-img-overlay-interest {
