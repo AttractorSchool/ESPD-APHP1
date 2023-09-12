@@ -7,19 +7,17 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-
-    <!-- Add the slick-theme.css if you want default styling -->
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-    <!-- Add the slick-theme.css if you want default styling -->
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
     <title>{{ config('app.name', 'Laravel') }}</title>
-    @vite(['resources/js/app.js', 'resources/sass/event.css'])
+    <link rel="stylesheet" href="{{ asset('css/event.css') }}">
 </head>
 <body>
 
-<footer>
-    <div class="footer" style="position: relative">
+
+    <div class="footer-event" style="position: relative">
         <div class="dropdown">
             <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa-solid fa-bars-staggered icon-bar" style="color:#ffffff;"></i>
@@ -43,11 +41,10 @@
                 @endforeach
             </ul>
         </div>
-        <div class="notification">
+        <div class="notification-event">
             <a href="{{ route('notifications') }}"><i class="fa-regular fa-bell" style="color: #ffffff;"></i></a>
         </div>
     </div>
-</footer>
 <main>
     <div class="title_event">
         <p>Предстоящие мероприятия</p>
@@ -90,6 +87,7 @@
                                 <button type="submit" class="heart-button_c" style="background-color: transparent; border: none"> <i class="fa-solid fa-bookmark" style="color: {{\App\Models\Favourite::where('events_id', $event->id)->where('user_id', \Illuminate\Support\Facades\Auth::id())->first() ? '#f2766d' : '#000'}}"></i></button>
                             </form>
                         </div>
+                    </a>
                     </div>
                 </a>
             @endif
@@ -104,22 +102,8 @@
     </div>
 
 </main>
-
-{{--    <div class="social">--}}
-{{--        <h4>Пригласить друга</h4>--}}
-{{--        <div class="social-cards">--}}
-{{--            <div class="social-card">--}}
-{{--                <a href="{{ url('https://t.me/share/url?url=' . \Illuminate\Support\Facades\URL::current() . '&text=Привет') }}"><i class="fa-brands fa-telegram" style="font-size: 25px"></i></a>--}}
-{{--                <p>Telegram</p>--}}
-{{--            </div>--}}
-{{--            <div class="social-card">--}}
-{{--                <a><i class="fa-brands fa-whatsapp" style="font-size: 25px"></i></a>--}}
-{{--                <p>Whatsapp</p>--}}
-{{--            </div>--}}
-{{--            <div class="social-card"></div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 </html>
 <script>
