@@ -7,7 +7,7 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #4a43ec!important;
+    background-color: #4a43ec;
     border-radius: 0 0 25px 25px;
 }
 .notification-event{
