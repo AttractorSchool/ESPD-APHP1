@@ -1,8 +1,6 @@
 <style>
-{{--    @vite(['resources/sass/home.css'])--}}
 </style>
 @extends('layouts.app')
-{{--@vite(['resources/sass/home.css'])--}}
 @section('content')
     <div class="container">
         <div class="row justify-content-center">

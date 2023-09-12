@@ -1,4 +1,5 @@
 @extends('layouts.app')
+<link rel="stylesheet" href="{{ asset('css/course.css') }}">
 @section('content')
     <div class="header_course">
         <div class="image">
