@@ -627,7 +627,7 @@ p {
 .footer-icons .nav-item {
     display: inline-block;
     text-align: center;
-    margin-right: 15px;
+    margin-right: 15px!important;
 }
 
 .icon-container {
