@@ -1,4 +1,3 @@
-@vite('resources/sass/favourite.css')
 @extends('layouts.app')
 @section('content')
     <h1>Избранное</h1>
