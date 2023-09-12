@@ -31,7 +31,7 @@ body {
 
 @media (max-width: 767px) {
     .footer-desktop {
-        display: none;
+        display: none!important;
     }
 
     .footer-mobile {
