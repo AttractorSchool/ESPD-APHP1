@@ -6,12 +6,35 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Orchid\Filters\Filterable;
+use Orchid\Filters\Types\Like;
+use Orchid\Screen\AsSource;
 
 class Interest extends Model
 {
-    use HasFactory;
+    use HasFactory, Filterable, AsSource;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'picture'];
+
+
+    /**
+     * @var string[]
+     */
+    protected $allowedFilters = [
+        'id' => Like::class
+    ];
+
+    /**
+     * The attributes for which can use sort in url.
+     *
+     * @var array
+     */
+    protected $allowedSorts = [
+        'id',
+        'updated_at',
+        'created_at',
+    ];
+
 
     /**
      * @return BelongsToMany

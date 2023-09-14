@@ -17,6 +17,16 @@
         font-size: 20px;
         font-weight: 700;
     }
+    @media screen  and (max-width: 584px){
+        .analytic h3{
+            font-size: 15px;
+        }
+    }
+    @media screen  and (max-width: 390px){
+        .analytic h3{
+            font-size: 12px;
+        }
+    }
 </style>
 <div class="all_analytics">
     <div class="analytic">

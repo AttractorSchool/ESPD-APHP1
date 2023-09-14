@@ -88,6 +88,11 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('bell')
                 ->route('platform.notification.create')
                 ->title('Уведомление')
+                ->divider(),
+            Menu::make('Интересы')
+                ->icon('balloon-heart')
+                ->route('platform.interest.list')
+                ->title('Интересы')
                 ->divider()
         ];
     }

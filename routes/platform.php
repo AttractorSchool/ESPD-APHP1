@@ -169,3 +169,12 @@ Route::screen('review/{review?}', \App\Orchid\Screens\Review\ReviewEditScreen::c
 //Notification
 Route::screen('notification', \App\Orchid\Screens\Noification\NotificationCreateScreen::class)
     ->name('platform.notification.create');
+//Interest
+Route::screen('interest', \App\Orchid\Screens\Interest\InterestScreen::class)
+    ->name('platform.interest.list');
+Route::screen('interest/create', \App\Orchid\Screens\Interest\InterestEditScreen::class)
+    ->name('platform.interest.create');
+Route::screen('interest/{interest?}', \App\Orchid\Screens\Interest\InterestEditScreen::class)
+    ->name('platform.interest.edit');
+
+
