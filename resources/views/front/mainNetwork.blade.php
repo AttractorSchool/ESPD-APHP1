@@ -10,6 +10,7 @@
                 <div class="row">
 
                     <div class="profile-cards">
+
                         @foreach($users_filtered as $user)
                                 <div class="profile-card">
                                     <img class="card-background-image"

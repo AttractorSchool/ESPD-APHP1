@@ -47,6 +47,7 @@ class PageController extends Controller
      */
     public function networking(Request $request): View
     {
+
         $login_user = auth()->user();
         $users_filtered= array();
         $users = User::all();
